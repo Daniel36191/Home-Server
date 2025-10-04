@@ -71,7 +71,7 @@
                 users.${(import ./config/variables.nix).username} = import ./config/hm-main.nix;
               };
             }
-            ./config/pc/nix-main.nix
+            ./config/nix-main.nix
           ] ++ commonModules;
         };
       };
