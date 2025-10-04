@@ -8,5 +8,6 @@
     git
     lazygit
     micro
+    nh
   ];
 }

@@ -58,7 +58,7 @@
     in
     {
       nixosConfigurations = {
-        "pc" = nixpkgs.lib.nixosSystem {
+        "server" = nixpkgs.lib.nixosSystem {
           specialArgs = commonArgs;
           modules = [
             {
