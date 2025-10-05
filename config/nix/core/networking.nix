@@ -29,6 +29,7 @@
     dhcpcd.enable = false;
 
     nameservers = [
+    "192.168.0.141"
     "9.9.9.9"
     ];
   };
