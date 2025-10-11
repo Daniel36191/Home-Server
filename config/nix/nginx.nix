@@ -4,8 +4,7 @@
 let
   redirectConfig = [
     { domain = "home.lillypond.local"; port = "500"; }
-    { domain = "api.lillypond.local"; port = "3000"; }
-    { domain = "nginx.lillypond.local"; port = "8080"; }
+    { domain = "proxmox.lillypond.local"; port = "8006"; }
   ];
 
   makeVhost = cfg: {
