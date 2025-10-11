@@ -4,13 +4,30 @@
 }:
 {
   imports = [
+
+    ##############
+    ## Services ##
+    ##############
+
+    ./nix/services/proxmox.nix
+
+
+    ############
+    ## System ##
+    ############
+    
+    ./nix/apps.nix
+    ./nix/nginx.nix
+
+
+    ##########
+    ## Core ##
+    ##########
+
     ./nix/core/user.nix
     ./nix/core/networking.nix
     ./nix/core/boot.nix
     ./nix/core/hardware.nix
-    
-    ./nix/apps.nix
-    ./nix/nginx.nix
   ];
 
   #########
