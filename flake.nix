@@ -57,7 +57,7 @@
       commonModules = [
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
-        proxmox-nixos.overlays.${system}
+        proxmox-nixos.nixosModules.proxmox-ve
       ];
     in
     {

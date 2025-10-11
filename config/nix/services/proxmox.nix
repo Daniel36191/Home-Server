@@ -7,13 +7,13 @@
 {
   services.proxmox-ve = {
     enable = true;
-    # package = inputs.proxmox-nixos.packages.${pkgs.system}.proxmox-nixos;
+    package = inputs.proxmox-nixos.packages.${pkgs.system}.proxmox-nixos;
     ipAddress = "192.168.0.1";
   };
 
-  nixpkgs.overlays = [
-    proxmox-nixos.overlays.${pkgs.system}
-  ];
+  # nixpkgs.overlays = [
+  #   proxmox-nixos.overlays.${pkgs.system}
+  # ];
 
   nix = {
     settings = {
