@@ -21,6 +21,8 @@
       url = "github:ryantm/agenix";
       inputs.darwin.follows = "";
     };
+
+    proxmox-nixos.url = "github:SaumonNet/proxmox-nixos";
   };
 
   outputs =
@@ -30,6 +32,7 @@
       nixpkgs-stable,
       home-manager,
       agenix,
+      proxmox-nixos,
       ...
     }@inputs:
     let
@@ -54,6 +57,7 @@
       commonModules = [
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
+        proxmox-nixos.overlays.${system}
       ];
     in
     {
