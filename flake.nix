@@ -53,6 +53,8 @@
           inherit system;
           config.allowUnfree = true;
         };
+
+        proxmoxOverlay = proxmox-nixos.overlays.${system};
       };
       commonModules = [
         home-manager.nixosModules.home-manager

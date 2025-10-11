@@ -1,11 +1,7 @@
 {
-  inputs,
-  pkgs,
+  proxmoxOverlay,
   ...
 }:
-let
-  proxmoxOverlay = inputs.proxmox-nixos.overlays.${pkgs.system};
-in
 {
   services.proxmox-ve = {
     enable = true;
@@ -13,7 +9,7 @@ in
   };
 
   nixpkgs.overlays = [
-    proxmoxOverlay    
+    proxmoxOverlay
   ];
 
   nix = {
