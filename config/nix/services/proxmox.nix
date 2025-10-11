@@ -1,7 +1,6 @@
 {
   inputs,
   pkgs,
-  proxmox-nixos,
   ...
 }:
 {
@@ -11,7 +10,7 @@
   };
 
   nixpkgs.overlays = [
-    proxmox-nixos.overlays.${pkgs.system}
+    inputs.proxmox-nixos.overlays.${pkgs.system}
   ];
 
   nix = {
