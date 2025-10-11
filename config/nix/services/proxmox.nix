@@ -3,7 +3,8 @@
   pkgs,
   proxmox-nixos,
   ...
-}:{
+}:
+{
   services.proxmox-ve = {
     enable = true;
     # package = inputs.proxmox-nixos.packages.${pkgs.system}.proxmox-nixos;
