@@ -24,7 +24,7 @@
 
     proxmox-nixos.url = "github:SaumonNet/proxmox-nixos";
 
-    nix-minecraft.url = “github:Infinidoge/nix-minecraft”;
+    # nix-minecraft.url = “github:Infinidoge/nix-minecraft”;
   };
 
   outputs =
