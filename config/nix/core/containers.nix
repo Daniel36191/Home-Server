@@ -3,7 +3,7 @@
   ...
 }:
 {
-    virtualisation = {
+  virtualisation = {
     containers.enable = true;
     oci-containers.backend = "docker";
     docker = {
@@ -12,7 +12,8 @@
         features.cdi = true;
       };
       rootless = {
-      setSocketVariable = true;
+        setSocketVariable = true;
+      };
     };
   };
 
