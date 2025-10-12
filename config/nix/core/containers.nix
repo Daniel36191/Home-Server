@@ -11,7 +11,8 @@
       daemon.settings = {
         features.cdi = true;
       };
-      rootless.daemon.settings.features.cdi = true;
+      rootless = {
+      setSocketVariable = true;
     };
   };
 
