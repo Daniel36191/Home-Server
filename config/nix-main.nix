@@ -10,26 +10,21 @@
     ##############
 
     ./nix/services/proxmox.nix
-
-
-    ############
-    ## System ##
-    ############
-    
-    ./nix/apps.nix
-    ./nix/nginx.nix
     # ./nix/servives/minecraft.nix
     # ./nix/services/containers/crafty.nix
-    ./nix/services/containers/portainer.nix
+    ./nix/services/homepage.nix
 
 
     ##########
     ## Core ##
     ##########
 
+    ./nix/apps.nix
+    ./nix/services/containers/portainer.nix
     ./nix/core/containers.nix
-    ./nix/core/user.nix
+    ./nix/nginx.nix
     ./nix/core/networking.nix
+    ./nix/core/user.nix
     ./nix/core/boot.nix
     ./nix/core/hardware.nix
   ];
