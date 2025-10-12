@@ -2,16 +2,13 @@
   localipaddress,
   ...
 }:
-let
-  guiPort = 8082;
-in
 {
   services.homepage-dashboard = {
     enable = true;
     openFirewall = true;
-    listenPort = guiPort;
+    listenPort = 8082;
     allowedHosts = "
-    ${localipaddress}:${guiPort},
+    ${localipaddress}:8082,
     home.lillypond.local,
     lillypond.local
     ";
