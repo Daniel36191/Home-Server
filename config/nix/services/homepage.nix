@@ -9,7 +9,7 @@ in
   services.homepage-dashboard = {
     enable = true;
     openFirewall = true;
-    listenPort = "${guiPort}";
+    listenPort = guiPort;
     allowedHosts = "
     ${localipaddress}:${guiPort},
     home.lillypond.local,
