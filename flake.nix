@@ -14,7 +14,7 @@
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
-    inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     agenix = {
@@ -23,6 +23,8 @@
     };
 
     proxmox-nixos.url = "github:SaumonNet/proxmox-nixos";
+
+    nix-minecraft.url = “github:Infinidoge/nix-minecraft”;
   };
 
   outputs =
@@ -33,6 +35,7 @@
       home-manager,
       agenix,
       proxmox-nixos,
+      nix-minecraft,
       ...
     }@inputs:
     let
@@ -55,11 +58,13 @@
         };
 
         proxmoxOverlay = proxmox-nixos.overlays.${system};
+        minecraftoverlay = nix-minecraft.overlay;
       };
       commonModules = [
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
         proxmox-nixos.nixosModules.proxmox-ve
+        nix-minecraft.nixosModules.minecraft-servers
       ];
     in
     {

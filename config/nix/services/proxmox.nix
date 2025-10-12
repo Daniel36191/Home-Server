@@ -8,9 +8,8 @@
     ipAddress = "192.168.0.1";
   };
 
-  nixpkgs.overlays = [
-    proxmoxOverlay
-  ];
+  ## Add Packages from flake overlay
+  nixpkgs.overlays = [ proxmoxOverlay ];
 
   nix = {
     settings = {
