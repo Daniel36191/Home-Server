@@ -1,26 +1,31 @@
 { 
   ...
 }:
-{
-  security.acme = {
-  acceptTerms = true;
-  email = "dmoeller38@outlook.com";
-};
+let
+  proxyConfig = [
+    { domain = "portainer.lillypond.local"; port = "9443"; default = true; }
+    { domain = "home.lillypond.local"; port = "500"; }
+    { domain = "proxmox.lillypond.local"; port = "8006"; }
+  ];
 
-services.nginx = {
-  enable = true;
-  recommendedGzipSettings = true;
-  recommendedOptimisation = true;
-  recommendedProxySettings = true;
-  recommendedTlsSettings = true;
-  virtualHosts."portainer.lillypond.local" = {
-    default = true;
-    enableACME = false;
-    addSSL = false;
+  makeVhost = cfg: {
+    default = cfg.default or false;
     locations."/" = {
-      proxyPass = "https://lillypond.local:9443/";
+      proxyPass = "https://lillypond.local:${cfg.port}/";
     };
   };
-};
 
+  vhosts = builtins.listToAttrs (map (cfg: {
+    name = cfg.domain;
+    value = makeVhost cfg;
+  }) proxyConfig);
+in {
+  services.nginx = {
+    enable = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+    virtualHosts = vhosts;
+  };
 }
