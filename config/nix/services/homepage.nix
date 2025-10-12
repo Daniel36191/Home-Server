@@ -3,7 +3,7 @@
   ...
 }:
 let
-  guiPort = "8082";
+  guiPort = 8082;
 in
 {
   services.homepage-dashboard = {
