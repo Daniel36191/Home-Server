@@ -7,11 +7,7 @@
     enable = true;
     openFirewall = true;
     listenPort = 8082;
-    allowedHosts = "
-    ${localipaddress}:8082,
-    home.lillypond.local,
-    lillypond.local
-    ";
+    allowedHosts = "${localipaddress}:8082,home.lillypond.local,lillypond.local";
     ## For Keys
     environmentFile = "
     ";
