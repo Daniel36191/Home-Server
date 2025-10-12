@@ -16,7 +16,7 @@ services.nginx = {
   virtualHosts."portainer.lillypond.local" = {
     default = true;
     enableACME = false;
-    addSSL = true;
+    addSSL = false;
     locations."/" = {
       proxyPass = "https://lillypond.local:9443/";
     };
