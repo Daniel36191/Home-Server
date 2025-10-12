@@ -45,6 +45,7 @@
       inherit (import ./config/variables.nix)
         system
         username
+        localipaddress
         ;
       
       ## Common function to create arguments for systems
@@ -52,6 +53,7 @@
         inherit inputs;
         inherit 
           username
+          localipaddress
           ;
         
         ## Pinning Nixpkgs versions
