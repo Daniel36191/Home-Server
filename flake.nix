@@ -24,6 +24,8 @@
 
     proxmox-nixos.url = "github:SaumonNet/proxmox-nixos";
 
+    portainer-on-nixos.url = "gitlab:cbleslie/portainer-on-nixos";
+
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };
 
@@ -35,6 +37,7 @@
       home-manager,
       agenix,
       proxmox-nixos,
+      portainer-on-nixos,
       nix-minecraft,
       ...
     }@inputs:
@@ -64,6 +67,7 @@
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
         proxmox-nixos.nixosModules.proxmox-ve
+        portainer-on-nixos.nixosModules.portainer
         nix-minecraft.nixosModules.minecraft-servers
       ];
     in

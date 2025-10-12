@@ -18,12 +18,16 @@
     
     ./nix/apps.nix
     ./nix/nginx.nix
+    # ./nix/servives/minecraft.nix
+    # ./nix/services/containers/crafty.nix
+    ./nix/services/containers/portainer.nix
 
 
     ##########
     ## Core ##
     ##########
 
+    ./nix/core/containers.nix
     ./nix/core/user.nix
     ./nix/core/networking.nix
     ./nix/core/boot.nix

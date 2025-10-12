@@ -3,7 +3,8 @@
 }:
 let
   redirectConfig = [
-    { domain = "home.lillypond.local"; port = "500"; }
+    { domain = "home.lillypond.local"; port = "500"; } ## add homarr
+    { domain = "portainer.lillypond.local"; port = "9443"; }
     { domain = "proxmox.lillypond.local"; port = "8006"; }
   ];
 
