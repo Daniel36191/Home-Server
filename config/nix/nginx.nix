@@ -1,41 +1,26 @@
 { 
   ...
 }:
-let
-  redirectConfig = [
-    { domain = "home.lillypond.local"; port = "500"; }
-    { domain = "portainer.lillypond.local"; port = "9443"; }
-    { domain = "proxmox.lillypond.local"; port = "8006"; }
-  ];
+{
+  security.acme = {
+  acceptTerms = true;
+  email = "dmoeller38@outlook.com";
+};
 
-  makeVhost = cfg: {
-    serverName = cfg.domain;
+services.nginx = {
+  enable = true;
+  recommendedGzipSettings = true;
+  recommendedOptimisation = true;
+  recommendedProxySettings = true;
+  recommendedTlsSettings = true;
+  virtualHosts."portainer.lillypond.local" = {
+    default = true;
+    enableACME = true;
+    addSSL = true;
     locations."/" = {
-      # Redirect to the same protocol but different port
-      return = "301 $scheme://lillypond.local:${cfg.port}$request_uri";
+      proxyPass = "https://lillypond.local:9443/";
     };
-    
-    # Add this to handle HTTPS requests properly
-    listen = [
-      {
-        addr = "0.0.0.0";
-        port = 80;
-      }
-      {
-        addr = "0.0.0.0";
-        port = 443;
-        ssl = true;
-      }
-    ];
   };
+};
 
-  vhosts = map makeVhost redirectConfig;
-in {
-  services.nginx = {
-    enable = true;
-    virtualHosts = builtins.listToAttrs (map (vhost: {
-      name = vhost.serverName;
-      value = vhost;
-    }) vhosts);
-  };
 }
