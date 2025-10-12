@@ -1,4 +1,4 @@
-{
+{ 
   ...
 }:
 let
@@ -10,27 +10,32 @@ let
 
   makeVhost = cfg: {
     serverName = cfg.domain;
-    enableACME = true;  # Automatically get SSL certificates
-    forceSSL = true;    # Force HTTPS
     locations."/" = {
-      return = "301 https://lillypond.local:${cfg.port}$request_uri";
+      # Redirect to the same protocol but different port
+      return = "301 $scheme://lillypond.local:${cfg.port}$request_uri";
     };
+    
+    # Add this to handle HTTPS requests properly
+    listen = [
+      {
+        addr = "0.0.0.0";
+        port = 80;
+      }
+      {
+        addr = "0.0.0.0";
+        port = 443;
+        ssl = true;
+      }
+    ];
   };
 
   vhosts = map makeVhost redirectConfig;
-in
-{
+in {
   services.nginx = {
     enable = true;
     virtualHosts = builtins.listToAttrs (map (vhost: {
       name = vhost.serverName;
       value = vhost;
     }) vhosts);
-  };
-  
-  # Enable ACME for Let's Encrypt certificates
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "your-email@example.com";
   };
 }
