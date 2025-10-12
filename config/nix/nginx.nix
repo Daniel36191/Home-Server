@@ -3,8 +3,8 @@
 }:
 let
   proxyConfig = [
-    { domain = "portainer.lillypond.local"; port = "9443"; default = true; }
-    { domain = "home.lillypond.local"; port = "500"; }
+    { domain = "portainer.lillypond.local"; port = "9443"; }
+    { domain = "home.lillypond.local"; port = "500"; default = true; }
     { domain = "proxmox.lillypond.local"; port = "8006"; }
   ];
 
