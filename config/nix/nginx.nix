@@ -4,7 +4,7 @@
 let
   proxyConfig = [
     { domain = "portainer.lillypond.local"; port = "9443"; }
-    { domain = "home.lillypond.local"; port = "8082"; /* default = true; */ } ## badgateway???
+    { domain = "home.lillypond.local"; port = "54321"; /* default = true; */ } ## badgateway???
     { domain = "proxmox.lillypond.local"; port = "8006"; }
   ];
 
