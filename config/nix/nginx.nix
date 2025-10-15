@@ -14,8 +14,8 @@ let
     locations."/" = {
       proxyPass = "${if cfg.secure == true then "https" else "http" }://${addr}:${cfg.port}/";
       proxyWebsockets = true;
-      forceSSL = cfg.secure;
     };
+    forceSSL = cfg.secure;
   };
 
   vhosts = builtins.listToAttrs (map (cfg: {
