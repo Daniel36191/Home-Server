@@ -4,16 +4,17 @@
 let
   addr = "lillypond.local";
   proxyConfig = [
-    { domain = "portainer.${addr}"; port = "9443"; protocall = "https"; }
-    { domain = "home.${addr}"; port = "54321"; protocall = "http"; default = true; }
-    { domain = "proxmox.${addr}"; port = "8006"; protocall = "https"; }
+    { domain = "portainer.${addr}"; port = "9443"; secure = true; }
+    { domain = "home.${addr}"; port = "54321"; secure = false; default = true; }
+    { domain = "proxmox.${addr}"; port = "8006"; secure = true; }
   ];
 
   makeVhost = cfg: {
     default = cfg.default or false;
     locations."/" = {
-      proxyPass = "${cfg.protocall}://${addr}:${cfg.port}/";
+      proxyPass = "${if cfg.secure == true then "https" else "http" }://${addr}:${cfg.port}/";
       proxyWebsockets = true;
+      forceSSL = cfg.secure;
     };
   };
 
