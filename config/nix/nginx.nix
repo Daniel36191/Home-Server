@@ -2,16 +2,18 @@
   ...
 }:
 let
+  addr = "lillypond.local";
   proxyConfig = [
-    { domain = "portainer.lillypond.local"; port = "9443"; }
-    { domain = "home.lillypond.local"; port = "54321"; /* default = true; */ } ## badgateway???
-    { domain = "proxmox.lillypond.local"; port = "8006"; }
+    { domain = "portainer.${addr}"; port = "9443"; }
+    { domain = "home.${addr}"; port = "54321"; /* default = true; */ } ## badgateway???
+    { domain = "proxmox.${addr}"; port = "8006"; }
   ];
 
   makeVhost = cfg: {
     default = cfg.default or false;
     locations."/" = {
-      proxyPass = "https://lillypond.local:${cfg.port}/";
+      proxyPass = "http://${addr}:${cfg.port}/";
+      proxyWebsockets = true;
     };
   };
 
