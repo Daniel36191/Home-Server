@@ -22,7 +22,8 @@
     ./nix/apps.nix
     ./nix/services/containers/portainer.nix
     ./nix/core/containers.nix
-    ./nix/nginx.nix
+    # ./nix/nginx.nix
+    ./nix/caddy.nix
     ./nix/core/networking.nix
     ./nix/core/user.nix
     ./nix/core/boot.nix
