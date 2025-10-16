@@ -11,8 +11,11 @@ let
   ];
 
   makeVhost = cfg: {
-    extraConfig = ''
-      reverse_proxy ${if cfg.secure == true then "https" else "http"}://localhost:${cfg.port}
+    extraConfig =
+      let
+        protocall = if cfg.secure then "https" else "http";
+      in ''
+      reverse_proxy ${protocall}://localhost:${cfg.port}
     '';
   };
 
