@@ -1,6 +1,6 @@
 { 
-  ...
   localipaddress,
+  ...
 }:
 let
   addr = "lillypond.local";
