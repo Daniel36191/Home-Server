@@ -16,7 +16,7 @@ let
         # protocall = if cfg.secure then "https" else "http";
         protocall = "https";
       in ''
-      reverse_proxy ${protocall}://localhost:${cfg.port}
+      reverse_proxy https://localhost:${cfg.port}
     '';
   };
 
