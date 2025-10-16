@@ -11,7 +11,7 @@ let
 
   makeVhost = cfg: {
     extraConfig = ''
-      reverse_proxy ${if cfg.secure == true then "https" else "http"}://${addr}:${cfg.port}";
+      reverse_proxy ${if cfg.secure == true then "https" else "http"}://${addr}:${cfg.port}
     '';
   };
 
