@@ -12,7 +12,7 @@ let
 
   makeVhost = cfg: {
     extraConfig = ''
-      reverse_proxy ${if cfg.secure == true then "https" else "http"}://${localipaddress}:${cfg.port}
+      reverse_proxy ${if cfg.secure == true then "https" else "http"}://localhost:${cfg.port}
     '';
   };
 
