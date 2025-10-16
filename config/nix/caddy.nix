@@ -12,7 +12,7 @@ let
   makeVhost = cfg: {
     extraConfig = ''
       reverse_proxy ${if cfg.secure == true then "https" else "http"}://${addr}:${cfg.port}";
-    ''
+    '';
   };
 
   vhosts = builtins.listToAttrs (map (cfg: {
