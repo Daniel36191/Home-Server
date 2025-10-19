@@ -7,6 +7,7 @@ let
     { domain = "portainer.${addr}"; port = "9443"; secure = true; }
     { domain = "home.${addr}"; port = "54321"; secure = false; default = true; }
     { domain = "proxmox.${addr}"; port = "8006"; secure = true; }
+    { domain = "crafty.${addr}"; port = "8000"; secure = true; }
   ];
 
   makeVhost = cfg: {
