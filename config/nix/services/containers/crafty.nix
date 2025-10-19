@@ -40,7 +40,7 @@ in
 
     serviceName = "${name}-docker";
   };
-  networking.firwall = { ## Open Firewall
+  networking.firewall = { ## Open Firewall
     allowedTCPPorts = firewallPorts;
     allowedUDPPorts = firewallPorts;
     allowedTCPPortRanges = firewallRanges;
