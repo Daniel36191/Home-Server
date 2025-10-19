@@ -9,8 +9,6 @@
     "${matchAll}".allowedUDPPorts = [ 53 ];
   };
 
-  virtualisation.oci-containers.backend = "podman";
-
   # Containers
   virtualisation.oci-containers.containers."crafty_container" = {
     image = "registry.gitlab.com/crafty-controller/crafty-4:latest";
