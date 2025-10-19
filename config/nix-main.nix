@@ -14,6 +14,8 @@
     # ./nix/services/containers/crafty.nix
     ./nix/services/homepage.nix
 
+    ./nix/services/containers/crafty-compose2.nix
+
 
     ##########
     ## Core ##

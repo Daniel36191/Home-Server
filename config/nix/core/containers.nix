@@ -5,20 +5,12 @@
 {
   virtualisation = {
     containers.enable = true;
-    oci-containers.backend = "docker";
-    docker = {
+    oci-containers.backend = "podman";
+    podman = {
       enable = true;
-      daemon.settings = {
-        features.cdi = true;
-      };
-      rootless = {
-        setSocketVariable = true;
-      };
     };
   };
 
   environment.systemPackages = with pkgs; [
-    docker-compose
-    docker-buildx
   ];
 }
