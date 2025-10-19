@@ -46,4 +46,13 @@ in
     allowedTCPPortRanges = firewallRanges;
     allowedUDPPortRanges = firewallRanges;
   };
+
+  # systemd.user.services."${name}-docker" = {
+  # enable = true;
+  # description = "${name}-docker-service";
+  # serviceConfig = {
+  #     Type = "simple";
+  #     ExecStart = ''/my/cool/user/service'';
+  # };
+};
 }
