@@ -11,7 +11,7 @@ let
       "19132" ## BEDROCK
   ];
   firewallRanges = [
-    { from = 25500; to = 25600 } ## MC SERV PORT RANGE
+    { from = 25500; to = 25600; } ## MC SERV PORT RANGE
   ];
 in
 {
