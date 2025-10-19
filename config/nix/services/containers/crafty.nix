@@ -39,6 +39,7 @@ in
 
 
     serviceName = "${name}-docker";
+    autoStart = true;
   };
   networking.firewall = { ## Open Firewall
     allowedTCPPorts = firewallPorts;
