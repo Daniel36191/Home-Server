@@ -54,5 +54,4 @@ in
   #     Type = "simple";
   #     ExecStart = ''/my/cool/user/service'';
   # };
-};
 }
