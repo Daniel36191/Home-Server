@@ -1,4 +1,5 @@
 { 
+  pkgs,
   ...
 }:
 let
@@ -7,6 +8,15 @@ let
   # domain = "home"; port = "54321"; secure = false
   # domain = "proxmox"; port = "8006"; secure = true
   # domain = "crafty"; port = "8443"; secure = true
+
+  mkCert = domain: pkgs.runCommand "cert-${domain}" { 
+    nativeBuildInputs = [ pkgs.mkcert ];
+  } ''
+    HOME=$TMPDIR
+    mkcert -cert-file cert.pem -key-file key.pem "${domain}.${addr}"
+    mkdir -p $out
+    cp cert.pem key.pem $out/
+  '';
 in
 {
   services.nginx = {
@@ -16,10 +26,12 @@ in
     recommendedGzipSettings = true;
     recommendedOptimisation = true;
     # other Nginx options
-    virtualHosts = {
-      "portiner.${addr}" =  {
+    virtualHosts = let domain = "portainer"; in {
+      "${domain}.${addr}" =  {
         # enableACME = true;
         forceSSL = true;
+        sslCertificate = "${mkCert domain}/cert.pem";
+        sslCertificateKey = "${mkCert domain}/key.pem";
         locations."/" = {
           proxyPass = "https://127.0.0.1:9443";
           proxyWebsockets = true; # needed if you need to use WebSocket
