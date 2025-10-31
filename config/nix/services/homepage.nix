@@ -26,6 +26,8 @@ in
                 href = "https://portainer.${addr}/"; ## Redirection url
               }
             ];
+          }
+          {
             Proxmox = [
               {
                 abbr = "PX";
@@ -33,6 +35,8 @@ in
                 href = "https://proxmox.${addr}/";
               }
             ];
+          }
+          {
             Crafty = [
               {
                 abbr = "MC";
