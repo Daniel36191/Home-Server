@@ -4,45 +4,52 @@
 }:
 let
   addr = "lillypond.local";
-  # domain = "portainer"; port = "9443"; secure = false
-  # domain = "home"; port = "54321"; secure = false
-  # domain = "proxmox"; port = "8006"; secure = true
-  # domain = "crafty"; port = "8443"; secure = true
+  proxyConfig = [
+    { domain = "portainer.${addr}"; port = "9000"; secure = false; }
+    { domain = "home.${addr}"; port = "54321"; secure = false; default = true; }
+    { domain = "proxmox.${addr}"; port = "8006"; secure = true; }
+    { domain = "crafty.${addr}"; port = "8443"; secure = true; sockets = true; }
+  ];
 
   mkCert = domain: pkgs.runCommand "cert-${domain}" { 
     nativeBuildInputs = [ pkgs.mkcert ];
-  } ''
-    HOME=$TMPDIR
-    mkcert -cert-file cert.pem -key-file key.pem "${domain}.${addr}"
-    mkdir -p $out
-    cp cert.pem key.pem $out/
-  '';
-in
-{
+    } ''
+      HOME=$TMPDIR
+      mkcert -cert-file cert.pem -key-file key.pem "${domain}.${addr}"
+      mkdir -p $out
+      cp cert.pem key.pem $out/
+    '';
+  makeVhost = cfg: {
+    default = cfg.default or false;
+    locations."/" = {
+      proxyPass = "${if cfg.secure == true then "https" else "http" }://${addr}:${cfg.port}/";
+      proxyWebsockets = cfg.sockets or false;
+    };
+    forceSSL = cfg.secure;
+  } // (if cfg.secure then {
+    sslCertificate = "${mkCert cfg.domain}/cert.pem";
+    sslCertificateKey = "${mkCert cfg.domain}/key.pem";
+    locations."/" = {
+      extraConfig =
+        # required when the target is also TLS server with multiple hosts
+        "proxy_ssl_server_name on;" +
+        # required when the server wants to use HTTP Authentication
+        "proxy_pass_header Authorization;"
+        ;
+    };
+  } else {});
+
+  vhosts = builtins.listToAttrs (map (cfg: {
+    name = cfg.domain;
+    value = makeVhost cfg;
+  }) proxyConfig);
+in {
   services.nginx = {
     enable = true;
-    recommendedProxySettings = true;
-    recommendedTlsSettings = true;
     recommendedGzipSettings = true;
     recommendedOptimisation = true;
-    # other Nginx options
-    virtualHosts = let domain = "portainer"; in {
-      "${domain}.${addr}" =  {
-        # enableACME = true;
-        forceSSL = true;
-        sslCertificate = "${mkCert domain}/cert.pem";
-        sslCertificateKey = "${mkCert domain}/key.pem";
-        locations."/" = {
-          proxyPass = "https://127.0.0.1:9443";
-          proxyWebsockets = true; # needed if you need to use WebSocket
-          extraConfig =
-            # required when the target is also TLS server with multiple hosts
-            "proxy_ssl_server_name on;" +
-            # required when the server wants to use HTTP Authentication
-            "proxy_pass_header Authorization;"
-            ;
-        };
-      };
-    };
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+    virtualHosts = vhosts;
   };
 }

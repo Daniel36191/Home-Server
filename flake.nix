@@ -23,6 +23,7 @@
     };
 
     proxmox-nixos.url = "github:SaumonNet/proxmox-nixos";
+    proxmox-nixos.inputs.nixpkgs.follows = "nixpkgs";
 
     portainer-on-nixos.url = "gitlab:cbleslie/portainer-on-nixos";
 
