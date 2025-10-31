@@ -14,7 +14,7 @@
     description = "File sync service";
     serviceConfig = {
         Type = "simple";
-        ExecStart = ''
+        script = ''
         ${pkgs.syncthing}/bin/syncthing
         syncthing cli config gui raw-address set 0.0.0.0:8384
         '';
