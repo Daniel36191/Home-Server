@@ -6,5 +6,5 @@ while true; do
         git pull
         sudonix
     fi
-    sleep 60
+    sleep 30
 done
