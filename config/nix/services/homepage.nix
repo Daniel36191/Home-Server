@@ -21,8 +21,8 @@ in
           {
             Portainer = [ ## Name
               {
-                abbr = "Portainer";
-                icon = "Portainer"; ## Automactily from https://github.com/homarr-labs/dashboard-icons
+                abbr = "PT";
+                icon = "portainer"; ## Automactily from https://github.com/homarr-labs/dashboard-icons
                 href = "https://portiner.${addr}/"; ## Redirection url
               }
             ];
