@@ -1,5 +1,6 @@
 { 
   pkgs,
+  lib,
   ...
 }:
 let
@@ -24,20 +25,18 @@ let
     locations."/" = {
       proxyPass = "${if cfg.secure == true then "https" else "http" }://${addr}:${cfg.port}/";
       proxyWebsockets = cfg.sockets or false;
-    };
-    forceSSL = cfg.secure;
-  } // (if cfg.secure then {
-    sslCertificate = "${mkCert cfg.domain}/cert.pem";
-    sslCertificateKey = "${mkCert cfg.domain}/key.pem";
-    locations."/" = {
+    } ++ (lib.optionals (cfg.secure == true){
       extraConfig =
         # required when the target is also TLS server with multiple hosts
         "proxy_ssl_server_name on;" +
         # required when the server wants to use HTTP Authentication
         "proxy_pass_header Authorization;"
-        ;
-    };
-  } else {});
+      ;});
+    forceSSL = cfg.secure;
+  } ++ (lib.optionals (cfg.secure == true){
+    sslCertificate = "${mkCert cfg.domain}/cert.pem";
+    sslCertificateKey = "${mkCert cfg.domain}/key.pem";
+  });
 
   vhosts = builtins.listToAttrs (map (cfg: {
     name = cfg.domain;
