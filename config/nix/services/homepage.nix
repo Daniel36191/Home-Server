@@ -14,7 +14,7 @@
 
     bookmarks = [
       {
-        Entertainment = [ ## Catagory
+        Tooling = [ ## Catagory
           {
             YouTube = [ ## Name
               {
