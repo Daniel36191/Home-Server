@@ -40,7 +40,7 @@ in
             Crafty = [
               {
                 abbr = "MC";
-                icon = "crafty";
+                icon = "crafty-controller";
                 href = "https://crafty.${addr}/";
               }
             ];
