@@ -2,25 +2,28 @@
   localipaddress,
   ...
 }:
+let
+  addr = "lillypond.local";
+in
 {
   services.homepage-dashboard = {
     enable = true;
     openFirewall = true;
     listenPort = 54321;
-    allowedHosts = "${localipaddress}:54321,home.lillypond.local,lillypond.local";
+    allowedHosts = "${localipaddress}:54321,home.${addr},${addr}";
     ## For Keys
     environmentFile = "
     ";
 
     bookmarks = [
       {
-        Tooling = [ ## Catagory
+        WebUIs = [ ## Catagory
           {
-            YouTube = [ ## Name
+            Portainer = [ ## Name
               {
-                abbr = "YT";
-                icon = "youtube"; ## Automactily from https://github.com/homarr-labs/dashboard-icons
-                href = "https://youtube.com/"; ## Redirection url
+                abbr = "Portainer";
+                icon = "Portainer"; ## Automactily from https://github.com/homarr-labs/dashboard-icons
+                href = "portiner.${addr}"; ## Redirection url
               }
             ];
           }
