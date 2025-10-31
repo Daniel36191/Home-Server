@@ -10,6 +10,7 @@ let
     { domain = "home"; port = "54321"; secure = false; default = true; }
     { domain = "proxmox"; port = "8006"; secure = true; }
     { domain = "crafty"; port = "8443"; secure = true; sockets = true; }
+    { domain = "syncthing"; port = "8384"; secure = false; sockets = true; }
   ];
 
   mkCert = domain: pkgs.runCommand "cert-${domain}" { 

@@ -25,6 +25,7 @@
       dns = "none"; ## Disable NetworkManager's DNS resolution
     };
     ## Don't get from router
+    hostName = "lillypond";
     useDHCP = false;
     dhcpcd.enable = false;
 
