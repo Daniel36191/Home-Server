@@ -23,7 +23,21 @@ in
               {
                 abbr = "PT";
                 icon = "portainer"; ## Automactily from https://github.com/homarr-labs/dashboard-icons
-                href = "https://portiner.${addr}/"; ## Redirection url
+                href = "https://portainer.${addr}/"; ## Redirection url
+              }
+            ];
+            Proxmox = [
+              {
+                abbr = "PX";
+                icon = "proxmox";
+                href = "https://proxmox.${addr}/";
+              }
+            ];
+            Crafty = [
+              {
+                abbr = "MC";
+                icon = "crafty";
+                href = "https://crafty.${addr}/";
               }
             ];
           }
