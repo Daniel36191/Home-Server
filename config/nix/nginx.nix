@@ -6,7 +6,7 @@
 let
   addr = "lillypond.local";
   proxyConfig = [
-    { domain = "portainer"; port = "9443"; secure = false; }
+    { domain = "portainer"; port = "9443"; secure = true; }
     { domain = "home"; port = "54321"; secure = false; default = true; }
     { domain = "proxmox"; port = "8006"; secure = true; }
     { domain = "crafty"; port = "8443"; secure = true; sockets = true; }
