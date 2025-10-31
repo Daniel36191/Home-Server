@@ -23,7 +23,7 @@ in
               {
                 abbr = "Portainer";
                 icon = "Portainer"; ## Automactily from https://github.com/homarr-labs/dashboard-icons
-                href = "portiner.${addr}"; ## Redirection url
+                href = "https://portiner.${addr}/"; ## Redirection url
               }
             ];
           }
