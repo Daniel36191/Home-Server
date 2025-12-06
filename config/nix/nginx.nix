@@ -55,6 +55,7 @@ in {
     recommendedOptimisation = true;
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
+    clientMaxBodySize = "1024m";
     virtualHosts = vhosts;
   };
 }
