@@ -6,7 +6,7 @@
   ...
 }:
 let
-  daniel-key = config.age.secrets."copyparty-user-daniel".path
+  daniel-key = config.age.secrets."copyparty-user-daniel".path;
 in
 {
   nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
