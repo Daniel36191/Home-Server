@@ -22,7 +22,7 @@ in
     settings = {
       i = "0.0.0.0";
       ## Use lists to set multiple values
-      p = [ 3210 3211 ];
+      p = [ 3923 ];
       ## Use booleans to set binary flags
       no-reload = true;
       ## Using 'false' will do nothing and omit the value when generating a config
