@@ -1,6 +1,6 @@
 {
   pkgs,
-  copyparty,
+  # copyparty,
   config,
   ...
 }:
