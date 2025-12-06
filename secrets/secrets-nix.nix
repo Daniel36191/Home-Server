@@ -9,7 +9,7 @@
   ];
 
   age.secrets = {
-    "user-pass" = {
+    "copyparty-user-daniel" = {
       file = ./copyparty-user-daniel.age;
       owner = "copyparty";
     };
