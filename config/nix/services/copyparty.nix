@@ -3,10 +3,11 @@
   # copyparty,
   config,
   inputs,
+  cfg,
   ...
 }:
 let
-  daniel-key = config.age.secrets."copyparty-user-daniel".path;
+  daniel-key = "${cfg.secretsDir}/copyparty-user-daniel";
 in
 {
   nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
