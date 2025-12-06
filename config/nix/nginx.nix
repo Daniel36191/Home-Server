@@ -18,7 +18,7 @@ let
 
   ];
 
-  mkCert = domain: pkgs.runCommand "cert-${domain}" { 
+  mkCert = domain: pkgs.runCommand "cert-${domain}" {
     nativeBuildInputs = [ pkgs.mkcert ];
     } ''
       HOME=$TMPDIR
