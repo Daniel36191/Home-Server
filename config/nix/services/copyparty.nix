@@ -6,6 +6,7 @@
   ...
 }:
 let
+  daniel-key = config.age.secrets."copyparty-user-daniel".path
 in
 {
   nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
@@ -30,7 +31,7 @@ in
 
     ## Create users
     accounts = {
-      daniel.passwordFile = config.age.secrets."copyparty-user-daniel".path;
+      daniel.passwordFile = daniel-key;
     };
     groups = {
       admin = [
