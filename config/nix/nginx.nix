@@ -6,11 +6,16 @@
 let
   addr = "lillypond.local";
   proxyConfig = [
-    { domain = "portainer"; port = "9443"; secure = true; }
+    ## Static
     { domain = "home"; port = "54321"; secure = false; default = true; }
+    { domain = "portainer"; port = "9443"; secure = true; }
+
+    ## Dynamic
     { domain = "proxmox"; port = "8006"; secure = true; }
     { domain = "crafty"; port = "8443"; secure = true; sockets = true; }
     { domain = "syncthing"; port = "8384"; secure = false; sockets = true; }
+    { domain = "files"; port = "8384"; secure = false; sockets = true; } ## CopyParty
+
   ];
 
   mkCert = domain: pkgs.runCommand "cert-${domain}" { 

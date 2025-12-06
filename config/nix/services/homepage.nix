@@ -45,6 +45,15 @@ in
               }
             ];
           }
+          {
+            CopyParty = [
+              {
+                abbr = "Files";
+                icon = "copyparty";
+                href = "https://files.${addr}/";
+              }
+            ];
+          }
         ];
       }
 

@@ -28,6 +28,8 @@
     portainer-on-nixos.url = "gitlab:cbleslie/portainer-on-nixos";
 
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+
+    inputs.copyparty.url = "github:9001/copyparty";
   };
 
   outputs =
@@ -40,6 +42,7 @@
       proxmox-nixos,
       portainer-on-nixos,
       nix-minecraft,
+      copyparty,
       ...
     }@inputs:
     let
@@ -72,6 +75,7 @@
         proxmox-nixos.nixosModules.proxmox-ve
         portainer-on-nixos.nixosModules.portainer
         nix-minecraft.nixosModules.minecraft-servers
+        copyparty.nixosModules.default
       ];
     in
     {
