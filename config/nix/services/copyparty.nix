@@ -30,7 +30,7 @@ in
 
     ## Create users
     accounts = {
-      daniel.passwordFile = config.age.secrets.copyparty-user-daniel.path;
+      daniel.passwordFile = config.age.secrets."copyparty-user-daniel".path;
     };
     groups = {
       admin = [
