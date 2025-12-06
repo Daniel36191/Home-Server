@@ -31,7 +31,7 @@ in
 
     ## Create users
     accounts = {
-      daniel.passwordFile = "/run/agenix/copyparty-user-daniel";
+      daniel.passwordFile = config.age.secrets."copyparty-user-daniel".path;
     };
     groups = {
       admin = [
