@@ -7,5 +7,5 @@ let
 in
 {
   ## make new files/edit with agenixedit file.age
-  "copypary-user-daniel.age".publicKeys = systems;
+  "copyparty-user-daniel.age".publicKeys = systems;
 }
