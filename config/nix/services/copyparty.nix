@@ -2,12 +2,13 @@
   pkgs,
   # copyparty,
   config,
+  inputs,
   ...
 }:
 let
 in
 {
-  nixpkgs.overlays = [ copyparty.overlays.default ];
+  nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
 
   services.copyparty = {
     enable = true;
