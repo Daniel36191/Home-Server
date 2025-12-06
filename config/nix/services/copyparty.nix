@@ -7,7 +7,6 @@
   ...
 }:
 let
-  daniel-key = "${cfg.secretsDir}/copyparty-user-daniel";
 in
 {
   nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
@@ -32,7 +31,7 @@ in
 
     ## Create users
     accounts = {
-      daniel.passwordFile = daniel-key;
+      daniel.passwordFile = "/run/agenix/copyparty-user-daniel";
     };
     groups = {
       admin = [
