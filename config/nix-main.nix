@@ -26,7 +26,7 @@
 
     ./nix/apps.nix
     ../secrets/secrets-nix.nix
-    ./nix/services/containers/portainer.nix
+    # ./nix/services/containers/portainer.nix
     ./nix/core/containers.nix
     ./nix/nginx.nix
     ./nix/core/networking.nix
