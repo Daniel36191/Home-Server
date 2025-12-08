@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   localipaddress,
   ...
 }:
@@ -16,50 +17,40 @@ in
     environmentFile = "
     ";
 
-    bookmarks = [
+    bookmarks = let 
+      
+
+      services = [
+        {
+          enable = config.services.portiner.enable;
+          abbr = "PT";
+          icon = "portainer";
+          url = "portiner";
+          secure = true;
+        }
+      ];
+
+      enabledBookmarks = lib.filterAttrs (_: services: services.enable) services;
+
+      makeBookmarks = services: mkUrl: let 
+        mkUrl = url: secure: "${if secure then "https" else "http"}://${url}.${addr}";
+        s = services;
+        in {
+        "${s.name}" = [
+          {
+            abbr = s.abbr;
+            icon = s.icon;
+            href = mkUrl s.url s.secure;
+          }
+        ];
+      }
+
+
+
+    in [
       {
         WebUIs = [ ## Catagory
-
-        (
-          if config.services.portainer.enable == true then
-          {
-            Portainer = [ ## Name
-              {
-                abbr = "PT";
-                icon = "portainer"; ## Automactily from https://github.com/homarr-labs/dashboard-icons
-                href = "https://portainer.${addr}/"; ## Redirection url
-              }
-            ];
-          }
-          else ""
-        )
-          {
-            Proxmox = [
-              {
-                abbr = "PX";
-                icon = "proxmox";
-                href = "https://proxmox.${addr}/";
-              }
-            ];
-          }
-          {
-            Crafty = [
-              {
-                abbr = "MC";
-                icon = "crafty-controller";
-                href = "https://crafty.${addr}/";
-              }
-            ];
-          }
-          {
-            CopyParty = [
-              {
-                abbr = "Files";
-                icon = "copyparty";
-                href = "https://files.${addr}/";
-              }
-            ];
-          }
+          makeBookmarks
         ];
       }
 
