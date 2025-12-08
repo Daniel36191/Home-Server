@@ -15,6 +15,7 @@
     ./nix/services/homepage.nix
     ./nix/services/syncthing.nix
     ./nix/services/copyparty.nix
+    ./nix/services/nextcloud.nix
 
     ./nix/services/containers/crafty-compose2.nix
 

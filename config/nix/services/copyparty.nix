@@ -1,9 +1,6 @@
 {
-  pkgs,
-  # copyparty,
   config,
   inputs,
-  cfg,
   ...
 }:
 let
@@ -20,9 +17,8 @@ in
     ## Directly maps to values in the [global] section of the copyparty config.
     ## See `copyparty --help` for available options
     settings = {
-      i = "0.0.0.0";
-      ## Use lists to set multiple values
-      p = [ 3923 ];
+      i = "0.0.0.0"; ## Allowed ip/s
+      p = [ 3923 ]; ## Port/s
       ## Use booleans to set binary flags
       no-reload = true;
       ## Using 'false' will do nothing and omit the value when generating a config

@@ -7,5 +7,10 @@ let
 in
 {
   ## make new files/edit with agenixedit file.age
+
+  ## CopyParty users
   "copyparty-user-daniel.age".publicKeys = systems;
+
+  ## Nextcloud Users
+  "nextcloud-user-admin.age".publicKeys = systems;
 }

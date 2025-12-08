@@ -1,4 +1,5 @@
 {
+  config,
   localipaddress,
   ...
 }:
@@ -18,6 +19,9 @@ in
     bookmarks = [
       {
         WebUIs = [ ## Catagory
+
+        (
+          if config.services.portainer.enable == true then
           {
             Portainer = [ ## Name
               {
@@ -27,6 +31,9 @@ in
               }
             ];
           }
+          else
+            {}
+        )
           {
             Proxmox = [
               {
