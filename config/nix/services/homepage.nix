@@ -43,10 +43,7 @@ in
             href = mkUrl s.url s.secure;
           }
         ];
-      }
-
-
-
+      };
     in [
       {
         WebUIs = [ ## Catagory
