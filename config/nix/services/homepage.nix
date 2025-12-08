@@ -17,9 +17,7 @@ in
     environmentFile = "
     ";
 
-    bookmarks = let 
-      
-
+    bookmarks = let
       services = [
         {
           enable = config.services.portiner.enable;
