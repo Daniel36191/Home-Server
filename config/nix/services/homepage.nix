@@ -20,20 +20,21 @@ in
       {
         WebUIs = [ ## Catagory
 
-        (
-          if config.services.portainer.enable == true then
+        # (
+        #   if config.services.portainer.enable == true then
+        #   {
+        #     Portainer = [ ## Name
+        #       {
+        #         abbr = "PT";
+        #         icon = "portainer"; ## Automactily from https://github.com/homarr-labs/dashboard-icons
+        #         href = "https://portainer.${addr}/"; ## Redirection url
+        #       }
+        #     ];
+        #   }
+        #   else {}
+        # )
           {
-            Portainer = [ ## Name
-              {
-                abbr = "PT";
-                icon = "portainer"; ## Automactily from https://github.com/homarr-labs/dashboard-icons
-                href = "https://portainer.${addr}/"; ## Redirection url
-              }
-            ];
           }
-          else
-            {}
-        )
           {
             Proxmox = [
               {
