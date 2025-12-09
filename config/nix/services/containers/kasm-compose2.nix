@@ -24,7 +24,7 @@
       "DOCKER_HUB_PASSWORD" = "PASS";
       "DOCKER_HUB_USERNAME" = "USER";
       "DOCKER_MTU" = "1500";
-      "KASM_PORT" = "3030";
+      "KASM_PORT" = "443";
     };
     volumes = [
       "/dev/input:/dev/input:rw"
