@@ -2,5 +2,8 @@
   ...
 }:
 {
-  services.kasmweb.enable = true;
+  services.kasmweb = {
+    enable = true;
+    port = 3069;
+  };
 }

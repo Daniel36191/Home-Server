@@ -15,6 +15,7 @@ let
     { domain = "crafty"; port = "8443"; secure = true; sockets = true; }
     { domain = "syncthing"; port = "8384"; secure = false; sockets = true; }
     { domain = "files"; port = "3923"; secure = false; sockets = true; } ## CopyParty
+    { domain = "kasm"; port = "3069"; secure = true; sockets = true; }
 
   ];
 
@@ -58,4 +59,4 @@ in {
     clientMaxBodySize = "1024m";
     virtualHosts = vhosts;
   };
-}
+} 
