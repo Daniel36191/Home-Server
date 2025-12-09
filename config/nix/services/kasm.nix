@@ -3,9 +3,9 @@
 }:
 {
   services.kasmweb = {
-    enable = true;
+    enable = false;
     listenPort = 3069;
-    listenAddress = "kasm.lillypond.local";
+    # listenAddress = "kasm.lillypond.local";
     # datastorePath = "/services/kasm";
   };
 }
