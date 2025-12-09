@@ -30,18 +30,22 @@ in
 
       enabledBookmarks = lib.filterAttrs (_: services: services.enable) services;
 
-      makeBookmarks = services: mkUrl: let 
-        mkUrl = url: secure: "${if secure then "https" else "http"}://${url}.${addr}";
-        s = services;
-        in {
-        "${s.name}" = [
+      makeBookmarks = services: mkUrl:
+        let 
+          mkUrl = url: secure: "${if secure then "https" else "http"}://${url}.${addr}";
+          s = services;
+        in 
+        {
           {
-            abbr = s.abbr;
-            icon = s.icon;
-            href = mkUrl s.url s.secure;
+            "${s.name}" = [
+              {
+                abbr = s.abbr;
+                icon = s.icon;
+                href = mkUrl s.url s.secure;
+              }
+            ];
           }
-        ];
-      };
+        };
     in [
       {
         WebUIs = [ ## Catagory

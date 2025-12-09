@@ -1,0 +1,6 @@
+{
+  ...
+}:
+{
+  services.kasmweb.enable = true;
+}
