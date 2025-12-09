@@ -4,6 +4,6 @@
 {
   services.kasmweb = {
     enable = true;
-    port = 3069;
+    listenPort = 3069;
   };
 }
