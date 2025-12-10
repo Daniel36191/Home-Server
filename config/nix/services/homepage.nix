@@ -24,7 +24,7 @@ in
           name = "Portainer";
           enable = config.services.portainer.enable or false;
           abbr = "PT";
-          icon = "portainer";
+          icon = "portainer"; ## Automactily from https://github.com/homarr-labs/dashboard-icons
           url = "portainer";
           secure = true;
         }
@@ -38,7 +38,7 @@ in
         }
         {
           name = "Crafty Controller";
-          enable = config.services.proxmox-ve.enable or false;
+          enable = config.systemd.services."docker-crafty_container".enable or false;
           abbr = "PX";
           icon = "crafty-controller";
           url = "crafty";
