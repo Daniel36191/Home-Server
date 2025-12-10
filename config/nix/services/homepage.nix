@@ -21,12 +21,36 @@ in
     bookmarks = let
       services = [
         {
-          name = "portainer";
+          name = "Portainer";
           enable = config.services.portainer.enable or false;
           abbr = "PT";
           icon = "portainer";
           url = "portainer";
           secure = true;
+        }
+        {
+          name = "Proxmox";
+          enable = config.services.proxmox-ve.enable or false;
+          abbr = "PX";
+          icon = "proxmox";
+          url = "proxmox";
+          secure = true;
+        }
+        {
+          name = "Crafty Controller";
+          enable = config.services.proxmox-ve.enable or false;
+          abbr = "PX";
+          icon = "crafty-controller";
+          url = "crafty";
+          secure = true;
+        }
+        {
+          name = "Files";
+          enable = config.services.copyparty.enable or false;
+          abbr = "copyparty";
+          icon = "copyparty";
+          url = "files";
+          secure = false;
         }
       ];
       
