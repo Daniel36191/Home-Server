@@ -15,7 +15,7 @@
       # "--auth-key=file:${config.age.secrets."tailscale-${nix-host}".path}"
       "--reset"
     ];
-    authKeyFile = config.age.secrets."tailscale-${nix-host}".path;
+    authKeyFile = config.age.secrets."tailscale-user-admin".path;
   };
 
   # CRITICAL: Enable IP forwarding for exit node
