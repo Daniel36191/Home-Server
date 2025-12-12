@@ -13,4 +13,6 @@ in
 
   ## Nextcloud Users
   "nextcloud-user-admin.age".publicKeys = systems;
+
+  "tailscale-user-lillypond.age".publicKeys = systems;
 }

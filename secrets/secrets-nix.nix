@@ -19,5 +19,10 @@
     "nextcloud-user-admin" = {
       file = ./nextcloud-user-admin.age;
     };
+
+    ## tailscale
+    "tailscale-user-admin" = {
+      file = ./tailscale-user-lillypond.age;
+    };
   };
 }
