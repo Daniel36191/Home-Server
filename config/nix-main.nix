@@ -15,6 +15,7 @@
     ./nix/services/homepage.nix
     ./nix/services/syncthing.nix
     ./nix/services/copyparty.nix
+    ./nix/services/tailscale.nix
     # ./nix/services/nextcloud.nix
     # ./nix/services/kasm.nix
 
