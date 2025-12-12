@@ -18,7 +18,7 @@
     # ./nix/services/nextcloud.nix
     # ./nix/services/kasm.nix
 
-    # ./nix/services/containers/crafty-compose2.nix
+    ./nix/services/containers/crafty-compose2.nix
     # ./nix/services/containers/kasm-compose2.nix
 
 

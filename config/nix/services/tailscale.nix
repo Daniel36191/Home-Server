@@ -1,6 +1,7 @@
 {
   config,
   nix-host,
+  pkgs,
   ...
 }:
 {
@@ -10,7 +11,17 @@
     useRoutingFeatures = "both";
     extraUpFlags = [
       "--advertise-exit-node"
+      # "--accept-routes"
+      # "--auth-key=file:${config.age.secrets."tailscale-${nix-host}".path}"
+      "--reset"
     ];
     authKeyFile = config.age.secrets."tailscale-${nix-host}".path;
   };
+
+  # CRITICAL: Enable IP forwarding for exit node
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = 1;
+    "net.ipv6.conf.all.forwarding" = 1;
+  };
+
 }
