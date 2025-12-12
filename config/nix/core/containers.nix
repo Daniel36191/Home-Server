@@ -11,7 +11,7 @@
       autoPrune.enable = true;
       rootless = {
         enable = false;
-        setSocketVariable = true;
+        setSocketVariable = false;
       };
     };
   };
