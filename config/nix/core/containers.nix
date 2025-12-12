@@ -10,6 +10,7 @@
       enable = true;
       autoPrune.enable = true;
       rootless = {
+        enable = false;
         setSocketVariable = true;
       };
     };
