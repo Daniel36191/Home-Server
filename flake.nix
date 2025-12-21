@@ -50,6 +50,7 @@
         system
         username
         localipaddress
+        ssh-public-key
         ;
       
       ## Common function to create arguments for systems
