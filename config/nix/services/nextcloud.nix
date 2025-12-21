@@ -4,15 +4,15 @@
   ...
 }:
 let
-  nextcloud-version = "32";
+  nextcloud-version = "nextcloud32";
 in
 {
   environment.systemPackages = with pkgs; [
-    nextcloud"${nextcloud-version}"
+    "${nextcloud-version}"
   ];
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud"${nextcloud-version}";
+    package = pkgs."${nextcloud-version}";
     configureRedis = true;
     maxUploadSize = "10G";
     hostName = "nextcloud.lillypond.local";
