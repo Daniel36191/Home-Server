@@ -9,6 +9,11 @@
   ];
 
   age.secrets = {
+    ## SSH
+    "ssh.age" = {
+      file = ./ssh.age;
+    };
+
     ## Copyparty
     "copyparty-user-daniel" = {
       file = ./copyparty-user-daniel.age;
@@ -24,5 +29,7 @@
     "tailscale-user-admin" = {
       file = ./tailscale-user-lillypond.age;
     };
+
+    
   };
 }

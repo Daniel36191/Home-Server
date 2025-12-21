@@ -58,6 +58,7 @@
         inherit 
           username
           localipaddress
+          ssh-public-key
           ;
         
         ## Pinning Nixpkgs versions

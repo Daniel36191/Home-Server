@@ -8,11 +8,15 @@ in
 {
   ## make new files/edit with agenixedit file.age
 
+  ## SSH
+  "ssh.age".publicKeys = systems;
+
   ## CopyParty users
   "copyparty-user-daniel.age".publicKeys = systems;
 
   ## Nextcloud Users
   "nextcloud-user-admin.age".publicKeys = systems;
 
+  ## Tailscale
   "tailscale-user-lillypond.age".publicKeys = systems;
 }

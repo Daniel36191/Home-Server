@@ -38,24 +38,6 @@
     ./nix/core/hardware.nix
   ];
 
-  #########
-  ## SSH ##
-  #########
-
-  services.openssh = {
-    enable = true;
-    ports = [ 22 ];
-    authorizedKeysInHomedir = true;
-    settings = {
-      PasswordAuthentication = true;
-      AllowUsers = null; ## Allows all users by default. Can be [ "user1" "user2" ]
-      UseDns = true;
-      X11Forwarding = false;
-      PermitRootLogin = "yes"; ## "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
-      PubkeyAuthentication = "yes";
-    };
-  };
-
   ###########
   ## Nixos ##
   ###########
