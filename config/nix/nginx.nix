@@ -16,6 +16,7 @@ let
     { domain = "syncthing"; port = "8384"; secure = false; sockets = true; }
     { domain = "files"; port = "3923"; secure = false; sockets = true; } ## CopyParty
     { domain = "kasm"; port = "3030"; secure = true; sockets = true; }
+    { domain = "nextcloud"; port = "8080"; secure = false; sockets = true; }
 
   ];
 
