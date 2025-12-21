@@ -10,7 +10,7 @@
 
   age.secrets = {
     ## SSH
-    "ssh.age" = {
+    "ssh" = {
       file = ./ssh.age;
     };
 
