@@ -102,7 +102,7 @@
 
   ## SSH Client
   home-manager.users.${username} = let ssh-private = config.age.secrets."ssh"; in { pkgs, config, ssh-public-key, ... }: {
-    # home.file.".ssh/ssh.pub" = { text = ssh-public-key; force = true; };
+    home.file.".ssh/ssh.pub" = { text = ssh-public-key; force = true; };
     programs.ssh = {
       enable = true;
       enableDefaultConfig = false;
