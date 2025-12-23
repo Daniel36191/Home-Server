@@ -100,7 +100,7 @@
     };
   };
 
-  ## SSH Client
+  ## SSH Client & Git Auth
   home-manager.users.${username} = let ssh-private = config.age.secrets."ssh"; in { pkgs, config, ssh-public-key, ... }: {
     home.file.".ssh/ssh.pub" = { text = ssh-public-key; force = true; };
     programs.ssh = {
@@ -128,6 +128,16 @@
           user = "git";
         };
       };
+    };
+    programs.git = {
+      enable = true;
+      settings.user = {
+        Name = "Daniel36191";
+        Email = "dmoeller3998@gmail.com";
+      };
+    };
+    programs = {
+      gh.enable = true;
     };
   };
 
