@@ -52,21 +52,6 @@ in
           nohash = "\.iso$";
         };
       };
-    "/Jellyfin" = {
-        ## Storage Path
-        path = "/services/jellyfin/media";
-        access.rw = "admin"; ## Everyone gets read-access
-
-        ## See `copyparty --help-flags` for available options
-        flags = {
-          ## Enables filekeys (necessary for upget permission) (4 chars long)
-          fk = 4;
-          ## Scan for new files every 60sec
-          scan = 60;
-          ## Skips hashing file contents if path matches *.iso
-          nohash = "\.iso$";
-        };
-      };
     };
     ## You may increase the open file limit for the process
     openFilesLimit = 8192;
