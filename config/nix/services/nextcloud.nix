@@ -11,6 +11,7 @@ in
   ];
   services.nextcloud = {
     enable = true;
+    home = "/services/nextcloud";
     package = pkgs.nextcloud32;
     configureRedis = true;
     maxUploadSize = "10G";
