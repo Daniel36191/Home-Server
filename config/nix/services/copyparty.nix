@@ -37,10 +37,25 @@ in
 
     volumes = {
       ## Create a volume at "/" (the webroot), which will
-      "/public" = {
+      "/Public" = {
         ## Storage Path
         path = "/services/copyparty/public";
         access.rw = "*"; ## Everyone gets read-access
+
+        ## See `copyparty --help-flags` for available options
+        flags = {
+          ## Enables filekeys (necessary for upget permission) (4 chars long)
+          fk = 4;
+          ## Scan for new files every 60sec
+          scan = 60;
+          ## Skips hashing file contents if path matches *.iso
+          nohash = "\.iso$";
+        };
+      };
+    "/Jellyfin" = {
+        ## Storage Path
+        path = "/services/jellyfin/media";
+        access.rw = "admin"; ## Everyone gets read-access
 
         ## See `copyparty --help-flags` for available options
         flags = {
