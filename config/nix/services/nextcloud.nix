@@ -16,6 +16,7 @@ in
     configureRedis = true;
     maxUploadSize = "10G";
     hostName = "nextcloud.lillypond.local";
+    database.createLocally = true;
     config = {
       adminuser = "admin";
       adminpassFile = config.age.secrets."nextcloud-user-admin".path;
