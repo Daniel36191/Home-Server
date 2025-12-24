@@ -3,7 +3,6 @@
   options,
   username,
   config,
-  ssh-public-key,
   ...
 }:
 {
