@@ -2,11 +2,11 @@
   config,
   ...
 }:{
-  # services.jellyfin = {
-  #   enable = true;
-  #   openFirewall = true;
-  #   dataDir = "/services/jellyfin/data";
-  # };
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+    dataDir = "/services/jellyfin/data";
+  };
   services.jellarr = {
     enable = true;
     user = "jellyfin";
