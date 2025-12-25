@@ -13,7 +13,7 @@
     group = "jellyfin";
     bootstrap = {
       enable = true;
-      apiKeyFile = config.age.secrets."jellyfin-api-jellarr".path;
+      apiKeyFile = config.age.secrets."jellyfin-api-jellarr".file;
       jellyfinDataDir = "/services/jellyfin/data";
       ## Optional
       # apiKeyName = "jellarr";
