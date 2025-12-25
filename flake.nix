@@ -30,6 +30,8 @@
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     copyparty.url = "github:9001/copyparty";
+
+    jellarr.url = "github:venkyr77/jellarr";
   };
 
   outputs =
@@ -43,6 +45,7 @@
       portainer-on-nixos,
       nix-minecraft,
       copyparty,
+      jellarr,
       ...
     }@inputs:
     let
@@ -78,6 +81,7 @@
         portainer-on-nixos.nixosModules.portainer
         nix-minecraft.nixosModules.minecraft-servers
         copyparty.nixosModules.default
+        jellarr.nixosModules.default
       ];
     in
     {

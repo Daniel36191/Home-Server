@@ -25,11 +25,17 @@
       file = ./nextcloud-user-admin.age;
     };
 
-    ## tailscale
+    ## Tailscale
     "tailscale-user-admin" = {
       file = ./tailscale-user-lillypond.age;
     };
 
-    
+    ## Jellyfin
+    "jellyfin-user-family" = {
+      file = ./jellyfin-user-family.age;
+    };
+    "jellyfin-user-admin" = {
+      file = ./jellyfin-user-admin.age;
+    };
   };
 }

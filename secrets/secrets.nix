@@ -19,4 +19,10 @@ in
 
   ## Tailscale
   "tailscale-user-lillypond.age".publicKeys = systems;
+
+  ## Jellyfin
+  "jellyfin-user-admin.age".publicKeys = systems;
+  "jellyfin-user-family.age".publicKeys = systems;
+
+
 }
