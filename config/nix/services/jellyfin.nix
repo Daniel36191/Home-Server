@@ -2,15 +2,28 @@
   config,
   ...
 }:{
+  # services.jellyfin = {
+  #   enable = true;
+  #   openFirewall = true;
+  #   dataDir = "/services/jellyfin/data";
+  # };
   services.jellarr = {
     enable = true;
     user = "jellyfin";
     group = "jellyfin";
+    bootstrap = {
+      enable = true;
+      apiKeyFile = config.age.secrets."jellyfin-api-jellarr".path;
+      jellyfinDataDir = "/services/jellyfin/data";
+      ## Optional
+      # apiKeyName = "jellarr";
+      # jellyfinService = "jellyfin.service";
+    };
     config = {
       version = 1;
       base_url = "http://localhost:8096";
       system = {
-        enableMetrics = false;  # Prometheus
+        enableMetrics = false;  ## Prometheus
         pluginRepositories = [
           {
             name = "Jellyfin Official";

@@ -31,6 +31,9 @@
     };
 
     ## Jellyfin
+    "jellyfin-api-jellarr.age" = {
+      file = ./jellyfin-api-jellarr.age;
+    };
     "jellyfin-user-family" = {
       file = ./jellyfin-user-family.age;
     };
