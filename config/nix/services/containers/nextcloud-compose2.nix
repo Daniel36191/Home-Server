@@ -3,6 +3,13 @@
 { pkgs, lib, ... }:
 
 {
+  # Runtime
+  virtualisation.docker = {
+    enable = true;
+    autoPrune.enable = true;
+  };
+  virtualisation.oci-containers.backend = "docker";
+
   # Containers
   virtualisation.oci-containers.containers."nextcloud-aio-mastercontainer" = {
     image = "ghcr.io/nextcloud-releases/all-in-one:latest";
@@ -11,20 +18,20 @@
       "NEXTCLOUD_ENABLE_DRI_DEVICE" = "true";
       "NEXTCLOUD_STARTUP_APPS" = "deck twofactor_totp tasks calendar contacts notes";
       "NEXTCLOUD_UPLOAD_LIMIT" = "20G";
+      "TALK_PORT" = "3478";
     };
     volumes = [
       "/var/run/docker.sock:/var/run/docker.sock:ro"
       "nextcloud_aio_mastercontainer:/mnt/docker-aio-config:rw"
     ];
     ports = [
-      "80:80/tcp"
       "8080:8080/tcp"
       "8443:8443/tcp"
     ];
     log-driver = "journald";
     extraOptions = [
       "--network-alias=nextcloud-aio-mastercontainer"
-      "--network=nextcloud-aio_default"
+      "--network=nextcloud-aio"
     ];
   };
   systemd.services."docker-nextcloud-aio-mastercontainer" = {
@@ -35,11 +42,11 @@
       RestartSteps = lib.mkOverride 90 9;
     };
     after = [
-      "docker-network-nextcloud-aio_default.service"
+      "docker-network-nextcloud-aio.service"
       "docker-volume-nextcloud_aio_mastercontainer.service"
     ];
     requires = [
-      "docker-network-nextcloud-aio_default.service"
+      "docker-network-nextcloud-aio.service"
       "docker-volume-nextcloud_aio_mastercontainer.service"
     ];
     partOf = [
@@ -51,15 +58,15 @@
   };
 
   # Networks
-  systemd.services."docker-network-nextcloud-aio_default" = {
+  systemd.services."docker-network-nextcloud-aio" = {
     path = [ pkgs.docker ];
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
-      ExecStop = "docker network rm -f nextcloud-aio_default";
+      ExecStop = "docker network rm -f nextcloud-aio";
     };
     script = ''
-      docker network inspect nextcloud-aio_default || docker network create nextcloud-aio_default
+      docker network inspect nextcloud-aio || docker network create nextcloud-aio --opt=com.docker.network.driver.mtu=1440
     '';
     partOf = [ "docker-compose-nextcloud-aio-root.target" ];
     wantedBy = [ "docker-compose-nextcloud-aio-root.target" ];
