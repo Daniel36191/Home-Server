@@ -1,14 +1,14 @@
 { 
   pkgs,
   lib,
-  servicesConfig,
+  services,
   ...
 }:
 let
   addr = "lillypond.local";
 
   # Filter enabled services
-  enabledServices = lib.filterAttrs (_: cfg: cfg.enable or false) servicesConfig;
+  enabledServices = lib.filterAttrs (_: cfg: cfg.enable or false) services;
 
   mkCert = domain: pkgs.runCommand "cert-${domain}" {
     nativeBuildInputs = [ pkgs.mkcert ];
