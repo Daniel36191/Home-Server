@@ -39,7 +39,7 @@
     secure = true;
     sockets = false;
   };
-  craft = {
+  crafty = {
     enable = false;
     port = "8443";
 

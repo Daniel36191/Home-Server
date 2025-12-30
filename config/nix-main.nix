@@ -10,21 +10,7 @@
     ##############
     ## Services ##
     ##############
-
-    # ./nix/services/proxmox.nix
-    # ./nix/servives/minecraft.nix
-    # ./nix/services/containers/crafty.nix
-    # ./nix/services/homepage.nix
-    ./nix/services/syncthing.nix
-    ./nix/services/copyparty.nix
     ./nix/services/tailscale.nix
-    # ./nix/services/nextcloud.nix
-    # ./nix/services/kasm.nix
-    # ./nix/services/jellyfin.nix
-
-    # ./nix/services/containers/crafty-compose2.nix
-    # ./nix/services/containers/kasm-compose2.nix
-    # ./nix/services/containers/nextcloud-compose2.nix
 
 
     ##########
@@ -33,7 +19,6 @@
 
     ./nix/apps.nix
     ../secrets/secrets-nix.nix
-    ./nix/services/containers/portainer.nix
     ./nix/core/containers.nix
     ./nix/nginx.nix
     ./nix/core/networking.nix
@@ -41,7 +26,16 @@
     ./nix/core/boot.nix
     ./nix/core/hardware.nix
   ]
-  ++ lib.optional (services.homepage.enable or false) ./nix/services/homepage.nix;
+  ++ lib.optional (services.homepage.enable or false) ./nix/services/homepage.nix
+  ++ lib.optional (services.portainer.enable or false) ./nix/services/containers/portainer.nix
+  ++ lib.optional (services.proxmox.enable or false) ./nix/services/proxmox.nix
+  ++ lib.optional (services.crafty.enable or false) ./nix/services/containers/crafty-compose2.nix
+  ++ lib.optional (services.syncthing.enable or false) ./nix/services/syncthing.nix
+  ++ lib.optional (services.copyparty.enable or false) ./nix/services/copyparty.nix
+  ++ lib.optional (services.kasm.enable or false) ./nix/services/kasm.nix
+  ++ lib.optional (services.nextcloud.enable or false) ./nix/services/nextcloud.nix
+  ++ lib.optional (services.jellyfin.enable or false) ./nix/services/jellyfin.nix;
+  
 
   ###########
   ## Nixos ##
