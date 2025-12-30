@@ -25,11 +25,11 @@ let
   
 in
 {
-  services.homepage-dashboard = {
+  services.homepage-dashboard = let
     enable = true;
     openFirewall = true;
     listenPort = lib.strings.toInt port;
-    allowedHosts = "${localipaddress}:${port},home.${addr},${addr}";
+    allowedHosts = ''${localipaddress}:${port},home.${addr},${addr}'';
     environmentFile = "";
     
     bookmarks = [
