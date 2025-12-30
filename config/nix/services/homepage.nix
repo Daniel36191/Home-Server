@@ -6,7 +6,7 @@
 }:
 let
   addr = "lillypond.local";
-  port = 54321;
+  port = "54321";
   
   homepageServices = lib.filterAttrs (_: cfg: 
     (cfg.enable or false) && (cfg.homepage or false)
@@ -29,7 +29,7 @@ in
     enable = true;
     openFirewall = true;
     listenPort = lib.strings.toInt port;
-    allowedHosts = "home.${addr}";
+    allowedHosts = "${localipaddress}:${port},home.${addr},${addr}";
     environmentFile = "";
     
     bookmarks = [
