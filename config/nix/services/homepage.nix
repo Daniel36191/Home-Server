@@ -28,7 +28,7 @@ in
   services.homepage-dashboard = {
     enable = true;
     openFirewall = true;
-    listenPort = lib.strings.toInt port;
+    listenPort = port;
     allowedHosts = "${localipaddress}:${port},home.${address},${address}";
     environmentFile = "";
     
