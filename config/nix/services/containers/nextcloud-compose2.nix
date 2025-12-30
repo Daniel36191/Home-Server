@@ -14,6 +14,9 @@
   virtualisation.oci-containers.containers."nextcloud-aio-mastercontainer" = {
     image = "ghcr.io/nextcloud-releases/all-in-one:latest";
     environment = {
+      "APACHE_ADDITIONAL_NETWORK" = "frontend_net";
+      "APACHE_IP_BINDING" = "127.0.0.1";
+      "APACHE_PORT" = "11000";
       "NEXTCLOUD_DATADIR" = "/services/nextcloud";
       "NEXTCLOUD_ENABLE_DRI_DEVICE" = "true";
       "NEXTCLOUD_STARTUP_APPS" = "deck twofactor_totp tasks calendar contacts notes";
@@ -26,7 +29,6 @@
     ];
     ports = [
       "8080:8080/tcp"
-      "8443:8443/tcp"
     ];
     log-driver = "journald";
     extraOptions = [
