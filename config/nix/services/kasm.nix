@@ -1,10 +1,11 @@
 {
+  services,
   ...
 }:
 {
   services.kasmweb = {
     enable = true;
-    listenPort = 3069;
+    listenPort = services.kasm.port;
     # listenAddress = "kasm.lillypond.local";
     # datastorePath = "/services/kasm";
   };

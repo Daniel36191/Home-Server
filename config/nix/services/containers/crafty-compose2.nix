@@ -1,6 +1,9 @@
 # Auto-generated using compose2nix v0.3.3-pre.
-{ pkgs, lib, ... }:
-
+{
+  services,
+  lib,
+  ...
+}:
 {
   # Containers
   virtualisation.oci-containers.containers."crafty_container" = {
@@ -16,10 +19,10 @@
       "/services/minecraft/craftycontroller/servers:/crafty/servers:rw"
     ];
     ports = [
-      "8000:8000/tcp"
-      "8443:8443/tcp"
-      "8123:8123/tcp"
-      "19132:19132/udp"
+      # "8000:8000/tcp"
+      "${services.crafty.port}:8443/tcp"
+      # "8123:8123/tcp"
+      # "19132:19132/udp"
       "25500:25500/tcp"
       "25501:25501/tcp"
       "25502:25502/tcp"

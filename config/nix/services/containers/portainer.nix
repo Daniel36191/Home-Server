@@ -1,4 +1,5 @@
 {
+  services,
   ...
 }:
 {
@@ -6,6 +7,6 @@
     enable = true;
     version = "latest";
     openFirewall = true;
-    port = 9443; ## WebUi port
+    port = services.portainer.port; ## WebUi port
   };
 }

@@ -6,7 +6,7 @@
   ...
 }:
 let
-  port = "54321";
+  port = services.homepage.port;
   
   homepageServices = lib.filterAttrs (_: cfg: 
     (cfg.enable or false) && (cfg.homepage or false)

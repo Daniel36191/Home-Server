@@ -1,5 +1,6 @@
 {
     pkgs,
+    services,
     ...
 }:
 {
@@ -16,7 +17,7 @@
         Type = "simple";
         ExecStart = ''
         ${pkgs.syncthing}/bin/syncthing
-        syncthing cli config gui raw-address set 0.0.0.0:8384
+        syncthing cli config gui raw-address set 0.0.0.0:${services.syncthing.port}
         '';
         Restart = "on-failure";
     };

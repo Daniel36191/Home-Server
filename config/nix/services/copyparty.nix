@@ -1,6 +1,7 @@
 {
   config,
   inputs,
+  services,
   ...
 }:
 let
@@ -18,7 +19,7 @@ in
     ## See `copyparty --help` for available options
     settings = {
       i = "0.0.0.0"; ## Allowed ip/s
-      p = [ 3923 ]; ## Port/s
+      p = [ services.copyparty.port ]; ## Port/s
       ## Use booleans to set binary flags
       no-reload = true;
       ## Using 'false' will do nothing and omit the value when generating a config

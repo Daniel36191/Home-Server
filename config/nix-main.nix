@@ -10,7 +10,9 @@
     ##############
     ## Services ##
     ##############
+    
     ./nix/tailscale.nix
+    ./nix/nginx.nix
 
 
     ##########
@@ -20,7 +22,6 @@
     ./nix/apps.nix
     ../secrets/secrets-nix.nix
     ./nix/core/containers.nix
-    ./nix/nginx.nix
     ./nix/core/networking.nix
     ./nix/core/user.nix
     ./nix/core/boot.nix
