@@ -41,7 +41,7 @@
     ./nix/core/boot.nix
     ./nix/core/hardware.nix
   ]
-  ++ lib.optionals (services.homepage.enable or false) ./nix/services/homepage.nix;
+  ++ lib.optional (services.homepage.enable or false) ./nix/services/homepage.nix;
 
   ###########
   ## Nixos ##
