@@ -2,7 +2,7 @@
   ## Static
   homepage = {
     enable = true;
-    port = "54321";
+    port = 54321;
 
     abbr = "Ho";
     homepage = false;
@@ -15,7 +15,7 @@
   };
   portainer = {
     enable = true;
-    port = "9443";
+    port = 9443;
 
     abbr = "PT";
     homepage = true;
@@ -29,7 +29,7 @@
   ## Dynamic
   proxmox = {
     enable = false;
-    port = "8006";
+    port = 8006;
 
     abbr = "PX";
     homepage = true;
@@ -41,7 +41,7 @@
   };
   crafty = {
     enable = false;
-    port = "8443";
+    port = 8443;
 
     abbr = "CC";
     homepage = true;
@@ -53,7 +53,7 @@
   };
   syncthing = {
     enable = true;
-    port = "8384";
+    port = 8384;
 
     abbr = "ST";
     homepage = true;
@@ -65,7 +65,7 @@
   };
   copyparty = {
     enable = true;
-    port = "3923";
+    port = 3923;
 
     abbr = "FS";
     homepage = true;
@@ -77,7 +77,7 @@
   };
   kasm = {
     enable = false;
-    port = "3069";
+    port = 3069;
 
     abbr = "KM";
     homepage = true;
@@ -89,7 +89,7 @@
   };
   nextcloud = {
     enable = false;
-    port = "8080";
+    port = 8080;
 
     abbr = "NC";
     homepage = true;
@@ -101,7 +101,19 @@
   };
   jellyfin = {
     enable = false;
-    port = "8920";
+    port = 8920;
+
+    abbr = "JF";
+    homepage = true;
+    icon = "jellyfin";
+
+    domain = "jellyfin";
+    secure = true;
+    sockets = true;
+  };
+  immich = {
+    enable = true;
+    port = 2283;
 
     abbr = "JF";
     homepage = true;

@@ -10,7 +10,7 @@
     ##############
     ## Services ##
     ##############
-    
+
     ./nix/tailscale.nix
     ./nix/nginx.nix
 
@@ -35,7 +35,8 @@
   ++ lib.optional (services.copyparty.enable or false) ./nix/services/copyparty.nix
   ++ lib.optional (services.kasm.enable or false) ./nix/services/kasm.nix
   ++ lib.optional (services.nextcloud.enable or false) ./nix/services/nextcloud.nix
-  ++ lib.optional (services.jellyfin.enable or false) ./nix/services/jellyfin.nix;
+  ++ lib.optional (services.jellyfin.enable or false) ./nix/services/jellyfin.nix
+  ++ lib.optional (services.immich.enable or false) ./nix/services/immich.nix;
   
 
   ###########
