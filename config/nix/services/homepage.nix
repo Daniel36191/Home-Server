@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   localipaddress,
   services,
@@ -9,16 +8,13 @@ let
   addr = "lillypond.local";
   port = 54321;
   
-  # Filter services that are enabled and marked for homepage
   homepageServices = lib.filterAttrs (_: cfg: 
     (cfg.enable or false) && (cfg.homepage or false)
   ) services;
   
-  # Capitalize first letter of domain for display name
   capitalizeDomain = domain: 
     lib.toUpper (builtins.substring 0 1 domain) + builtins.substring 1 999 domain;
   
-  # Create bookmarks from services
   bookmarks = lib.mapAttrsToList (name: cfg: {
     "${capitalizeDomain cfg.domain}" = [{
       abbr = cfg.abbr;
@@ -32,7 +28,7 @@ in
   services.homepage-dashboard = {
     enable = true;
     openFirewall = true;
-    listenPort = port;
+    listenPort = lib.strings.toInt port;
     allowedHosts = "${localipaddress}:${port},home.${addr},${addr}";
     environmentFile = "";
     
