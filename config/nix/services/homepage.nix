@@ -7,7 +7,7 @@
 }:
 let
   addr = "lillypond.local";
-  port = "54321";
+  port = 54321;
   
   # Filter services that are enabled and marked for homepage
   homepageServices = lib.filterAttrs (_: cfg: 
