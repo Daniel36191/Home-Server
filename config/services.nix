@@ -2,68 +2,113 @@
   ## Static
   homepage = {
     enable = true;
+    port = "54321";
+
+    abbr = "Ho";
+    homepage = true;
+    icon = "homepage";
+
     default = true;
     domain = "home";
     secure = false;
-    port = "54321";
     sockets = false;
   };
-  portainer = { 
+  portainer = {
     enable = true;
+    port = "9443";
+
+    abbr = "PT";
+    homepage = true;
+    icon = "portainer";
+
     domain = "portainer";
     secure = true;
-    port = "9443";
     sockets = false;
   };
 
   ## Dynamic
   proxmox = {
     enable = true;
+    port = "8006";
+
+    abbr = "PX";
+    homepage = true;
+    icon = "proxmox";
+
     domain = "proxmox";
     secure = true;
-    port = "8006";
     sockets = false;
   };
-  craft = { 
+  craft = {
     enable = true;
+    port = "8443";
+
+    abbr = "CC";
+    homepage = true;
+    icon = "crafty-controller";
+
     domain = "crafty";
     secure = true;
-    port = "8443";
     sockets = true;
   };
-  syncthing = { 
+  syncthing = {
     enable = true;
+    port = "8384";
+
+    abbr = "ST";
+    homepage = true;
+    icon = "syncthing";
+
     domain = "syncthing";
     secure = false;
-    port = "8384";
     sockets = true;
   };
-  copyparty = { 
+  copyparty = {
     enable = true;
+    port = "3923";
+
+    abbr = "FS";
+    homepage = true;
+    icon = "copyparty";
+
     domain = "files";
     secure = false;
-    port = "3923";
     sockets = true;
   };
-  kasm = { 
+  kasm = {
     enable = true;
+    port = "3069";
+
+    abbr = "KM";
+    homepage = true;
+    icon = "kasm";
+
     domain = "kasm";
     secure = true;
-    port = "3069";
     sockets = true;
   };
-  nextcloud = { 
+  nextcloud = {
     enable = true;
+    port = "8080";
+
+    abbr = "NC";
+    homepage = true;
+    icon = "nextcloud";
+
     domain = "nextcloud";
     secure = true;
-    port = "8080";
     sockets = true;
   };
-  jellyfin = { 
+  jellyfin = {
     enable = true;
+    port = "8920";
+
+    abbr = "JF";
+    homepage = true;
+    icon = "jellyfin";
+
     domain = "jellyfin";
     secure = true;
-    port = "8920";
     sockets = true;
   };
 }
