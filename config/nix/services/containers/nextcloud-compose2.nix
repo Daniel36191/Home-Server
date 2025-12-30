@@ -29,7 +29,7 @@
       "nextcloud_aio_mastercontainer:/mnt/docker-aio-config:rw"
     ];
     ports = [
-      "80:80/tcp"
+      # "80:80/tcp"
       "8080:8080/tcp"
       "8443:8443/tcp"
     ];
