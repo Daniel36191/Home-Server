@@ -5,7 +5,7 @@
     port = "54321";
 
     abbr = "Ho";
-    homepage = true;
+    homepage = false;
     icon = "homepage";
 
     default = true;
@@ -28,7 +28,7 @@
 
   ## Dynamic
   proxmox = {
-    enable = true;
+    enable = false;
     port = "8006";
 
     abbr = "PX";
@@ -40,7 +40,7 @@
     sockets = false;
   };
   craft = {
-    enable = true;
+    enable = false;
     port = "8443";
 
     abbr = "CC";
@@ -76,7 +76,7 @@
     sockets = true;
   };
   kasm = {
-    enable = true;
+    enable = false;
     port = "3069";
 
     abbr = "KM";
@@ -88,7 +88,7 @@
     sockets = true;
   };
   nextcloud = {
-    enable = true;
+    enable = false;
     port = "8080";
 
     abbr = "NC";
@@ -100,7 +100,7 @@
     sockets = true;
   };
   jellyfin = {
-    enable = true;
+    enable = false;
     port = "8920";
 
     abbr = "JF";
