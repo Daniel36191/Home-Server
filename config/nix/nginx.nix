@@ -1,43 +1,55 @@
-{
-  config,
+{ 
+  pkgs,
   lib,
-  localipaddress,
-  services,
+  servicesConfig,
   ...
 }:
 let
   addr = "lillypond.local";
-  port = "54321";
-  
-  # Capitalize function
-  capitalize = str: lib.toUpper (builtins.substring 0 1 str) + builtins.substring 1 999 str;
-  
-  # Create bookmark from service
-  makeBookmark = name: cfg: {
-    "${capitalize cfg.domain}" = [{
-      abbr = cfg.abbr;
-      icon = cfg.icon;
-      href = "${if cfg.secure then "https" else "http"}://${cfg.domain}.${addr}";
-    }];
-  };
-  
-  # Filter and create bookmarks
-  homepageBookmarks = lib.mapAttrsToList makeBookmark
-    (lib.filterAttrs (_: cfg: cfg.enable && cfg.homepage) services);
-  
-in
-{
-  services.homepage-dashboard = {
+
+  # Filter enabled services
+  enabledServices = lib.filterAttrs (_: cfg: cfg.enable or false) servicesConfig;
+
+  mkCert = domain: pkgs.runCommand "cert-${domain}" {
+    nativeBuildInputs = [ pkgs.mkcert ];
+  } ''
+    HOME=$TMPDIR
+    mkcert -cert-file cert.pem -key-file key.pem "${domain}.${addr}"
+    mkdir -p $out
+    cp cert.pem key.pem $out/
+  '';
+
+  # Create vhosts from enabled services
+  vhosts = lib.mapAttrs'
+    (name: cfg: {
+      name = "${cfg.domain}.${addr}";
+      value = {
+        default = cfg.default or false;
+        locations."/" = {
+          proxyPass = "${if cfg.secure then "https" else "http"}://${addr}:${toString cfg.port}/";
+          proxyWebsockets = cfg.sockets or false;
+        } // (lib.optionalAttrs cfg.secure {
+          extraConfig = ''
+            proxy_ssl_server_name on;
+            proxy_pass_header Authorization;
+          '';
+        });
+        forceSSL = cfg.secure or false;
+      } // (lib.optionalAttrs cfg.secure {
+        sslCertificate = "${mkCert cfg.domain}/cert.pem";
+        sslCertificateKey = "${mkCert cfg.domain}/key.pem";
+      });
+    })
+    enabledServices;
+
+in {
+  services.nginx = {
     enable = true;
-    openFirewall = true;
-    listenPort = 54321;
-    allowedHosts = "${localipaddress}:${port},home.${addr},${addr}";
-    environmentFile = "";
-    
-    bookmarks = [
-      {
-        Applications = homepageBookmarks;
-      }
-    ];
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+    clientMaxBodySize = "1024m";
+    virtualHosts = vhosts;
   };
 }
