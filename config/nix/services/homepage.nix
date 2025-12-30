@@ -25,7 +25,7 @@ let
   
 in
 {
-  services.homepage-dashboard = let
+  services.homepage-dashboard = {
     enable = true;
     openFirewall = true;
     listenPort = lib.strings.toInt port;
