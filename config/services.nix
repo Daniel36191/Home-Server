@@ -1,17 +1,17 @@
 {
   ## Static
-  homepage = {
-    enable = true;
-    port = 54321;
+  homepage = { ## Service entry
+    enable = true; ## Wether to enable the module
+    port = 54321; ## What the ui port should be 
 
-    abbr = "Ho";
-    homepage = false;
-    icon = "homepage";
+    abbr = "Ho"; ## Abbreavation for Homepage
+    homepage = false; ## Wether to enable homepage entry
+    icon = "homepage"; ## The icon from https://dashboardicons.com/ names pulled from https://github.com/homarr-labs/dashboard-icons/tree/main/svg
 
-    default = true;
-    domain = "home";
-    secure = false;
-    sockets = false;
+    default = true; ## Default entry for <hostname.local> when accessed *Can only be one set to true
+    domain = "home"; ## The subdomain to <hostname.local> for url acess
+    secure = false; ## Wether to use https for proxy
+    sockets = false; ## Are websockets needed through proxy
   };
   portainer = {
     enable = true;
@@ -115,12 +115,12 @@
     enable = true;
     port = 2283;
 
-    abbr = "JF";
+    abbr = "IM";
     homepage = true;
-    icon = "jellyfin";
+    icon = "immich";
 
-    domain = "jellyfin";
-    secure = true;
+    domain = "immich";
+    secure = false;
     sockets = true;
   };
 }

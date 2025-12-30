@@ -10,5 +10,6 @@
     mediaLocation = "/services/immich";
 
     machine-learning.enable = true; ## Dectect faces & objects
+    accelerationDevices = [ "/dev/dri/renderD128" ];
   };
 }
