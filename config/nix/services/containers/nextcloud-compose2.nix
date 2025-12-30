@@ -21,6 +21,7 @@
       "NEXTCLOUD_ENABLE_DRI_DEVICE" = "true";
       "NEXTCLOUD_STARTUP_APPS" = "deck twofactor_totp tasks calendar contacts notes";
       "NEXTCLOUD_UPLOAD_LIMIT" = "20G";
+      "SKIP_DOMAIN_VALIDATION" = "false";
       "TALK_PORT" = "3478";
     };
     volumes = [
