@@ -55,7 +55,7 @@
         localipaddress
         ssh-public-key
         ;
-      inherit (import ./config/variables.nix)
+      inherit (import ./config/services.nix)
       services
       ;
       
