@@ -1,9 +1,12 @@
 {
+  pkgs,
   config,
   services,
-
   ...
 }:{
+  environment.systemPackages = with pkgs; [
+    immich-cli
+  ];
   services.immich = {
     enable = true;
     openFirewall = true;
