@@ -1,11 +1,11 @@
 {
   lib,
   localipaddress,
+  address,
   services,
   ...
 }:
 let
-  addr = "lillypond.local";
   port = "54321";
   
   homepageServices = lib.filterAttrs (_: cfg: 
@@ -19,7 +19,7 @@ let
     "${capitalizeDomain cfg.domain}" = [{
       abbr = cfg.abbr;
       icon = cfg.icon;
-      href = "${if cfg.secure then "https" else "http"}://${cfg.domain}.${addr}";
+      href = "${if cfg.secure then "https" else "http"}://${cfg.domain}.${address}";
     }];
   }) homepageServices;
   
@@ -29,7 +29,7 @@ in
     enable = true;
     openFirewall = true;
     listenPort = lib.strings.toInt port;
-    allowedHosts = "${localipaddress}:${port},home.${addr},${addr}";
+    allowedHosts = "${localipaddress}:${port},home.${address},${address}";
     environmentFile = "";
     
     bookmarks = [

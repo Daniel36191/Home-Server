@@ -2,31 +2,31 @@
   pkgs,
   lib,
   services,
+  address,
   ...
 }:
 let
-  addr = "lillypond.local";
 
-  # Filter enabled services
+  ## Filter enabled services
   enabledServices = lib.filterAttrs (_: cfg: cfg.enable or false) services;
 
   mkCert = domain: pkgs.runCommand "cert-${domain}" {
     nativeBuildInputs = [ pkgs.mkcert ];
   } ''
     HOME=$TMPDIR
-    mkcert -cert-file cert.pem -key-file key.pem "${domain}.${addr}"
+    mkcert -cert-file cert.pem -key-file key.pem "${domain}.${address}"
     mkdir -p $out
     cp cert.pem key.pem $out/
   '';
 
-  # Create vhosts from enabled services
+  ## Create vhosts from enabled services
   vhosts = lib.mapAttrs'
     (name: cfg: {
-      name = "${cfg.domain}.${addr}";
+      name = "${cfg.domain}.${address}";
       value = {
         default = cfg.default or false;
         locations."/" = {
-          proxyPass = "${if cfg.secure then "https" else "http"}://${addr}:${toString cfg.port}/";
+          proxyPass = "${if cfg.secure then "https" else "http"}://${address}:${toString cfg.port}/";
           proxyWebsockets = cfg.sockets or false;
         } // (lib.optionalAttrs cfg.secure {
           extraConfig = ''

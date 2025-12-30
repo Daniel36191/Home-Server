@@ -53,6 +53,7 @@
         system
         username
         localipaddress
+        address
         ssh-public-key
         ;
       services = import ./config/services.nix;
@@ -63,6 +64,7 @@
         inherit 
           username
           localipaddress
+          address
           ssh-public-key
           services
           ;

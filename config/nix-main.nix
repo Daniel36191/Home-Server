@@ -1,5 +1,7 @@
 {
   pkgs,
+  lib,
+  services,
   ...
 }:
 {
@@ -12,7 +14,7 @@
     # ./nix/services/proxmox.nix
     # ./nix/servives/minecraft.nix
     # ./nix/services/containers/crafty.nix
-    ./nix/services/homepage.nix
+    # ./nix/services/homepage.nix
     ./nix/services/syncthing.nix
     ./nix/services/copyparty.nix
     ./nix/services/tailscale.nix
@@ -38,7 +40,8 @@
     ./nix/core/user.nix
     ./nix/core/boot.nix
     ./nix/core/hardware.nix
-  ];
+  ]
+  ++ lib.optionals services.homepage.enable or false ./nix/services/homepage.nix;
 
   ###########
   ## Nixos ##

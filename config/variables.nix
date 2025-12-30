@@ -1,5 +1,6 @@
 {
   localipaddress = "192.168.0.189";
+  address = "lillypond.local";
   system = "x86_64-linux";
   username = "lillypond";
 
