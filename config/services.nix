@@ -120,7 +120,7 @@
     icon = "immich";
 
     domain = "immich";
-    secure = true;
+    secure = false;
     sockets = true;
   };
 }
