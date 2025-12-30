@@ -27,7 +27,7 @@ in
 
     ## App installs
     extraApps = {
-      inherit (config.services.nextcloud.package.packages.apps) news contacts calendar tasks;
+      inherit (config.services.nextcloud.package.packages.apps) contacts calendar memories;
     };
     extraAppsEnable = true;
 
