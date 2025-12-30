@@ -17,7 +17,7 @@
         Type = "simple";
         ExecStart = ''
         ${pkgs.syncthing}/bin/syncthing
-        syncthing cli config gui raw-address set 0.0.0.0:${builtins.toString .syncthing.port}
+        syncthing cli config gui raw-address set 0.0.0.0:${builtins.toString services.syncthing.port}
         '';
         Restart = "on-failure";
     };
