@@ -4,16 +4,18 @@
   ...
 }:
 let
+  package = pkgs.nextcloud32;
 in
 {
   environment.systemPackages = with pkgs; [
-    nextcloud32
+    package
   ];
   services.nextcloud = {
     enable = true;
     home = "/services/nextcloud";
-    package = pkgs.nextcloud32;
+    package = package;
     configureRedis = true;
+    appstoreEnable = false;
     maxUploadSize = "10G";
     hostName = "nextcloud.lillypond.local";
     database.createLocally = true;
@@ -43,12 +45,12 @@ in
       "OC\\Preview\\HEIC"
     ];
   };
-  services.nginx.virtualHosts."${config.services.nextcloud.hostName}".listen = [
-    {
-      addr = "127.0.0.1";
-      port = 8080;
-    }
-  ];
+  # services.nginx.virtualHosts."${config.services.nextcloud.hostName}".listen = [
+  #   {
+  #     addr = "127.0.0.1";
+  #     port = 8080;
+  #   }
+  # ];
 }
 
 
