@@ -8,66 +8,37 @@
 let
   addr = "lillypond.local";
   port = "54321";
-  mkUrl = url: secure: "${if secure then "https" else "http"}://${url}.${addr}";
+  
+  # Filter services that are enabled and marked for homepage
+  homepageServices = lib.filterAttrs (_: cfg: 
+    (cfg.enable or false) && (cfg.homepage or false)
+  ) services;
+  
+  # Capitalize first letter of domain for display name
+  capitalizeDomain = domain: 
+    lib.toUpper (builtins.substring 0 1 domain) + builtins.substring 1 999 domain;
+  
+  # Create bookmarks from services
+  bookmarks = lib.mapAttrsToList (name: cfg: {
+    "${capitalizeDomain cfg.domain}" = [{
+      abbr = cfg.abbr;
+      icon = cfg.icon;
+      href = "${if cfg.secure then "https" else "http"}://${cfg.domain}.${addr}";
+    }];
+  }) homepageServices;
+  
 in
 {
   services.homepage-dashboard = {
     enable = true;
     openFirewall = true;
-    listenPort = 54321;
+    listenPort = port;
     allowedHosts = "${localipaddress}:${port},home.${addr},${addr}";
-    ## For Keys
     environmentFile = "";
     
-    bookmarks = let
-      services = [
-        {
-          name = "Portainer";
-          enable = config.services.portainer.enable or false;
-          abbr = "PT";
-          icon = "portainer"; ## Automactily from https://github.com/homarr-labs/dashboard-icons
-          url = "portainer";
-          secure = true;
-        }
-        {
-          name = "Proxmox";
-          enable = config.services.proxmox-ve.enable or false;
-          abbr = "PX";
-          icon = "proxmox";
-          url = "proxmox";
-          secure = true;
-        }
-        {
-          name = "Crafty Controller";
-          enable = config.systemd.services."docker-crafty_container".enable or false;
-          abbr = "PX";
-          icon = "crafty-controller";
-          url = "crafty";
-          secure = true;
-        }
-        {
-          name = "Files";
-          enable = config.services.copyparty.enable or false;
-          abbr = "copyparty";
-          icon = "copyparty";
-          url = "files";
-          secure = false;
-        }
-      ];
-      
-      enabledServices = lib.filter (s: s.enable) services;
-      
-      makeBookmark = s: {
-        abbr = s.abbr;
-        icon = s.icon;
-        href = mkUrl s.url s.secure;
-      };
-      
-    in [
+    bookmarks = [
       {
-        WebUIs = map (s: {
-          "${s.name}" = [ (makeBookmark s) ];
-        }) enabledServices;
+        Services = bookmarks;
       }
     ];
   };
