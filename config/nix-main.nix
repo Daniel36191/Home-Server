@@ -22,7 +22,7 @@
 
     # ./nix/services/containers/crafty-compose2.nix
     # ./nix/services/containers/kasm-compose2.nix
-    ./nix/services/containers/nextcloud-compose2.nix
+    # ./nix/services/containers/nextcloud-compose2.nix
 
 
     ##########
