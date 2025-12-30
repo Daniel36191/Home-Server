@@ -29,7 +29,7 @@ in
     enable = true;
     openFirewall = true;
     listenPort = port;
-    allowedHosts = "${localipaddress}:${lib.toString port},home.${address},${address}";
+    allowedHosts = "${localipaddress}:${builtins.toString port},home.${address},${address}";
     environmentFile = "";
     
     bookmarks = [
