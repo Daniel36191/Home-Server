@@ -10,7 +10,7 @@
     ##############
     ## Services ##
     ##############
-    ./nix/services/tailscale.nix
+    ./nix/tailscale.nix
 
 
     ##########
