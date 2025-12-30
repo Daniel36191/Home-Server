@@ -55,6 +55,9 @@
         localipaddress
         ssh-public-key
         ;
+      inherit (import ./config/variables.nix)
+      services
+      ;
       
       ## Common function to create arguments for systems
       commonArgs = {
@@ -63,6 +66,7 @@
           username
           localipaddress
           ssh-public-key
+          services
           ;
         
         ## Pinning Nixpkgs versions
