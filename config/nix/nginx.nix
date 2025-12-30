@@ -2,7 +2,7 @@
   config,
   lib,
   localipaddress,
-  servicesConfig,
+  services,
   ...
 }:
 let
@@ -23,7 +23,7 @@ let
   
   # Filter and create bookmarks
   homepageBookmarks = lib.mapAttrsToList makeBookmark
-    (lib.filterAttrs (_: cfg: cfg.enable && cfg.homepage) servicesConfig);
+    (lib.filterAttrs (_: cfg: cfg.enable && cfg.homepage) services);
   
 in
 {
