@@ -1,6 +1,7 @@
 {
   config,
   services,
+
   ...
 }:{
   services.immich = {
@@ -9,6 +10,7 @@
     port = services.immich.port;
     user = "immich";
     mediaLocation = "/services/immich";
+    host = "0.0.0.0";
 
     machine-learning.enable = true; ## Dectect faces & objects
     accelerationDevices = [ "/dev/dri/renderD128" ];
