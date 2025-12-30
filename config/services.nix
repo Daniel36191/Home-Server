@@ -1,65 +1,69 @@
 {
+  ## Static
   homepage = {
+    enable = true;
+    default = true;
     domain = "home";
     secure = false;
-    default = true;
-    # port = "${config.homepage-dashboard.listenPort}";
-    # enable = config.services.homepage-dashboard.enable or false;
+    port = "54321";
+    sockets = false;
   };
   portainer = { 
+    enable = true;
     domain = "portainer";
     secure = true;
-    # enable = config.services.portainer.enable or false;
-    # port = "${config.services.portainer.port}";
+    port = "9443";
+    sockets = false;
   };
 
   ## Dynamic
   proxmox = {
+    enable = true;
     domain = "proxmox";
     secure = true;
-    # enable = config.services.proxmox-ve.enable or false;
     port = "8006";
+    sockets = false;
   };
   craft = { 
+    enable = true;
     domain = "crafty";
-    port = "8443";
     secure = true;
+    port = "8443";
     sockets = true;
-    # enable = config.systemd.services."docker-crafty_container".enable or false;
   };
   syncthing = { 
+    enable = true;
     domain = "syncthing";
     secure = false;
-    sockets = true;
     port = "8384";
-    # enable = config.systemd.user.services.syncthing.enable or false;
+    sockets = true;
   };
   copyparty = { 
+    enable = true;
     domain = "files";
     secure = false;
+    port = "3923";
     sockets = true;
-    # port = "${config.services.copyparty.settings.p}";
-    # enable = config.services.copyparty.enable or false;
   };
   kasm = { 
+    enable = true;
     domain = "kasm";
     secure = true;
+    port = "3069";
     sockets = true;
-    # port = "${config.services.kasmweb.listenPort}";
-    # enable = config.services.kasmweb.enable or false;
   };
   nextcloud = { 
+    enable = true;
     domain = "nextcloud";
     secure = true;
+    port = "8080";
     sockets = true;
-    # port = "${config.services.nginx.virtualHosts."${config.services.nextcloud.hostName}".listen.port}";
-    # enable = config.services.nextcloud.enable or false;
   };
   jellyfin = { 
+    enable = true;
     domain = "jellyfin";
     secure = true;
-    sockets = true;
     port = "8920";
-    # enable = config.services.jellyfin.enable or false;
+    sockets = true;
   };
 }
