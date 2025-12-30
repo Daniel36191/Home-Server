@@ -55,9 +55,7 @@
         localipaddress
         ssh-public-key
         ;
-      inherit (import ./config/services.nix)
-      services
-      ;
+      services = import ./config/services.nix;
       
       ## Common function to create arguments for systems
       commonArgs = {
