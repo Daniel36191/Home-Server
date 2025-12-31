@@ -35,10 +35,9 @@ let
           '';
         });
         forceSSL = true;
-      } // (lib.optionalAttrs cfg.secure {
         sslCertificate = "${mkCert cfg.domain}/cert.pem";
         sslCertificateKey = "${mkCert cfg.domain}/key.pem";
-      });
+      };
     })
     enabledServices;
 
