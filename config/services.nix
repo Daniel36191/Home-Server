@@ -40,7 +40,7 @@
     sockets = false;
   };
   crafty = {
-    enable = false;
+    enable = true;
     port = 8443;
 
     abbr = "CC";
