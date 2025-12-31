@@ -20,7 +20,7 @@
     ];
     ports = [
       # "8000:8000/tcp"
-      "${services.crafty.port}:8443/tcp"
+      "${builtins.toString services.crafty.port}:8443/tcp"
       # "8123:8123/tcp"
       # "19132:19132/udp"
       "25500:25500/tcp"
