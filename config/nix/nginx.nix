@@ -32,6 +32,7 @@ let
           extraConfig = ''
             proxy_ssl_server_name on;
             proxy_pass_header Authorization;
+            add_header Access-Control-Allow-Origin *;
           '';
         });
         forceSSL = true;
