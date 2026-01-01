@@ -28,13 +28,12 @@ let
         locations."/" = {
           proxyPass = "${if cfg.secure then "https" else "http"}://${address}:${toString cfg.port}/";
           proxyWebsockets = cfg.sockets or false;
-        } // (lib.optionalAttrs cfg.secure {
           extraConfig = ''
             proxy_ssl_server_name on;
             proxy_pass_header Authorization;
             add_header Access-Control-Allow-Origin *;
           '';
-        });
+        };
         forceSSL = true;
         sslCertificate = "${mkCert cfg.domain}/cert.pem";
         sslCertificateKey = "${mkCert cfg.domain}/key.pem";
