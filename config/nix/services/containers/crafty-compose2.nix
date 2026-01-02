@@ -76,4 +76,10 @@ in
     };
     wantedBy = [ "multi-user.target" ];
   };
+
+  ## User
+  users.users."${services.crafty.data-owner}" = {
+    isSystemUser = true;
+    
+  };
 }

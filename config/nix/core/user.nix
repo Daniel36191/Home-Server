@@ -56,7 +56,7 @@
       ;
     };
   };
-
+  
 
   ## Setup user
   users.users = {
