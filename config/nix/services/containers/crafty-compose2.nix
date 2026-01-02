@@ -79,7 +79,9 @@ in
 
   ## User
   users.users."${services.crafty.data-owner}" = {
+    enable = true;
     isSystemUser = true;
-    
+    group = "services";
+
   };
 }
