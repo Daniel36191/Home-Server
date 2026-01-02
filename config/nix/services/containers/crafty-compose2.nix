@@ -17,7 +17,7 @@ in
   ## Containers
   virtualisation.oci-containers.containers."crafty_container" = {
     image = "registry.gitlab.com/crafty-controller/crafty-4:latest";
-    user = "crafty:services";
+    # user = "crafty:services";
     environment = {
       "TZ" = "Etc/EDT";
     };
@@ -43,13 +43,13 @@ in
     log-driver = "journald";
     ## REMOVED: extraOptions with network configuration
   };
-  systemd.tmpfiles.rules = [
-    "d ${dirs.servers} 0755 ${services.crafty.data-owner} services -"
-    "d ${dirs.config} 0755 ${services.crafty.data-owner} services -"
-    "d ${dirs.import} 0755 ${services.crafty.data-owner} services -"
-    "d ${dirs.backups} 0755 ${services.crafty.data-owner} services -"
-    "d ${dirs.logs} 0755 ${services.crafty.data-owner} services -"
-  ];
+  # systemd.tmpfiles.rules = [
+  #   "d ${dirs.servers} 0755 ${services.crafty.data-owner} services -"
+  #   "d ${dirs.config} 0755 ${services.crafty.data-owner} services -"
+  #   "d ${dirs.import} 0755 ${services.crafty.data-owner} services -"
+  #   "d ${dirs.backups} 0755 ${services.crafty.data-owner} services -"
+  #   "d ${dirs.logs} 0755 ${services.crafty.data-owner} services -"
+  # ];
   
   systemd.services."docker-crafty_container" = {
     serviceConfig = {
@@ -78,9 +78,9 @@ in
   };
 
   ## User
-  users.users."${services.crafty.data-owner}" = {
-    enable = true;
-    isSystemUser = true;
-    group = "services";
-  };
+  # users.users."${services.crafty.data-owner}" = {
+  #   enable = true;
+  #   isSystemUser = true;
+  #   group = "services";
+  # };
 }
