@@ -56,7 +56,7 @@
       ;
     };
   };
-  
+
 
   ## Setup user
   users.users = {
@@ -95,6 +95,9 @@
       sudonix = "git pull && nh os switch -H server ./";
       updatenix = "git pull && nh os switch -H server ./ --update";
       cleannix = "sudo nix-collect-garbage -d";
+
+      log = "journalctl -xef -u";
+      logs = "journalctl -xe -u";
     };
   };
 
