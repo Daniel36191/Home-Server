@@ -13,9 +13,7 @@ let
   package = pkgs.nextcloud32;
 in
 {
-  environment.systemPackages = with pkgs; [
-    package
-  ];
+  environment.systemPackages = [ package ]; ## Cli Tool
   services.nextcloud = {
     enable = true;
     home = "/services/nextcloud";
@@ -29,6 +27,7 @@ in
       adminuser = "admin";
       adminpassFile = config.age.secrets."nextcloud-user-admin".path;
       dbtype = "pgsql";
+      dbuser = services.nextcloud.data-owner;
     };
 
     ## App installs

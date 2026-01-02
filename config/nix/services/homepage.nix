@@ -6,7 +6,6 @@
   ...
 }:
 let
-  port = services.homepage.port;
   
   homepageServices = lib.filterAttrs (_: cfg: 
     (cfg.enable or false) && (cfg.homepage or false)
@@ -28,8 +27,8 @@ in
   services.homepage-dashboard = {
     enable = true;
     openFirewall = true;
-    listenPort = port;
-    allowedHosts = "${localipaddress}:${builtins.toString port},home.${address},${address}";
+    listenPort = services.homepage.port;
+    allowedHosts = "${localipaddress}:${builtins.toString services.homepage.port},home.${address},${address}";
     environmentFile = "";
     
     bookmarks = [

@@ -4,6 +4,9 @@
     enable = true; ## Wether to enable the module
     port = 54321; ## What the ui port should be 
 
+    data-directory = ""; ## The Direcory of any sored data
+    data-owner = ""; ## The user who will own the data created
+
     abbr = "Ho"; ## Abbreavation for Homepage
     homepage = false; ## Wether to enable homepage entry
     icon = "homepage"; ## The icon from https://dashboardicons.com/ names pulled from https://github.com/homarr-labs/dashboard-icons/tree/main/svg
@@ -27,6 +30,18 @@
   };
 
   ## Dynamic
+  immich = {
+    enable = true;
+    port = 2283;
+
+    abbr = "IM";
+    homepage = true;
+    icon = "immich";
+
+    domain = "immich";
+    secure = false;
+    sockets = true;
+  };
   proxmox = {
     enable = false;
     port = 8006;
@@ -46,6 +61,9 @@
     abbr = "CC";
     homepage = true;
     icon = "crafty-controller";
+
+    data-directory = "/services/minecraft";
+    data-owner = "crafty";
 
     domain = "crafty";
     secure = true;
@@ -70,33 +88,12 @@
     abbr = "FS";
     homepage = true;
     icon = "copyparty";
+    
+    data-directory = "/services/copyparty/public"; ## Only the public folder listed here
+    data-owner = "copyparty";
 
     domain = "files";
     secure = false;
-    sockets = true;
-  };
-  kasm = {
-    enable = false;
-    port = 3069;
-
-    abbr = "KM";
-    homepage = true;
-    icon = "kasm";
-
-    domain = "kasm";
-    secure = true;
-    sockets = true;
-  };
-  nextcloud = {
-    enable = false;
-    port = 8080;
-
-    abbr = "NC";
-    homepage = true;
-    icon = "nextcloud";
-
-    domain = "nextcloud";
-    secure = true;
     sockets = true;
   };
   jellyfin = {
@@ -111,16 +108,34 @@
     secure = true;
     sockets = true;
   };
-  immich = {
-    enable = true;
-    port = 2283;
 
-    abbr = "IM";
+
+  ## Not Working Serives
+  nextcloud = {
+    enable = false;
+    port = 8080;
+
+    abbr = "NC";
     homepage = true;
-    icon = "immich";
+    icon = "nextcloud";
 
-    domain = "immich";
-    secure = false;
+    data-directory = "/services/nextcloud";
+    data-owner = "nextcloud";
+
+    domain = "nextcloud";
+    secure = true;
+    sockets = true;
+  };
+  kasm = {
+    enable = false;
+    port = 3069;
+
+    abbr = "KM";
+    homepage = true;
+    icon = "kasm";
+
+    domain = "kasm";
+    secure = true;
     sockets = true;
   };
 }

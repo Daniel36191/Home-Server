@@ -11,14 +11,15 @@
     enable = true;
     openFirewall = true;
     port = services.immich.port;
-    user = "immich";
-    mediaLocation = "/services/immich";
+    user = services.immich.data-owner;
+    group = "services";
+    mediaLocation = services.immich.data-directory;
     host = "0.0.0.0";
 
     machine-learning.enable = true; ## Dectect faces & objects
     accelerationDevices = [ "/dev/dri/renderD128" ];
   };
   systemd.tmpfiles.rules = [
-      "d ${config.services.immich.mediaLocation} 0775 ${config.services.immich.user} users -"
+    "d ${config.services.immich.mediaLocation} 0775 ${config.services.immich.user} ${config.services.immich.group} -"
   ];
 }

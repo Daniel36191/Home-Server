@@ -5,6 +5,8 @@
   services.jellyfin = {
     enable = true;
     openFirewall = true;
+    user = "jellyfin";
+    group = "services";
     dataDir = "/services/jellyfin/data";
   };
   services.jellarr = {

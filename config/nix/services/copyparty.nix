@@ -12,9 +12,9 @@ in
   services.copyparty = {
     enable = true;
     ## The user to run the service as
-    user = "copyparty"; 
+    user = services.copyparty.data-owner;
     ## The group to run the service as
-    group = "copyparty"; 
+    group = "services"; 
     ## Directly maps to values in the [global] section of the copyparty config.
     ## See `copyparty --help` for available options
     settings = {
@@ -40,7 +40,7 @@ in
       ## Create a volume at "/" (the webroot), which will
       "/Public" = {
         ## Storage Path
-        path = "/services/copyparty/public";
+        path = services.copyparty.data-directory;
         access.rw = "*"; ## Everyone gets read-access
 
         ## See `copyparty --help-flags` for available options

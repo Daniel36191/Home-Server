@@ -3,6 +3,8 @@
   options,
   username,
   config,
+  lib,
+  services,
   ...
 }:
 {
@@ -37,7 +39,26 @@
     };
   };
 
- ## Setup user
+
+  ## Setup Services group
+  users.groups = {
+    "services" = {
+      gid = 100;
+      members = [
+        "${username}"
+
+        ## Services
+      ]
+      ++ lib.optional (services.immich.enable or false) "immich"
+      ++ lib.optional (services.copyparty.enable or false) "copyparty"
+      ++ lib.optional (services.jellyfin.enable or false) "jellyfin"
+      ++ lib.optional (services.crafty.enable or false) "crafty"
+      ;
+    };
+  };
+
+
+  ## Setup user
   users.users = {
     "${username}" = {
       homeMode = "755";
@@ -45,6 +66,7 @@
       description = "${username}";
       shell = pkgs.bash;
       extraGroups = [
+        "services"
         "networkmanager"
         "wheel"
         "libvirtd"
@@ -61,6 +83,10 @@
       ];
     };
   };
+  nix.settings.trusted-users = [
+    "root"
+    "${username}"
+  ];
   environment = { 
     shells = with pkgs; [
       bashInteractive
@@ -81,6 +107,7 @@
     enable = true;
     ports = [ 22 ];
     authorizedKeysInHomedir = true;
+    allowSFTP = true;
     settings = {
       PasswordAuthentication = true;
       AllowUsers = null; ## Allows all users by default. Can be [ "user1" "user2" ]
