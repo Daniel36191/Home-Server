@@ -17,7 +17,7 @@ in
   ## Containers
   virtualisation.oci-containers.containers."crafty_container" = {
     image = "registry.gitlab.com/crafty-controller/crafty-4:latest";
-    user = "crafty";
+    user = "crafty:services";
     environment = {
       "TZ" = "Etc/EDT";
     };
@@ -82,6 +82,5 @@ in
     enable = true;
     isSystemUser = true;
     group = "services";
-
   };
 }
