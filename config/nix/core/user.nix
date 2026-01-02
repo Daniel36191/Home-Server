@@ -43,7 +43,7 @@
   ## Setup Services group
   users.groups = {
     "services" = {
-      gid = 100;
+      # gid = 100; ## Dissable for auto select
       members = [
         "${username}"
 
