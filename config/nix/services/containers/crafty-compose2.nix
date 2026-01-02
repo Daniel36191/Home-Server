@@ -22,11 +22,11 @@ in
       "TZ" = "Etc/EDT";
     };
     volumes = [
-      "${dirs.servers}"
-      "${dirs.config}"
-      "${dirs.import}"
-      "${dirs.backups}"
-      "${dirs.logs}"
+      "${dirs.servers}:/crafty/servers:rw"
+      "${dirs.config}:/crafty/app/config:rw"
+      "${dirs.import}:/crafty/import:rw"
+      "${dirs.backups}:/crafty/backups:rw"
+      "${dirs.logs}:/crafty/logs:rw"
     ];
     ports = [
       # "8000:8000/tcp"
