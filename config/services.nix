@@ -34,6 +34,9 @@
     enable = true;
     port = 2283;
 
+    data-directory = "/services/immich";
+    data-owner = "immich";
+
     abbr = "IM";
     homepage = true;
     icon = "immich";
