@@ -4,6 +4,7 @@ pkgs.mkShell {
   buildInputs = with pkgs; [
     nix-prefetch-scripts ## Every Prefetch
     compose2nix
+    zellij
     lnav
   ];
 
