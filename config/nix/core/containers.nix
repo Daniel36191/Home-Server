@@ -28,7 +28,7 @@
   };
 
   virtualisation.arion = {
-    backend = "podman-socket";
+    backend = "docker-socket";
   };
 
   # virtualisation = {
