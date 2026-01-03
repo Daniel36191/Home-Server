@@ -96,12 +96,12 @@
     secure = true;
     sockets = true;
   };
-  minecraft = {
-    enable = true;
-    port = 25500;
-
-    data-directory = "/services/minecraft/stary";
-  };
+  # minecraft = {
+  #   enable = true;
+  #   port = 25500;
+  # 
+  #   data-directory = "/services/minecraft/stary";
+  # };
 
 
   ## Not Working Serives
