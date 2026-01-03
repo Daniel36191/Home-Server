@@ -1,4 +1,22 @@
 {
+  example = { ## Service entry
+    enable = false; ## Wether to enable the module
+    port = 8080; ## What the ui port should be 
+
+    data-directory = "/services/example"; ## The Direcory of any sored data
+    data-owner = "example-user"; ## The user who will own the data created
+
+    abbr = "EX"; ## Abbreavation for Homepage
+    homepage = true; ## Wether to enable homepage entry
+    icon = "example"; ## The icon from https://dashboardicons.com/ names pulled from https://github.com/homarr-labs/dashboard-icons/tree/main/svg
+
+    no-proxy = true; ## Dissable nginx entry
+    default = false; ## Default entry for <hostname.local> when accessed *Can only be one set to true
+    domain = "home"; ## The subdomain to <hostname.local> for url acess
+    secure = false; ## Wether to use https for proxy
+    sockets = false; ## Are websockets needed through proxy
+  };
+
   ## Static
   homepage = { ## Service entry
     enable = true; ## Wether to enable the module
@@ -7,10 +25,11 @@
     data-directory = ""; ## The Direcory of any sored data
     data-owner = ""; ## The user who will own the data created
 
-    abbr = "Ho"; ## Abbreavation for Homepage
+    abbr = "HO"; ## Abbreavation for Homepage
     homepage = false; ## Wether to enable homepage entry
     icon = "homepage"; ## The icon from https://dashboardicons.com/ names pulled from https://github.com/homarr-labs/dashboard-icons/tree/main/svg
 
+    no-proxy = false; ## Dissable nginx entry
     default = true; ## Default entry for <hostname.local> when accessed *Can only be one set to true
     domain = "home"; ## The subdomain to <hostname.local> for url acess
     secure = false; ## Wether to use https for proxy
@@ -96,12 +115,15 @@
     secure = true;
     sockets = true;
   };
-  # minecraft = {
-  #   enable = true;
-  #   port = 25500;
-  # 
-  #   data-directory = "/services/minecraft/stary";
-  # };
+  minecraft = {
+    enable = true;
+    port = 25500;
+  
+    data-directory = "/services/minecraft/stary";
+
+    no-proxy = true;
+  };
+  
 
 
   ## Not Working Serives
