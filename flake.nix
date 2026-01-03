@@ -33,7 +33,7 @@
 
     jellarr.url = "github:venkyr77/jellarr";
 
-    arion.url = "https://github.com/hercules-ci/arion";
+    arion.url = "github:hercules-ci/arion";
   };
 
   outputs =
