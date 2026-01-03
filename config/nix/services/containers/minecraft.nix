@@ -28,7 +28,7 @@ in
               "25500:25565/tcp"
             ];
 
-            service.volumes = [
+            volumes = [
               "${workingDir}:/${serviceName}"
             ];
 
