@@ -18,6 +18,7 @@
 
 
 virtualisation = {
+  docker.enable = lib.mkForce false;
   containers.enable = true;
   podman = {
     enable = true;
