@@ -14,6 +14,8 @@
     ./nix/tailscale.nix
     ./nix/nginx.nix
 
+    ./nix/services/containers/minecraft.nix
+
 
     ##########
     ## Core ##

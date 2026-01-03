@@ -26,6 +26,9 @@
   #   };
   # };
 
+  virtualisation.arion = {
+    backend = "podman-socket";
+  };
 
   virtualisation = {
     docker.enable = lib.mkForce false;
