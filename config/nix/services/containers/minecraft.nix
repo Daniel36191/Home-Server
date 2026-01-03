@@ -3,21 +3,23 @@
   ...
 }:
 let
-  serviceName = "minecraft";
+  serviceName = "test1";
   workingDir = "/services/arion/test1";
 in
 {
-  virtualisation.arion.projects.example = {
-    serviceName = "${serviceName}"; # optional systemd service name, defaults to arion-example in this case
+  virtualisation.arion.projects."${serviceName}" = {
+    serviceName = "${serviceName}"; ## Systemd service name ex: arion-${serviceName}
     settings = {
       project.name = "${serviceName}";
       services = {
         "${serviceName}" = {
-          image.name = "test1";
-          image.enableRecommendedContents = true; ## https://docs.hercules-ci.com/arion/options#_services_name_image_enablerecommendedcontents
+          image = {
+            name = "${serviceName}";
+            enableRecommendedContents = true; ## https://docs.hercules-ci.com/arion/options#_services_name_image_enablerecommendedcontents
+          };
           service = {
             command = [ "sh" "-c" ''
-              cd "/project"
+              cd "/${serviceName}"
               ls -al
             '' ];
             # ${pkgs.javaPackages.compiler.temurin-bin.jre-17}/bin/java 
@@ -27,7 +29,7 @@ in
             ];
 
             service.volumes = [
-              "${workingDir}:/project"
+              "${workingDir}:/${serviceName}"
             ];
 
             useHostStore = true;
