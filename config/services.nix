@@ -17,7 +17,7 @@
     sockets = false; ## Are websockets needed through proxy
   };
   portainer = {
-    enable = true;
+    enable = false;
     port = 9443;
 
     abbr = "PT";
@@ -58,7 +58,7 @@
     sockets = false;
   };
   crafty = {
-    enable = true;
+    enable = false;
     port = 8443;
 
     abbr = "CC";
