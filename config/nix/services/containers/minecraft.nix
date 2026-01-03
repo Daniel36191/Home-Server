@@ -3,8 +3,8 @@
   ...
 }:
 let
-  serviceName = "test1";
-  workingDir = "/services/arion/test1";
+  serviceName = "minecraft";
+  workingDir = "/services/arion/minecraft";
 in
 {
   virtualisation.arion.projects."${serviceName}" = {
