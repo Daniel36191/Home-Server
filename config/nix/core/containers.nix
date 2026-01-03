@@ -28,7 +28,7 @@
   };
 
   virtualisation.arion = {
-    backend = "docker-socket";
+    backend = "docker";
   };
 
   # virtualisation = {
