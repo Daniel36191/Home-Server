@@ -11,32 +11,33 @@
      ## Not needed when virtualisation.docker.enable = true; ## https://docs.hercules-ci.com/arion/#_nixos
     docker-client
 
-    podman-compose
+    # podman-compose
+    docker-compose
   ];
-  # virtualisation = {
-  #   containers.enable = true;
-  #   oci-containers.backend = "docker";
-  #   docker = {
-  #     enable = true;
-  #     autoPrune.enable = true;
-  #     rootless = {
-  #       enable = false;
-  #       setSocketVariable = false;
-  #     };
-  #   };
-  # };
+  virtualisation = {
+    containers.enable = true;
+    oci-containers.backend = "docker";
+    docker = {
+      enable = true;
+      autoPrune.enable = true;
+      rootless = {
+        enable = false;
+        setSocketVariable = false;
+      };
+    };
+  };
 
   virtualisation.arion = {
     backend = "podman-socket";
   };
 
-  virtualisation = {
-    docker.enable = lib.mkForce false;
-    containers.enable = true;
-    podman = {
-      enable = true;
-      dockerCompat = true;
-      defaultNetwork.settings.dns_enabled = true;
-    };
-  };
+  # virtualisation = {
+  #   docker.enable = lib.mkForce false;
+  #   containers.enable = true;
+  #   podman = {
+  #     enable = true;
+  #     dockerCompat = true;
+  #     defaultNetwork.settings.dns_enabled = true;
+  #   };
+  # };
 }
