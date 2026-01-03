@@ -57,21 +57,6 @@
     secure = true;
     sockets = false;
   };
-  crafty = {
-    enable = false;
-    port = 8443;
-
-    abbr = "CC";
-    homepage = true;
-    icon = "crafty-controller";
-
-    data-directory = "/services/minecraft";
-    data-owner = "crafty";
-
-    domain = "crafty";
-    secure = true;
-    sockets = true;
-  };
   syncthing = {
     enable = true;
     port = 8384;
@@ -111,9 +96,30 @@
     secure = true;
     sockets = true;
   };
+  minecraft = {
+    enable = true;
+    port = 25500;
+
+    data-directory = "/services/minecraft/stary";
+  };
 
 
   ## Not Working Serives
+  crafty = {
+    enable = false;
+    port = 8443;
+
+    abbr = "CC";
+    homepage = true;
+    icon = "crafty-controller";
+
+    data-directory = "/services/minecraft";
+    data-owner = "crafty";
+
+    domain = "crafty";
+    secure = true;
+    sockets = true;
+  };
   nextcloud = {
     enable = false;
     port = 8080;
