@@ -18,22 +18,18 @@
   };
 
   ## Static
-  homepage = { ## Service entry
-    enable = true; ## Wether to enable the module
-    port = 54321; ## What the ui port should be 
+  homepage = {
+    enable = true;
+    port = 54321;
 
-    data-directory = ""; ## The Direcory of any sored data
-    data-owner = ""; ## The user who will own the data created
+    abbr = "HO";
+    homepage = false;
+    icon = "homepage";
 
-    abbr = "HO"; ## Abbreavation for Homepage
-    homepage = false; ## Wether to enable homepage entry
-    icon = "homepage"; ## The icon from https://dashboardicons.com/ names pulled from https://github.com/homarr-labs/dashboard-icons/tree/main/svg
-
-    no-proxy = false; ## Dissable nginx entry
-    default = true; ## Default entry for <hostname.local> when accessed *Can only be one set to true
-    domain = "home"; ## The subdomain to <hostname.local> for url acess
-    secure = false; ## Wether to use https for proxy
-    sockets = false; ## Are websockets needed through proxy
+    default = true;
+    domain = "home";
+    secure = false;
+    sockets = false;
   };
   portainer = {
     enable = false;
@@ -123,7 +119,7 @@
 
     no-proxy = true;
   };
-  
+
 
 
   ## Not Working Serives
