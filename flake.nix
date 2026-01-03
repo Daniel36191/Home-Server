@@ -32,6 +32,8 @@
     copyparty.url = "github:9001/copyparty";
 
     jellarr.url = "github:venkyr77/jellarr";
+
+    arion.url = "https://github.com/hercules-ci/arion";
   };
 
   outputs =
@@ -46,6 +48,7 @@
       nix-minecraft,
       copyparty,
       jellarr,
+      arion,
       ...
     }@inputs:
     let
@@ -86,6 +89,7 @@
         nix-minecraft.nixosModules.minecraft-servers
         copyparty.nixosModules.default
         jellarr.nixosModules.default
+        arion.nixosModules.arion
       ];
     in
     {
