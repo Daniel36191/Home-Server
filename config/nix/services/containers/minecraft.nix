@@ -20,7 +20,7 @@ in
           service = {
             command = [ "sh" "-c" ''
               cd "/${serviceName}"
-              ls -al
+              ${pkgs.coreutils}/bin/ls -al
             '' ];
             # ${pkgs.javaPackages.compiler.temurin-bin.jre-17}/bin/java 
 
