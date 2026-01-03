@@ -18,7 +18,7 @@
     containers.enable = true;
     oci-containers.backend = "docker";
     docker = {
-      enable = true;
+      enable = lib.mkDefault true;
       autoPrune.enable = true;
       rootless = {
         enable = false;
