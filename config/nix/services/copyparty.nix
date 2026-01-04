@@ -53,16 +53,17 @@ in
           nohash = "\.iso$";
         };
       };
-    } ++ lib.optionalAttrs (services.minecraft.enable or false) {
+    } // (lib.optionalAttrs (services.minecraft.enable or false) {
         "/Minecraft-Server" = {
           ## Storage Path
           path = services.copyparty.data-directory;
           access.rw = "admins";
           flags = {
-            fk = 4;
             scan = 60;
+            fk = 4;
           };
         };
-      };
+      })
+    ;
   };
 }
