@@ -56,7 +56,7 @@ in
     } // (lib.optionalAttrs (services.minecraft.enable or false) {
         "/Minecraft-Server" = {
           ## Storage Path
-          path = services.copyparty.data-directory;
+          path = services.minecraft.data-directory;
           access.rw = config.services.copyparty.groups.admin;
           flags = {
             scan = 60;
