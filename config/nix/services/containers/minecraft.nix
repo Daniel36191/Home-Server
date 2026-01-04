@@ -34,7 +34,7 @@ in
 
             useHostStore = true;
             restart = "always";
-            stop_signal = "SIGINT";
+            stop_signal = "SIGTERM";
           };
         };
       };

@@ -1,6 +1,7 @@
 {
   config,
   inputs,
+  lib,
   services,
   ...
 }:
@@ -20,10 +21,9 @@ in
     settings = {
       i = "0.0.0.0"; ## Allowed ip/s
       p = [ services.copyparty.port ]; ## Port/s
+      
       ## Use booleans to set binary flags
       no-reload = true;
-      ## Using 'false' will do nothing and omit the value when generating a config
-      ignored-flag = false;
     };
 
     ## Create users
@@ -31,7 +31,7 @@ in
       daniel.passwordFile = config.age.secrets."copyparty-user-daniel".path;
     };
     groups = {
-      admin = [
+      admins = [
         "daniel"
       ];
     };
@@ -53,8 +53,16 @@ in
           nohash = "\.iso$";
         };
       };
-    };
-    ## You may increase the open file limit for the process
-    openFilesLimit = 8192;
+    } lib.optionalAttrs (services.minecraft.enable or false) {
+        "/Minecraft-Server" = {
+          ## Storage Path
+          path = services.copyparty.data-directory;
+          access.rw = "admins";
+          flags = {
+            fk = 4;
+            scan = 60;
+          };
+        };
+      };
   };
 }
