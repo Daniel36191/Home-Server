@@ -41,7 +41,7 @@ in
       "/Public" = {
         ## Storage Path
         path = services.copyparty.data-directory;
-        access.rw = "daniel"; ## Everyone gets read-access
+        access.rw = "*"; ## Everyone gets read-access
 
         ## See `copyparty --help-flags` for available options
         flags = {
@@ -57,7 +57,7 @@ in
         "/Minecraft-Server" = {
           ## Storage Path
           path = services.copyparty.data-directory;
-          access.rw = "admins";
+          access.rw = config.services.copyparty.groups.admin;
           flags = {
             scan = 60;
             fk = 4;
