@@ -96,7 +96,7 @@
     data-owner = "copyparty";
 
     domain = "files";
-    secure = false;
+    secure = true;
     sockets = true;
   };
   jellyfin = {
