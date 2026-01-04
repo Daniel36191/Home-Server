@@ -21,7 +21,7 @@ in
     settings = {
       i = "0.0.0.0"; ## Allowed ip/s
       p = [ services.copyparty.port ]; ## Port/s
-      
+
       ## Use booleans to set binary flags
       no-reload = true;
     };
@@ -53,7 +53,7 @@ in
           nohash = "\.iso$";
         };
       };
-    } lib.optionalAttrs (services.minecraft.enable or false) {
+    } ++ lib.optionalAttrs (services.minecraft.enable or false) {
         "/Minecraft-Server" = {
           ## Storage Path
           path = services.copyparty.data-directory;
