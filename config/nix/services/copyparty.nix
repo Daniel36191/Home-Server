@@ -41,7 +41,7 @@ in
       "/Public" = {
         ## Storage Path
         path = services.copyparty.data-directory;
-        access.rw = config.services.copyparty.groups.admins; ## Everyone gets read-access
+        access.rw = "daniel"; ## Everyone gets read-access
 
         ## See `copyparty --help-flags` for available options
         flags = {
