@@ -20,9 +20,29 @@ in
           };
           service = {
             command = [ "sh" "-c" ''
-              cd "/${serviceName}"
-              ${runCommand}
-            '' ];
+              "${pkgs.writeShellScript "minecraft-wrapper" ''
+                set -e
+                cd "/${serviceName}"
+                
+                # Function to gracefully stop the server
+                graceful_stop() {
+                  echo "Sending stop command to Minecraft server..."
+                  echo "stop" > /proc/1/fd/0  # Send to stdin of PID 1 (the java process)
+                  # Wait for the process to exit
+                  wait $java_pid
+                  exit 0
+                }
+                
+                # Trap signals
+                trap 'graceful_stop' SIGTERM SIGINT
+                
+                # Start the server in background
+                ${runCommand} &
+                java_pid=$!
+                
+                # Wait for the java process
+                wait $java_pid
+              ''}"''];
 
             ports = [
               "${builtins.toString services.minecraft.port}:25565/tcp"
