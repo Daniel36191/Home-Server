@@ -31,7 +31,7 @@ in
       daniel.passwordFile = config.age.secrets."copyparty-user-daniel".path;
     };
     groups = {
-      admins = [
+      admin = [
         "daniel"
       ];
     };
