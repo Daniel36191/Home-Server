@@ -1,13 +1,14 @@
 {
   pkgs,
   services,
+  lib,
   ...
 }:
 let
   serviceName = "minecraft";
   runCommand = ''${pkgs.javaPackages.compiler.temurin-bin.jre-17}/bin/java @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-47.4.0/unix_args.txt "$@"'';
 in
-lib.mkIf modules.minecraft.enable {
+lib.mkIf services.minecraft.enable {
 
   virtualisation.arion.projects."${serviceName}" = {
     serviceName = "${serviceName}"; ## Systemd service name ex: arion-${serviceName}
