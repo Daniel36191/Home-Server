@@ -7,7 +7,8 @@ let
   serviceName = "minecraft";
   runCommand = ''${pkgs.javaPackages.compiler.temurin-bin.jre-17}/bin/java @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-47.4.0/unix_args.txt "$@"'';
 in
-{
+lib.mkIf modules.minecraft.enable {
+
   virtualisation.arion.projects."${serviceName}" = {
     serviceName = "${serviceName}"; ## Systemd service name ex: arion-${serviceName}
     settings = {
@@ -24,23 +25,17 @@ in
                 set -e
                 cd "/${serviceName}"
                 
-                # Function to gracefully stop the server
-                graceful_stop() {
-                  echo "Sending stop command to Minecraft server..."
-                  echo "stop" > /proc/1/fd/0  # Send to stdin of PID 1 (the java process)
-                  # Wait for the process to exit
+                ## Function to save and stop the server
+                savestop() {
+                  echo "stop" > /proc/1/fd/0
                   wait $java_pid
                   exit 0
                 }
-                
-                # Trap signals
-                trap 'graceful_stop' SIGTERM SIGINT
-                
-                # Start the server in background
+                trap 'savestop' SIGTERM SIGINT
+
                 ${runCommand} &
                 java_pid=$!
                 
-                # Wait for the java process
                 wait $java_pid
               ''}"''];
 
