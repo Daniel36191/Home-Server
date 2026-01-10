@@ -15,7 +15,7 @@ in
       http.server_port = mod.port;
       useXForwardedFor = true;
       trustedProxies = [
-        "0.0.0.0"
+        "127.0.0.1"
       ];
       http.server_host = [ "0.0.0.0" ];
       lovelace = {
