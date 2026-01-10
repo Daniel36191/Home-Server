@@ -120,7 +120,7 @@
     no-proxy = true;
   };
   home-assistant = {
-    enable = true;
+    enable = false;
     port = 8123;
 
     abbr = "HA";
@@ -129,7 +129,7 @@
     
     data-directory = "/services/home-assistant";
 
-    love-config-writeable = true;
+    love-config-writeable = true; ## Set to true to edit dashboard in ui, copy file yaml file next to home-assistant.nix then rebuild.
 
     domain = "home";
     secure = false;
