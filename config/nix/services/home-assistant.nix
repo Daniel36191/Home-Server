@@ -11,7 +11,12 @@ in
   services.home-assistant = {
     enable = true;
     openFirewall = true;
-    config.http.server_port = mod.port;
+    config = {
+      http.server_port = mod.port;
+      config.lovelace = {
+        mode = if mod.love-config-writeable then "storage" else "yaml";
+      };
+    };
     configDir = "${mod.data-path}/config";
     extraComponents = [
       ## Onboarding
@@ -26,9 +31,6 @@ in
       mini-graph-card
     ];
 
-    lovelace = {
-      mode = if mod.love-config-writeable then "storage" else "yaml";
-    };
     lovelaceConfigWritable = mod.love-config-writeable;
     lovelaceConfigFile = if mod.love-config-writeable == false then ./lovelace.yaml else null;
   }
