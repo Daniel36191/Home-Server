@@ -122,8 +122,12 @@
   home-assistant = {
     enable = true;
     port = 8123;
+
+    abbr = "HA";
+    homepage = false;
+    icon = "home-assistant";
     
-    data-directory = "/services/home-manager";
+    data-directory = "/services/home-assistant";
 
     love-config-writeable = true;
 
