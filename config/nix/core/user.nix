@@ -47,6 +47,7 @@
       members = [
         "root"
         "${username}"
+        "${config.services.caddy.user}"
       ] ## Services
       ++ lib.optional (services.immich.enable or false) "immich"
       ++ lib.optional (services.copyparty.enable or false) "copyparty"
