@@ -13,8 +13,8 @@ in
     openFirewall = true;
     config = {
       http.server_port = mod.port;
-      useXForwardedFor = true;
-      trustedProxies = [
+      use_x_forwarded_for = true;
+      trusted_proxies = [
         "127.0.0.1"
       ];
       http.server_host = [ "0.0.0.0" ];
