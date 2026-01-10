@@ -128,7 +128,7 @@
     love-config-writeable = true;
 
     domain = "home";
-    secure = true;
+    secure = false;
     sockets = true;
   };
 
