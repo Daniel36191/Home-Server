@@ -13,7 +13,7 @@ in
     openFirewall = true;
     config = {
       http.server_port = mod.port;
-      config.lovelace = {
+      lovelace = {
         mode = if mod.love-config-writeable then "storage" else "yaml";
       };
     };
