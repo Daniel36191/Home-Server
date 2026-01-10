@@ -119,7 +119,7 @@
 
     no-proxy = true;
   };
-  home-manager = {
+  home-assistant = {
     enable = true;
     port = 8123;
     
