@@ -1,10 +1,13 @@
 { 
   lib,
+  config,
   services,
   address,
   ...
 }:
 let
+  dir = "/services/caddy";
+
 
   ## Filter enabled services
   enabledServices = lib.filterAttrs (_: cfg: !cfg.no-proxy or false) (lib.filterAttrs (_: cfg: cfg.enable or false) services);
@@ -25,9 +28,14 @@ let
 in {
   services.caddy = {
     enable = true;
-    dataDir = "/services/caddy/data";
-    logDir = "/services/caddy/logs";
+    user = "caddy";
+    dataDir = "${dir}/data";
+    logDir = "${dir}/logs";
 
     virtualHosts = vhosts;
   };
+
+  systemd.tmpfiles.rules = [
+    "d ${dir} 0775 ${config.services.caddy.user} services -"
+  ];
 }
