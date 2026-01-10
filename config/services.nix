@@ -124,7 +124,7 @@
     port = 8123;
 
     abbr = "HA";
-    homepage = false;
+    homepage = true;
     icon = "home-assistant";
     
     data-directory = "/services/home-assistant";
