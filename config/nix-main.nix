@@ -39,7 +39,8 @@
   ++ lib.optional (services.nextcloud.enable or false) ./nix/services/nextcloud.nix
   ++ lib.optional (services.jellyfin.enable or false) ./nix/services/jellyfin.nix
   ++ lib.optional (services.immich.enable or false) ./nix/services/immich.nix
-  # ++ lib.optional (services.minecraft.enable or false) ./nix/services/containers/minecraft.nix
+  ++ lib.optional (services.minecraft.enable or false) ./nix/services/containers/minecraft.nix
+  ++ lib.optional (services.minecraft.enable or false) ./nix/services/home-manager.nix
   ;
   
 

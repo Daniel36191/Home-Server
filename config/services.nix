@@ -27,7 +27,7 @@
     icon = "homepage";
 
     default = true;
-    domain = "home";
+    domain = "homepage";
     secure = false;
     sockets = false;
   };
@@ -118,6 +118,18 @@
     data-directory = "/services/minecraft/stary";
 
     no-proxy = true;
+  };
+  home-manager = {
+    enable = true;
+    port = 8123;
+    
+    data-directory = /services/home-manager;
+
+    love-config-writeable = true;
+
+    domain = "home";
+    secure = false;
+    sockets = true;
   };
 
 
