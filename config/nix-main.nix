@@ -40,7 +40,7 @@
   ++ lib.optional (services.jellyfin.enable or false) ./nix/services/jellyfin.nix
   ++ lib.optional (services.immich.enable or false) ./nix/services/immich.nix
   ++ lib.optional (services.minecraft.enable or false) ./nix/services/containers/minecraft.nix
-  ++ lib.optional (services.minecraft.enable or false) ./nix/services/home-manager.nix
+  ++ lib.optional (services.home-assistant.enable or false) ./nix/services/home-assistant.nix
   ;
   
 
