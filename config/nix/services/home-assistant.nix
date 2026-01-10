@@ -12,6 +12,7 @@ in
     enable = true;
     openFirewall = true;
     config = {
+      default_config = {};
       http.server_port = mod.port;
       use_x_forwarded_for = true;
       trusted_proxies = [
