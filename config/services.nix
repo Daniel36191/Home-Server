@@ -123,7 +123,7 @@
     enable = true;
     port = 8123;
     
-    data-directory = /services/home-manager;
+    data-directory = "/services/home-manager";
 
     love-config-writeable = true;
 
