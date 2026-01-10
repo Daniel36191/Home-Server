@@ -28,7 +28,7 @@
 
     default = true;
     domain = "homepage";
-    secure = false;
+    secure = true;
     sockets = false;
   };
   portainer = {
