@@ -37,5 +37,7 @@ in {
 
   systemd.tmpfiles.rules = [
     "d ${dir} 0775 ${config.services.caddy.user} services -"
+    "d ${config.services.caddy.dataDir} 0775 ${config.services.caddy.user} services -"
+    "d ${config.services.caddy.logDir} 0775 ${config.services.caddy.user} services -"
   ];
 }
