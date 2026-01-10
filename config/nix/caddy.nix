@@ -28,15 +28,15 @@ in {
   services.caddy = {
     enable = true;
     user = "caddy";
-    dataDir = "${dir}/data";
-    logDir = "${dir}/logs";
+    # dataDir = "${dir}/data";
+    # logDir = "${dir}/logs";
 
     virtualHosts = vhosts;
   };
 
-  systemd.tmpfiles.rules = [
-    "d ${dir} 0775 ${config.services.caddy.user} services -"
-    "d ${config.services.caddy.dataDir} 0775 ${config.services.caddy.user} services -"
-    "d ${config.services.caddy.logDir} 0775 ${config.services.caddy.user} services -"
-  ];
+  # systemd.tmpfiles.rules = [
+  #   "d ${dir} 0775 ${config.services.caddy.user} services -"
+  #   "d ${config.services.caddy.dataDir} 0775 ${config.services.caddy.user} services -"
+  #   "d ${config.services.caddy.logDir} 0775 ${config.services.caddy.user} services -"
+  # ];
 }

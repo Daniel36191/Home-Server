@@ -12,8 +12,8 @@
     ##############
 
     ./nix/tailscale.nix
-    # ./nix/nginx.nix
-    ./nix/caddy.nix
+    ./nix/nginx.nix
+    # ./nix/caddy.nix
 
     ./nix/services/containers/minecraft.nix
 
