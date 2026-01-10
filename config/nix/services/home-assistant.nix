@@ -17,7 +17,7 @@ in
         mode = if mod.love-config-writeable then "storage" else "yaml";
       };
     };
-    configDir = "${mod.data-path}/config";
+    configDir = "${mod.data-directory}/config";
     extraComponents = [
       ## Onboarding
       "esphome"
