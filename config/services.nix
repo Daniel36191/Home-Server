@@ -135,6 +135,15 @@
     secure = false;
     sockets = true;
   };
+  duckdns = {
+    enable = true;
+
+    domains = [
+      "immich-public" ## immich-public.duckdns.org
+    ];
+    
+    no-proxy = true;
+  };
 
 
 

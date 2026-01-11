@@ -25,5 +25,8 @@ in
   "jellyfin-user-admin.age".publicKeys = systems;
   "jellyfin-user-family.age".publicKeys = systems;
 
+  ## Duckdns
+  "duckdns-token".publicKeys = systems;
+
 
 }

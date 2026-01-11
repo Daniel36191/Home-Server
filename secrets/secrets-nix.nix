@@ -40,5 +40,10 @@
     "jellyfin-user-admin" = {
       file = ./jellyfin-user-admin.age;
     };
+
+    ## Duckdns
+    "duckdns-token" = {
+      file = ./duckdns-token.age;
+    };
   };
 }
