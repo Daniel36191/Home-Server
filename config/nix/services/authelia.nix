@@ -15,7 +15,7 @@ in
     group = "services";
     secrets = { 
       jwtSecretFile = config.age.secrets."authelia-jwtsecret".path;
-      storageEncryptionKeyFile = config.age.secrets."authelia-encriptionkey".path;
+      storageEncryptionKeyFile = config.age.secrets."authelia-encryptionkey".path;
     };  
     settings = {
       theme = "dark";
