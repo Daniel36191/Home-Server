@@ -8,9 +8,7 @@
 let
 
   ## Filter enabled services
-  enabledServices = lib.filterAttrs ((_: cfg: cfg.enable or false) && (_: cfg: lib.matchAttrs { domain = ""; } services )) services;
-
-  # enabledServices = lib.filterAttrs ( cfg: (cfg.enable or false) && (cfg.domain != null) ) services;
+  enabledServices = lib.filterAttrs (_: cfg: cfg.domain or null != null) (lib.filterAttrs (_: cfg: cfg.enable or false) services);
 
   mkCert = domain: pkgs.runCommand "cert-${domain}" {
     nativeBuildInputs = [ pkgs.mkcert ];
