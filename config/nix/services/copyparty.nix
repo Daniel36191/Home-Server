@@ -13,7 +13,7 @@ in
   services.copyparty = {
     enable = true;
     ## The user to run the service as
-    user = services.copyparty.data-owner;
+    user = services.copyparty.owner;
     ## The group to run the service as
     group = "services"; 
     ## Directly maps to values in the [global] section of the copyparty config.

@@ -11,7 +11,7 @@
     enable = true;
     openFirewall = true;
     port = services.immich.port;
-    user = services.immich.data-owner;
+    user = services.immich.owner;
     group = "services";
     mediaLocation = services.immich.data-directory;
     host = "0.0.0.0";

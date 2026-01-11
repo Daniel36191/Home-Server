@@ -44,11 +44,11 @@ in
     ## REMOVED: extraOptions with network configuration
   };
   # systemd.tmpfiles.rules = [
-  #   "d ${dirs.servers} 0755 ${services.crafty.data-owner} services -"
-  #   "d ${dirs.config} 0755 ${services.crafty.data-owner} services -"
-  #   "d ${dirs.import} 0755 ${services.crafty.data-owner} services -"
-  #   "d ${dirs.backups} 0755 ${services.crafty.data-owner} services -"
-  #   "d ${dirs.logs} 0755 ${services.crafty.data-owner} services -"
+  #   "d ${dirs.servers} 0755 ${services.crafty.owner} services -"
+  #   "d ${dirs.config} 0755 ${services.crafty.owner} services -"
+  #   "d ${dirs.import} 0755 ${services.crafty.owner} services -"
+  #   "d ${dirs.backups} 0755 ${services.crafty.owner} services -"
+  #   "d ${dirs.logs} 0755 ${services.crafty.owner} services -"
   # ];
   
   systemd.services."docker-crafty_container" = {
@@ -78,7 +78,7 @@ in
   };
 
   ## User
-  # users.users."${services.crafty.data-owner}" = {
+  # users.users."${services.crafty.owner}" = {
   #   enable = true;
   #   isSystemUser = true;
   #   group = "services";

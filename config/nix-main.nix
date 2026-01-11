@@ -43,6 +43,7 @@
   ++ lib.optional (services.minecraft.enable or false) ./nix/services/containers/minecraft.nix
   ++ lib.optional (services.home-assistant.enable or false) ./nix/services/home-assistant.nix
   ++ lib.optional (services.duckdns.enable or false) ./nix/services/duckdns.nix
+  ++ lib.optional (services.authelia.enable or false) ./nix/services/authelia.nix
   ;
   
 

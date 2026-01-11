@@ -27,7 +27,7 @@ in
       adminuser = "admin";
       adminpassFile = config.age.secrets."nextcloud-user-admin".path;
       dbtype = "pgsql";
-      dbuser = services.nextcloud.data-owner;
+      dbuser = services.nextcloud.owner;
     };
 
     ## App installs

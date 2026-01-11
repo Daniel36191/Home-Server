@@ -4,7 +4,7 @@
     port = 8080; ## What the ui port should be 
 
     data-directory = "/services/example"; ## The Direcory of any sored data
-    data-owner = "example-user"; ## The user who will own the data created
+    owner = "example-user"; ## The user who will own the data created
 
     abbr = "EX"; ## Abbreavation for Homepage
     homepage = true; ## Wether to enable homepage entry
@@ -50,7 +50,7 @@
     port = 2283;
 
     data-directory = "/services/immich";
-    data-owner = "immich";
+    owner = "immich";
 
     abbr = "IM";
     homepage = true;
@@ -93,7 +93,7 @@
     icon = "copyparty";
     
     data-directory = "/services/copyparty/public"; ## Only the public folder listed here
-    data-owner = "copyparty";
+    owner = "copyparty";
 
     domain = "files";
     secure = true;
@@ -141,8 +141,14 @@
     domains = [
       "immich-public" ## immich-public.duckdns.org
     ];
-    
+
+
     no-proxy = true;
+  };
+  authelia = {
+    enable = true;
+
+    owner = "authelia";
   };
 
 
@@ -157,7 +163,7 @@
     icon = "crafty-controller";
 
     data-directory = "/services/minecraft";
-    data-owner = "crafty";
+    owner = "crafty";
 
     domain = "crafty";
     secure = true;
@@ -172,7 +178,7 @@
     icon = "nextcloud";
 
     data-directory = "/services/nextcloud";
-    data-owner = "nextcloud";
+    owner = "nextcloud";
 
     domain = "nextcloud";
     secure = true;
