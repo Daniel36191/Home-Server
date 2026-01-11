@@ -48,7 +48,7 @@
 
     ## Authentik
     "authentik-env" = {
-      file = ./authentik-env;
+      file = ./authentik-env.age;
     };
   };
 }
