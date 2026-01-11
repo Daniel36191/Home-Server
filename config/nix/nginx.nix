@@ -9,7 +9,7 @@ let
 
   ## Filter enabled services
   enabledServices = lib.filterAttrs (_: cfg: 
-    (cfg.enable or false) && (!cfg.domain == null)
+    (cfg.enable or false) && (cfg.domain ==! null)
   ) services;
 
   mkCert = domain: pkgs.runCommand "cert-${domain}" {
