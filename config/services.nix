@@ -136,10 +136,8 @@
       "immich-public" ## immich-public.duckdns.org
     ];
   };
-  authelia = {
+  authentik = {
     enable = true;
-
-    owner = "authelia";
   };
 
 

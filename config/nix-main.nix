@@ -46,6 +46,7 @@ in
   ++ lib.optional (services.minecraft.enable or false) (cD /minecraft.nix)
   ++ lib.optional (services.home-assistant.enable or false) (sD /home-assistant.nix)
   ++ lib.optional (services.duckdns.enable or false) (sD /duckdns.nix)
+  ++ lib.optional (services.authentik.enable or false) (sD /authentik.nix)
   ;
   
 
