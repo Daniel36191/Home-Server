@@ -4,10 +4,10 @@
   ...
 }:
 let
-  mod = services.authetia;
+  mod = services.authelia;
 in
 {
-  services.authetia.instances."${username}" = {
+  services.authelia.instances."${username}" = {
     enable = true;
     user = mod.owner;
     name = "${username}";
