@@ -1,4 +1,5 @@
 {
+  config,
   services,
   username,
   ...
@@ -13,8 +14,8 @@ in
     name = "${username}";
     group = "services";
     secrets = { 
-      jwtSecretFile = /my/path/to/jwtsecret;
-      storageEncryptionKeyFile = /my/path/to/encryptionkey;
+      jwtSecretFile = config.age.secrets."authelia-jwtsecret".path;
+      storageEncryptionKeyFile = config.age.secrets."authelia-encriptionkey".path;
     };  
     settings = {
       theme = "dark";
