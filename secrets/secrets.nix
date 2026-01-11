@@ -30,7 +30,7 @@ in
 
   ## Authelia
   "authelia-jwtsecret.age".publicKeys = systems;
-  "authelia-encriptionkey.age".publicKeys = systems;
+  "authelia-encryptionkey.age".publicKeys = systems;
 
 
 }
