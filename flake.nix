@@ -34,6 +34,8 @@
     jellarr.url = "github:venkyr77/jellarr";
 
     arion.url = "github:hercules-ci/arion";
+
+    authentik-nix.url = "github:nix-community/authentik-nix";
   };
 
   outputs =
@@ -49,6 +51,7 @@
       copyparty,
       jellarr,
       arion,
+      authentik-nix,
       ...
     }@inputs:
     let
@@ -90,6 +93,7 @@
         copyparty.nixosModules.default
         jellarr.nixosModules.default
         arion.nixosModules.arion
+        authentik-nix.nixosModules.default
       ];
     in
     {
