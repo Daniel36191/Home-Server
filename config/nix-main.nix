@@ -33,7 +33,7 @@ in
     ./nix/core/boot.nix
     ./nix/core/hardware.nix
   ]
-  ++ lib.optional (services.homepage.enable or false) sD /homepage.nix
+  ++ lib.optional (services.homepage.enable or false) (sD /homepage.nix)
   ++ lib.optional (services.portainer.enable or false) ./nix/services/containers/portainer.nix
   ++ lib.optional (services.proxmox.enable or false) ./nix/services/proxmox.nix
   ++ lib.optional (services.crafty.enable or false) ./nix/services/containers/crafty-compose2.nix
