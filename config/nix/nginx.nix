@@ -8,11 +8,11 @@
 let
 
   ## Filter enabled services
-  otherenabledServices = lib.filterAttrs (_: cfg: !cfg.no-proxy or false) (lib.filterAttrs (_: cfg: cfg.enable or false) services);
+  enabledServices = lib.filterAttrs (_: cfg: cfg.domain == !null) (lib.filterAttrs (_: cfg: cfg.enable or false) services);
 
-  enabledServices = lib.filterAttrs ( cfg: 
-    (cfg.enable or false) && ((builtins.stringLength cfg.domain) > 1 )
-  ) services;
+  # enabledServices = lib.filterAttrs ( cfg: 
+  #   (cfg.enable or false) && ( )
+  # ) services;
 
   mkCert = domain: pkgs.runCommand "cert-${domain}" {
     nativeBuildInputs = [ pkgs.mkcert ];
