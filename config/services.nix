@@ -10,7 +10,6 @@
     homepage = true; ## Wether to enable homepage entry
     icon = "example"; ## The icon from https://dashboardicons.com/ names pulled from https://github.com/homarr-labs/dashboard-icons/tree/main/svg
 
-    no-proxy = true; ## Dissable nginx entry
     default = false; ## Default entry for <hostname.local> when accessed *Can only be one set to true
     domain = "home"; ## The subdomain to <hostname.local> for url acess
     secure = false; ## Wether to use https for proxy
@@ -21,10 +20,6 @@
   homepage = {
     enable = true;
     port = 54321;
-
-    abbr = "HO";
-    homepage = false;
-    icon = "homepage";
 
     default = true;
     domain = "homepage";
@@ -117,7 +112,6 @@
   
     data-directory = "/services/minecraft/stary";
 
-    no-proxy = true;
   };
   home-assistant = {
     enable = false;
@@ -141,9 +135,6 @@
     domains = [
       "immich-public" ## immich-public.duckdns.org
     ];
-
-
-    no-proxy = true;
   };
   authelia = {
     enable = true;
