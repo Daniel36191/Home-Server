@@ -45,5 +45,13 @@
     "duckdns-token" = {
       file = ./duckdns-token.age;
     };
+
+    ## Authelia
+    "authelia-jwtsecret" = {
+      file = ./authelia-jwtsecret.age;
+    };
+    "authelia-encryptionkey" = {
+      file = ./authelia-encryptionkey.age;
+    };
   };
 }

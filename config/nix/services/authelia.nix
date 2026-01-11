@@ -12,6 +12,10 @@ in
     user = mod.owner;
     name = "${username}";
     group = "services";
+    secrets = { 
+      jwtSecretFile = /my/path/to/jwtsecret;
+      storageEncryptionKeyFile = /my/path/to/encryptionkey;
+    };  
     settings = {
       theme = "dark";
       default_2fa_method = "totp";

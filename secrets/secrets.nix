@@ -28,5 +28,9 @@ in
   ## Duckdns
   "duckdns-token.age".publicKeys = systems;
 
+  ## Authelia
+  "authelia-jwtsecret.age".publicKeys = systems;
+  "authelia-encriptionkey.age".publicKeys = systems;
+
 
 }
