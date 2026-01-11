@@ -8,7 +8,7 @@
 let
 
   ## Filter enabled services
-  enabledServices = lib.filterAttrs (_: cfg: lib.matchAttrs { domain = ""; } (lib.filterAttrs (_: cfg: cfg.enable or false) services) );
+  enabledServices = lib.filterAttrs ((_: cfg: cfg.enable or false) && (_: cfg: lib.matchAttrs { domain = ""; } )) services;
 
   # enabledServices = lib.filterAttrs ( cfg: (cfg.enable or false) && (cfg.domain != null) ) services;
 
