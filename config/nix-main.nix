@@ -5,7 +5,7 @@
   ...
 }:
 let 
-  sD = path: lib.path.append ./nix/services builtins.toString path;
+  sD = path: (lib.path.append ./nix/services builtins.toString path);
 in 
 {
   imports = [
