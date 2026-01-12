@@ -28,7 +28,7 @@
   };
   portainer = {
     enable = false;
-    port = 9443;
+    port = 10443;
 
     abbr = "PT";
     homepage = true;
