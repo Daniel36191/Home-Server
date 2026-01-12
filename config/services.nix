@@ -138,7 +138,7 @@
   };
   authentik = {
     enable = true;
-    port = 9443;
+    port = 9443; #*
 
     domain = "auth";
     secure = true;
