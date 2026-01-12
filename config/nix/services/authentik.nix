@@ -14,8 +14,8 @@ in
       disable_startup_analytics = true;
       avatars = "initials";
       listen = {
-        http = 3080;
-        https = mod.port;
+        http = "0.0.0.0:3080";
+        https = "0.0.0.0:${mod.port}";
       };
     };
   };

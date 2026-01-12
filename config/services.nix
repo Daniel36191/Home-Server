@@ -138,7 +138,7 @@
   };
   authentik = {
     enable = true;
-    port = 3443; #*
+    port = 3443;
 
     abbr = "AU";
     homepage = true;
