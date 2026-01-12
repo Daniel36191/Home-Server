@@ -140,6 +140,10 @@
     enable = true;
     port = 3443; #*
 
+    abbr = "AU";
+    homepage = true;
+    icon = "authentik";
+
     domain = "auth";
     secure = true;
     sockets = true;
