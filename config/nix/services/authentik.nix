@@ -1,6 +1,7 @@
 {
   config,
   services,
+  address,
   ...
 }:
 let
@@ -10,6 +11,10 @@ in
   services.authentik = {
     enable = true;
     environmentFile = config.age.secrets."authentik-env".path;
+    nginx = {
+      enable = true;
+      host = "${mod.domain}.${address}";
+    };
     settings = {
       disable_startup_analytics = true;
       avatars = "initials";
