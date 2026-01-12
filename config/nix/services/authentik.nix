@@ -15,7 +15,7 @@ in
       avatars = "initials";
       listen = {
         http = "0.0.0.0:3080";
-        https = "0.0.0.0:${mod.port}";
+        https = "0.0.0.0:${toString mod.port}";
       };
     };
   };
