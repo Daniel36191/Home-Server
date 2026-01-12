@@ -24,10 +24,10 @@ let
     (name: cfg: {
       name = "${cfg.domain}.${address}";
       value = {
-        default = cfg.default or false;
+        default = lib.mkDefault cfg.default or false;
         locations."/" = {
-          proxyPass = "${if cfg.secure then "https" else "http"}://${address}:${toString cfg.port}/";
-          proxyWebsockets = cfg.sockets or false;
+          proxyPass = lib.mkDefault "${if cfg.secure then "https" else "http"}://${address}:${toString cfg.port}/";
+          proxyWebsockets = lib.mkDefault cfg.sockets or false;
           extraConfig = lib.mkDefault ''
             proxy_ssl_server_name on;
             proxy_pass_header Authorization;
