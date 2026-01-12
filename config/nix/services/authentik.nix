@@ -13,6 +13,10 @@ in
     settings = {
       disable_startup_analytics = true;
       avatars = "initials";
+      listen = {
+        http = 3080;
+        https = mod.port;
+      };
     };
   };
 }

@@ -28,7 +28,7 @@
   };
   portainer = {
     enable = false;
-    port = 10443;
+    port = 9443;
 
     abbr = "PT";
     homepage = true;
@@ -138,7 +138,7 @@
   };
   authentik = {
     enable = true;
-    port = 9443; #*
+    port = 3443; #*
 
     domain = "auth";
     secure = true;
