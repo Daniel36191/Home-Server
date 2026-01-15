@@ -18,7 +18,7 @@ let
     enabledServices;
 in
 {
-  servicses.cloudflared = {
+  services.cloudflared = {
     enable = true;
     certificateFile = config.age.secrets."cloudflared-token".path;
 
