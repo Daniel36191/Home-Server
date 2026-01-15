@@ -55,9 +55,6 @@
     "cloudflared-token" = {
       file = ./cloudflared-token.age;
     };
-    "cloudflared-id" = {
-      file = ./cloudflared-id.age;
-    };
     "cloudflared-creds" = {
       file = ./cloudflared-creds.age;
     };
