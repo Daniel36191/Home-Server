@@ -63,6 +63,7 @@
         ssh-public-key
         ;
       services = import ./config/services.nix;
+      nginx-custom = import ./config/nginx-custom.nix;
       
       ## Common function to create arguments for systems
       commonArgs = {

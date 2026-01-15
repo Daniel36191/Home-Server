@@ -14,6 +14,7 @@
     domain = "home"; ## The subdomain to <hostname.local> for url acess
     secure = false; ## Wether to use https for proxy
     sockets = false; ## Are websockets needed through proxy
+    nginx-custom = false; ## Extra nginx config is defined at config.<service-domain>-nginx-config = {};
   };
 
   ## Static
@@ -147,6 +148,7 @@
     domain = "auth";
     secure = true;
     sockets = true;
+    nginx-custom = true;
   };
 
 

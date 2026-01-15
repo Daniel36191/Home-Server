@@ -1,7 +1,9 @@
 { 
   pkgs,
+  config,
   lib,
   services,
+  nginx-custom,
   address,
   ...
 }:
@@ -20,10 +22,11 @@ let
   '';
 
   ## Create vhosts from enabled services
-  vhosts = lib.mapAttrs'
+  vhosts = lib.mapAttrs
     (name: cfg: {
       name = "${cfg.domain}.${address}";
-      value = {
+      value = if cfg.nginx-custom then nginx-custom."${cfg.domain}" else {
+        
         default = lib.mkDefault cfg.default or false;
         locations."/" = {
           proxyPass = lib.mkForce "${if cfg.secure then "https" else "http"}://${address}:${toString cfg.port}/";
@@ -35,6 +38,7 @@ let
           '';
         };
         forceSSL = lib.mkDefault true;
+        useACMEHost = true;
         sslCertificate = "${mkCert cfg.domain}/cert.pem";
         sslCertificateKey = "${mkCert cfg.domain}/key.pem";
       };
