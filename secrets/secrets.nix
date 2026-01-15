@@ -30,4 +30,9 @@ in
 
   ## Authentik
   "authentik-env.age".publicKeys = systems;
+
+  ##Cloudflared
+  "cloudflared-token.age".publicKeys = systems;
+  "cloudflared-id.age".publicKeys = systems;
+  "cloudflared-creds.age".publicKeys = systems;
 }

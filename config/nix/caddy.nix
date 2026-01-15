@@ -3,13 +3,14 @@
   config,
   services,
   address,
+  email,
   ...
 }:
 let
   dir = "/services/caddy";
 
   ## Filter enabled services
-  enabledServices = lib.filterAttrs (_: cfg: !cfg.no-proxy or false) (lib.filterAttrs (_: cfg: cfg.enable or false) services);
+  enabledServices = lib.filterAttrs (_: cfg: cfg.domain or null != null) (lib.filterAttrs (_: cfg: cfg.enable or false) services);
 
   ## Create vhosts from enabled services
   vhosts = lib.mapAttrs'
@@ -28,7 +29,9 @@ in {
   services.caddy = {
     enable = true;
     user = "caddy";
-    # dataDir = "${dir}/data";
+    group = "services";
+    email = email;
+    # dataDir = "${dir}/data
     # logDir = "${dir}/logs";
 
     virtualHosts = vhosts;

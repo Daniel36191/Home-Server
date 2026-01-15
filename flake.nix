@@ -61,6 +61,7 @@
         localipaddress
         address
         ssh-public-key
+        email
         ;
       services = import ./config/services.nix;
       nginx-custom = import ./config/nginx-custom.nix;
@@ -74,6 +75,7 @@
           address
           ssh-public-key
           services
+          email
           ;
         
         ## Pinning Nixpkgs versions

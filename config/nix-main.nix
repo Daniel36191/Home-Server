@@ -17,7 +17,7 @@ in
     ##############
 
     ./nix/tailscale.nix
-    ./nix/nginx.nix
+    # ./nix/nginx.nix
     # ./nix/caddy.nix
 
 
