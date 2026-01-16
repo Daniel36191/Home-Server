@@ -19,7 +19,7 @@ in
     ./nix/tailscale.nix
     # ./nix/nginx.nix
     ./nix/caddy.nix
-    ./nix/cloudflared.nix
+    # ./nix/cloudflared.nix
 
 
     ##########
