@@ -14,7 +14,7 @@ let
   ## Create vhosts from enabled services
   vhosts = lib.mapAttrs'
     (name: cfg: {
-      name = "${if cfg.public then "${cfg.domain}.${public-address}" else "${cfg.domain}.${if cfg.public then public-address else local-address}"}";
+      name = "${if cfg.public or false then "${cfg.domain}.${public-address}" else "${cfg.domain}.${if cfg.public then public-address else local-address}"}";
       value = {
         extraConfig = ''
           encode gzip zstd
