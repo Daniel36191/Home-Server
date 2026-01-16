@@ -14,7 +14,7 @@
     domain = "home"; ## The subdomain to <hostname.local> for url acess
     secure = false; ## Wether to use https for proxy
     sockets = false; ## Are websockets needed through proxy
-    nginx-custom = false; ## Extra nginx config is defined at config.<service-domain>-nginx-config = {};
+    public = false; ## If true then accessable through cloudflared
   };
 
   ## Static
@@ -55,6 +55,7 @@
     domain = "immich";
     secure = false;
     sockets = true;
+    public = true;
   };
   proxmox = {
     enable = false;
@@ -131,7 +132,7 @@
     sockets = true;
   };
   duckdns = {
-    enable = true;
+    enable = false;
 
     domains = [
       "immich-public" ## immich-public.duckdns.org
@@ -148,7 +149,7 @@
     domain = "auth";
     secure = true;
     sockets = true;
-    nginx-custom = true;
+    public = true;
   };
 
 

@@ -59,7 +59,7 @@
         system
         username
         localipaddress
-        address
+        local-address
         ssh-public-key
         email
         ;
@@ -71,7 +71,7 @@
         inherit 
           username
           localipaddress
-          address
+          local-address
           ssh-public-key
           services
           email

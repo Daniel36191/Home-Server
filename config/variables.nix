@@ -1,6 +1,7 @@
 {
   localipaddress = "192.168.0.189";
-  address = "lillypond.name";
+  local-address = "lillypond.local";
+  remote-address = "lillypond.name";
   system = "x86_64-linux";
   username = "lillypond";
   email = "dmoeller3998@gmail.com";

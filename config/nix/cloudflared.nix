@@ -1,18 +1,18 @@
 {
   lib,
   config,
-  address,
+  public-address,
   services,
   ...
 }:
 let
     ## Filter enabled services
-  enabledServices = lib.filterAttrs (_: cfg: cfg.domain or null != null) (lib.filterAttrs (_: cfg: cfg.enable or false) services);
+  enabledServices = lib.filterAttrs (_: cfg: cfg.domain or null != null) (lib.filterAttrs (_: cfg: cfg.public or false) (lib.filterAttrs (_: cfg: cfg.enable or false) services));
 
   ## Create vhosts from enabled services
   ingress-hosts = lib.mapAttrs'
     (name: cfg: {
-      name = "${cfg.domain}.${address}";
+      name = "${cfg.domain}.${public-address}";
       value = "${if cfg.secure then "https" else "http"}://127.0.0.1:${toString cfg.port}";
     })
     enabledServices;

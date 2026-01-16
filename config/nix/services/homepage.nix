@@ -1,7 +1,7 @@
 {
   lib,
   localipaddress,
-  address,
+  local-address,
   services,
   ...
 }:
@@ -19,7 +19,7 @@ let
     "${capitalizeDomain cfg.domain}" = [{
       abbr = cfg.abbr;
       icon = cfg.icon;
-      href = "${if cfg.secure then "https" else "http"}://${cfg.domain}.${address}";
+      href = "${if cfg.secure then "https" else "http"}://${cfg.domain}.${local-address}";
     }];
   }) homepageServices;
   
@@ -29,7 +29,7 @@ in
     enable = true;
     openFirewall = true;
     listenPort = mod.port;
-    allowedHosts = "${localipaddress}:${builtins.toString mod.port},${mod.domain}.${address}${if mod.default then ",${address}" else ""}";
+    allowedHosts = "${localipaddress}:${builtins.toString mod.port},${mod.domain}.${local-address}${if mod.default then ",${local-address}" else ""}";
     environmentFile = "";
     
     bookmarks = [

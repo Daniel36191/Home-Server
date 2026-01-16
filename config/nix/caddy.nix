@@ -2,24 +2,23 @@
   lib,
   config,
   services,
-  address,
+  local-address,
+  public-address,
   email,
   ...
 }:
 let
-  dir = "/services/caddy";
-
   ## Filter enabled services
   enabledServices = lib.filterAttrs (_: cfg: cfg.domain or null != null) (lib.filterAttrs (_: cfg: cfg.enable or false) services);
 
   ## Create vhosts from enabled services
   vhosts = lib.mapAttrs'
     (name: cfg: {
-      name = "${cfg.domain}.${address}";
+      name = "${if cfg.public then "${cfg.domain}.${public-address}" else "${cfg.domain}.${if cfg.public then public-address else local-address}"}";
       value = {
         extraConfig = ''
-        encode gzip zstd
-        reverse_proxy ${if cfg.secure then "https" else "http"}://127.0.0.1:${toString cfg.port}
+          encode gzip zstd
+          reverse_proxy ${if cfg.secure then "https" else "http"}://127.0.0.1:${toString cfg.port}
         '';
       };
     })
@@ -28,11 +27,7 @@ let
 in {
   services.caddy = {
     enable = true;
-    user = "caddy";
-    group = "services";
     email = email;
-    # dataDir = "${dir}/data
-    # logDir = "${dir}/logs";
 
     virtualHosts = vhosts;
   };
