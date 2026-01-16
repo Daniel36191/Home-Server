@@ -25,7 +25,7 @@ in
     tunnels."c8729276-c5da-4ca9-a170-a1535782266a" = {
       credentialsFile = config.age.secrets."cloudflared-creds".path;
       default = "http_status:404";
-      ingress = ingress-hosts;
+      # ingress = ingress-hosts;
     };
   };
 }
