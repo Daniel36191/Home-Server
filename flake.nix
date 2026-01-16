@@ -60,6 +60,7 @@
         username
         localipaddress
         local-address
+        public-address
         ssh-public-key
         email
         ;
@@ -72,6 +73,7 @@
           username
           localipaddress
           local-address
+          public-address
           ssh-public-key
           services
           email
