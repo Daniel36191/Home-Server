@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   ...
 }:
 let
@@ -11,9 +12,6 @@ in
     ##############
     ## Services ##
     ##############
-
-    ../modules/admin
-    ../modules/user
 
     ./nix/tailscale.nix
     # ./nix/nginx.nix
@@ -32,7 +30,10 @@ in
     ( core /user.nix)
     ( core /boot.nix)
     ( core /hardware.nix)
-  ];
+  ]
+    ++ lib.filesystem.listFilesRecursive ../modules/user
+    ++ lib.filesystem.listFilesRecursive ../modules/admin
+  ;
   
 
   ###########
