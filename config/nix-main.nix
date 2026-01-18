@@ -25,11 +25,11 @@ in
 
     ./nix/apps.nix
     ../secrets/secrets-nix.nix
-    ( core /containers.nix)
-    ( core /networking.nix)
-    ( core /user.nix)
-    ( core /boot.nix)
-    ( core /hardware.nix)
+    ./nix/containers.nix
+    ./nix/networking.nix
+    ./nix/user.nix
+    ./nix/core/boot.nix
+    ./nix/core/hardware.nix
   ]
     ++ lib.filesystem.listFilesRecursive ../modules/user
     ++ lib.filesystem.listFilesRecursive ../modules/admin
