@@ -1,6 +1,5 @@
 { 
   pkgs,
-  config,
   lib,
   services,
   nginx-custom,
@@ -10,7 +9,7 @@
 let
 
   ## Filter enabled services
-  enabledServices = lib.filterAttrs (_: cfg: cfg.domain or null != null) (lib.filterAttrs (_: cfg: cfg.enable or false) services);
+  enabledServices = lib.filterAttrs (_: cfg: cfg.domain or null != null) (lib.filterAttrs (_: cfg: cfg.enable or false) services.modules);
 
   mkCert = domain: pkgs.runCommand "cert-${domain}" {
     nativeBuildInputs = [ pkgs.mkcert ];

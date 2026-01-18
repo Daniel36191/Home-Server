@@ -55,37 +55,24 @@
       ...
     }@inputs:
     let
-      inherit (import ./config/variables.nix)
-        system
-        username
-        localipaddress
-        local-address
-        public-address
-        ssh-public-key
-        email
-        ;
       services = import ./config/services.nix;
+      vars = import ./config/variables.nix;
       
       ## Common function to create arguments for systems
       commonArgs = {
         inherit inputs;
         inherit 
-          username
-          localipaddress
-          local-address
-          public-address
-          ssh-public-key
           services
-          email
+          vars
           ;
         
         ## Pinning Nixpkgs versions
         pkgs-stable = import nixpkgs-stable {
-          inherit system;
+          inherit vars;
           config.allowUnfree = true;
         };
 
-        proxmoxOverlay = proxmox-nixos.overlays.${system};
+        proxmoxOverlay = proxmox-nixos.overlays.${vars.system};
         minecraftoverlay = nix-minecraft.overlay;
       };
       commonModules = [
@@ -112,10 +99,11 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 backupFileExtension = "backup";
-                users.${(import ./config/variables.nix).username} = import ./config/hm-main.nix;
+                users.${vars.username} = import ./config/hm-main.nix;
               };
             }
             ./config/nix-main.nix
+            ./config/services.nix
           ] ++ commonModules;
         };
       };

@@ -3,8 +3,6 @@
   options,
   username,
   config,
-  lib,
-  services,
   ...
 }:
 {
@@ -47,13 +45,12 @@
       members = [
         "root"
         "${username}"
-        "${config.services.caddy.user}"
-      ] ## Services
-      ++ lib.optional (services.immich.enable or false) "immich"
-      ++ lib.optional (services.copyparty.enable or false) "copyparty"
-      ++ lib.optional (services.jellyfin.enable or false) "jellyfin"
-      ++ lib.optional (services.crafty.enable or false) "crafty"
-      ;
+        "caddy"
+        "crafty"
+        "jellyfin"
+        "copyparty"
+        "immich"
+      ];
     };
   };
 

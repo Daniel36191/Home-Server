@@ -1,20 +1,18 @@
 { 
   lib,
-  config,
   services,
-  local-address,
-  public-address,
+  vars,
   email,
   ...
 }:
 let
   ## Filter enabled services
-  enabledServices = lib.filterAttrs (_: cfg: cfg.domain or null != null) (lib.filterAttrs (_: cfg: cfg.enable or false) services);
+  enabledServices = lib.filterAttrs (_: cfg: cfg.domain or null != null) (lib.filterAttrs (_: cfg: cfg.enable or false) services.modules);
 
   ## Create vhosts from enabled services
   vhosts = lib.mapAttrs'
     (name: cfg: {
-      name = "${if cfg.public or false then "${cfg.domain}.${public-address}" else "${cfg.domain}.${local-address}"}";
+      name = "${if cfg.public or false then "${cfg.domain}.${vars.sld}.${vars.tld}" else "${cfg.domain}.${vars.sld}.local"}";
       value = {
         extraConfig = ''
           encode gzip zstd
