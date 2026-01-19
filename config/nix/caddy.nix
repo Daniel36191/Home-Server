@@ -2,7 +2,6 @@
   lib,
   config,
   vars,
-  email,
   ...
 }:
 let
@@ -28,7 +27,7 @@ let
 in {
   services.caddy = {
     enable = true;
-    email = email;
+    email = vars.email;
 
     virtualHosts = vhosts;
   };
