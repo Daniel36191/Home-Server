@@ -29,10 +29,11 @@ in
       enable = true;
       openFirewall = true;
       listenPort = mod.port;
-      allowedHosts = "
+      allowedHosts = ''
         ${vars.localipaddress}:${builtins.toString mod.port},
         ${mod.domain}.${vars.sld}.${if mod.public then vars.tld else "local"}
-        ${if mod.default then "${vars.sld}.${if mod.public then vars.tld else "local"}" else ""}";
+        ${if mod.default then "${vars.sld}.${if mod.public then vars.tld else "local"}" else ""}
+        '';
       environmentFile = "";
       
       bookmarks = [
