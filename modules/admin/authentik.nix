@@ -13,10 +13,10 @@ in
     services.authentik = {
       enable = true;
       environmentFile = config.age.secrets."authentik-env".path;
-      nginx = {
-        enable = true;
-        host = "${mod.domain}.${vars.sld}.${if mod.public then vars.tld else "local" }";
-      };
+      # nginx = {
+      #   enable = true;
+      #   host = "${mod.domain}.${vars.sld}.${if mod.public then vars.tld else "local" }";
+      # };
       settings = {
         disable_startup_analytics = true;
         avatars = "initials";
