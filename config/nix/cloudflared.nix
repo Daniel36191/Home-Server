@@ -2,7 +2,6 @@
   lib,
   config,
   vars,
-  services,
   ... 
 }:
 let
