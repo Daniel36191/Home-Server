@@ -5,9 +5,7 @@
   ... 
 }:
 let
-  ## "catchAll", "auto", "manual"
-  mode = "manual";
-
+  id = "0bd0c551-d1bd-483c-bcb9-65180e17bb82";
 
   ## Filter
   enabledServices = lib.filterAttrs (_: cfg: 
@@ -31,18 +29,13 @@ in
     services.cloudflared = {
       enable = true;
       certificateFile = config.age.secrets."cloudflared-token".path;
-      tunnels."0bd0c551-d1bd-483c-bcb9-65180e17bb82" = {
+      tunnels."${id}" = {
         credentialsFile = config.age.secrets."cloudflared-creds".path;
         default = "http_status:404";
         originRequest = {
           noTLSVerify = true;
         };
-        ingress = if mode == "auto" then ingress else if mode == "catchAll" then {
-          "*.${vars.sld}.${vars.tld}" = "http://localhost:80";
-          "*.${vars.sld}.${vars.tld}" = "https://localhost:443";
-          } else if mode == "manual" then { 
-          "*.${vars.sld}.${vars.tld}" = "http://localhost:80"; 
-          } else null;
+        ingress = ingress;
       };
     };
   };
