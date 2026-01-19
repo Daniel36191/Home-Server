@@ -33,7 +33,7 @@ in
         noTLSVerify = true;
       };
       ingress = if !mode then ingress else {
-        "*.${vars.sld}.${vars.tld}" = "https://localhost:443";
+        "*.${vars.sld}.${vars.tld}" = "http://localhost:80";
       };
     };
   };
