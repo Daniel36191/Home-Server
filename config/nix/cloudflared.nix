@@ -4,6 +4,9 @@
   vars,
   ... 
 }:
+
+## WARN: Doesn't create dns CNAME records
+
 let
   id = "43387887-077c-4587-8be7-58fcc0f35558";
 
