@@ -29,15 +29,11 @@ let
       value = {
         default = lib.mkDefault cfg.default or false;
         locations."/" = {
-          proxyPass = lib.mkForce "${if cfg.secure then "https" else "http"}://127.0.0.1:${toString cfg.port}/";
+          proxyPass = lib.mkForce "${if cfg.secure then "https" else "http"}://${cfg.domain}.${vars.sld}.${if cfg.public then vars.tld else "local"}:${toString cfg.port}/";
           proxyWebsockets = lib.mkDefault true;
           extraConfig = lib.mkDefault ''
             proxy_ssl_server_name on;
             add_header Access-Control-Allow-Origin *;
-            
-            proxy_buffer_size 128k;
-            proxy_buffers 4 256k;
-            proxy_busy_buffers_size 256k;
 
             proxy_set_header Authorization $http_authorization;
             proxy_set_header Host $host;
