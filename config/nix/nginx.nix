@@ -8,21 +8,24 @@
 let
 
   ## Filter enabled services
-  enabledServices = lib.filterAttrs (_: cfg: cfg.domain or null != null) (lib.filterAttrs (_: cfg: cfg.enable or false) config.modules);
+  enabledServices = lib.filterAttrs (_: cfg: 
+    (cfg.enable or false) && 
+    (cfg.url or false)
+  ) config.modules;
 
-  mkCert = domain: pkgs.runCommand "cert-${domain}" {
+  mkCert = domain: public: pkgs.runCommand "cert-${domain}" {
     nativeBuildInputs = [ pkgs.mkcert ];
   } ''
     HOME=$TMPDIR
-    mkcert -cert-file cert.pem -key-file key.pem "${domain}.${vars.sld}.${vars.tld}"
+    mkcert -cert-file cert.pem -key-file key.pem "${domain}.${vars.sld}.${if public then vars.tld else "local"}"
     mkdir -p $out
     cp cert.pem key.pem $out/
   '';
 
   ## Create vhosts from enabled services
-  vhosts = lib.mapAttrs
+  vhosts = lib.mapAttrs'
     (name: cfg: {
-      name = "${cfg.domain}.${vars.sld}.${vars.tld}";
+      name = "${cfg.domain}.${vars.sld}.${if cfg.public then vars.tld else "local"}";
       value = {
         default = lib.mkDefault cfg.default or false;
         locations."/" = {
@@ -35,9 +38,8 @@ let
           '';
         };
         forceSSL = lib.mkDefault true;
-        useACMEHost = lib.mkDefault true;
-        sslCertificate = "${mkCert cfg.domain}/cert.pem";
-        sslCertificateKey = "${mkCert cfg.domain}/key.pem";
+        sslCertificate = "${mkCert cfg.domain cfg.public}/cert.pem";
+        sslCertificateKey = "${mkCert cfg.domain cfg.public}/key.pem";
       };
     })
     enabledServices;
