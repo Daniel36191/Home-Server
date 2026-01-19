@@ -6,7 +6,7 @@
 }:
 let
   ## Do Catchal
-  mode = true;
+  mode = false;
 
 
   ## Filter
@@ -19,7 +19,7 @@ let
   ## Create Rules
   ingress = lib.mapAttrs' (name: cfg: {
     name = "${cfg.domain}.${vars.sld}.${vars.tld}";
-    value = "${if cfg.secure or false then "https" else "http"}://127.0.0.1:${toString cfg.port}";
+    value = "${if cfg.secure or false then "https" else "http"}://localhost:${toString cfg.port}";
   }) enabledServices;
 in
 {
