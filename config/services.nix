@@ -69,6 +69,7 @@
     homepage = {
       enable = true;
       port = 8125;
+      domain = "home";
       secure = false;
       default = true;
     };
