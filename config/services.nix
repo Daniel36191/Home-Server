@@ -86,7 +86,7 @@
     };
 
     minecraft = {
-      enable = true;
+      enable = false;
       port = 25500;
       url = false;
     

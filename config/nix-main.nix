@@ -22,6 +22,7 @@
 
     ./services.nix
     ./module-deff.nix
+    
     ./nix/apps.nix
     ../secrets/secrets-nix.nix
     ./nix/containers.nix
