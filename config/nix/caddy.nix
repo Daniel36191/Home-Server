@@ -19,12 +19,12 @@ let
         extraConfig = ''
           encode gzip zstd
           reverse_proxy ${if cfg.secure then "https" else "http"}://127.0.0.1:${toString cfg.port}{
-            header_up Host {host}
-            header_up X-Real-IP {remote}
-            header_up X-Forwarded-For {remote}
-            header_up X-Forwarded-Proto {scheme}
           }
         '';
+            # header_up Host {host}
+            # header_up X-Real-IP {remote}
+            # header_up X-Forwarded-For {remote}
+            # header_up X-Forwarded-Proto {scheme}
       };
     })
     enabledServices;
