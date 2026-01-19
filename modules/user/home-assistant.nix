@@ -11,18 +11,11 @@ let
 in
 {
   options.modules.home-assistant = {
-    enable = mkEnableOption "Home-Assistant";
-    
-    port = mkOption { default = 8123; };
-
     love-config-writeable = mkOption { default = false; };
-
-    data-directory = mkOption { default = /services/home-assistant; };
 
     connectors = mkOption { default = []; };
     
     lovelace-modules = mkOption { default = []; };
-
   };
 
   config = mkIf mod.enable {

@@ -9,10 +9,6 @@ let
   mod = config.modules.proxmox;
 in
 {
-  options.modules.proxmox = {
-    enable = mkEnableOption "Proxmox";
-  };
-  
   config = mkIf mod.enable {
     services.proxmox-ve = {
       enable = true;

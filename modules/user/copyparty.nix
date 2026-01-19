@@ -9,19 +9,6 @@ let
   mod = config.modules.copyparty;
 in
 {
-  options.modules.copyparty = {
-    enable = mkEnableOption "Copyparty";
-
-    port = mkOption { default = 3923; };
-
-    owner = mkOption { default = "copyparty"; };
-
-    group = mkOption { default = "services"; };
-
-    data-directory = mkOption { default = /services/copyparty/public; };
-
-  };
-
   config = mkIf mod.enable {
     nixpkgs.overlays = [ inputs.copyparty.overlays.default ];
 
@@ -30,7 +17,7 @@ in
       ## The user to run the service as
       user = mod.owner;
       ## The group to run the service as
-      group = mod.group;
+      group = "services";
       ## Directly maps to values in the [global] section of the copyparty config.
       ## See `copyparty --help` for available options
       settings = {

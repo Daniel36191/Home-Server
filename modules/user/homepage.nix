@@ -1,7 +1,6 @@
 {
   lib,
   vars,
-  services,
   config,
   ...
 }:
@@ -11,7 +10,7 @@ let
 
   homepageServices = lib.filterAttrs (_: cfg: 
     (cfg.enable or false) && (cfg.homepage or false)
-  ) services;
+  ) config.modules;
   
   capitalizeDomain = domain: 
     lib.toUpper (builtins.substring 0 1 domain) + builtins.substring 1 999 domain;
@@ -20,18 +19,11 @@ let
     "${capitalizeDomain cfg.domain}" = [{
       abbr = cfg.abbr;
       icon = cfg.icon;
-      href = "${if cfg.secure then "https" else "http"}://${cfg.domain}.${local-address}";
+      href = "https://${cfg.domain}.${vars.sld}.${if cfg.public then vars.tld else "local"}";
     }];
   }) homepageServices;
-  
 in
 {
-  options.modules.homepage = {
-    enable = mkEnableOption "Homepage";
-
-    port = mkOption { default = 8125; };
-  };
-
   config = mkIf mod.enable {
     services.homepage-dashboard = {
       enable = true;

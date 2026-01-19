@@ -8,12 +8,7 @@ with lib;
 let
   mod = config.modules.authentik;
 in
-{
-  options.modules.authentik = {
-    enable = mkEnableOption "Authentik";
-    port = mkOption { default = 3443; };
-  };
-  
+{  
   config = mkIf mod.enable {
     services.authentik = {
       enable = true;

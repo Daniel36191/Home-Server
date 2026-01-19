@@ -9,11 +9,6 @@ let
   mod = config.modules.syncthing;
 in
 {
-  options.modules.syncthing = {
-    enable = mkEnableOption "Syncthing";
-    port = mkOption { default = 8384; };
-  };
-
   config = mkIf mod.enable {
     environment.systemPackages = with pkgs; [
       syncthing

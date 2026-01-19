@@ -11,12 +11,6 @@ let
 in
 {
   options.modules.minecraft = {
-    enable = mkEnableOption "Minecraft";
-
-    port = mkOption { default = 25565; };
-
-    data-directory = mkOption { default = "/services/minecraft"; };
-
     runCommand = mkOption { default = ""; };
   };
 

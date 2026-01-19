@@ -9,16 +9,6 @@ let
   mod = config.modules.immich;
 in
 {
-  options.modules.immich = {
-    enable = mkEnableOption "Immich";
-
-    port = mkOption { default =  };
-
-    data-directory = mkOption { default = "/services/immich"; };
-
-    owner = mkOption { default = "immich"; };
-  };
-
   config = mkIf mod.enable {
     environment.systemPackages = with pkgs; [
       immich-cli

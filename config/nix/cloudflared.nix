@@ -15,7 +15,7 @@ let
     cfg.enable or false && 
     cfg.public or false && 
     cfg.domain or null != null
-  ) services.modules;
+  ) config.modules;
 
   ## Create Rules
   ingress = lib.mapAttrsToList (name: cfg: {
@@ -34,7 +34,7 @@ in
         noTLSVerify = true;
       };
       ingress = if !mode then ingress else {
-        "*.${vars.sld}.${vars.tld}" = "https://localhost:80";
+        "*.${vars.sld}.${vars.tld}" = "https://localhost:443";
       };
     };
   };

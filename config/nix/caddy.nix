@@ -1,13 +1,16 @@
 { 
   lib,
-  services,
+  config,
   vars,
   email,
   ...
 }:
 let
   ## Filter enabled services
-  enabledServices = lib.filterAttrs (_: cfg: cfg.domain or null != null) (lib.filterAttrs (_: cfg: cfg.enable or false) services.modules);
+  enabledServices = lib.filterAttrs (_: cfg: 
+    (cfg.enable or false) && 
+    (cfg.url or false)
+  ) config.modules;
 
   ## Create vhosts from enabled services
   vhosts = lib.mapAttrs'
@@ -29,10 +32,4 @@ in {
 
     virtualHosts = vhosts;
   };
-
-  # systemd.tmpfiles.rules = [
-  #   "d ${dir} 0775 ${config.services.caddy.user} services -"
-  #   "d ${config.services.caddy.dataDir} 0775 ${config.services.caddy.user} services -"
-  #   "d ${config.services.caddy.logDir} 0775 ${config.services.caddy.user} services -"
-  # ];
 }

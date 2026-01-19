@@ -2,10 +2,7 @@
   pkgs,
   lib,
   ...
-}:
-let
-  core = path: ./nix/core + path;
-in 
+}: 
 {
   imports = [
 
@@ -23,6 +20,8 @@ in
     ## Core ##
     ##########
 
+    ./services.nix
+    ./module-deff.nix
     ./nix/apps.nix
     ../secrets/secrets-nix.nix
     ./nix/containers.nix

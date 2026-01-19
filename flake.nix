@@ -55,14 +55,14 @@
       ...
     }@inputs:
     let
-      services = import ./config/services.nix;
+      # services = import ./config/services.nix;
       vars = import ./config/variables.nix;
       
       ## Common function to create arguments for systems
       commonArgs = {
         inherit inputs;
         inherit 
-          services
+          # services
           vars
           ;
         
@@ -103,7 +103,6 @@
               };
             }
             ./config/nix-main.nix
-            ./config/services.nix
           ] ++ commonModules;
         };
       };

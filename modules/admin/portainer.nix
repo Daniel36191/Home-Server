@@ -6,12 +6,7 @@ with lib;
 let
   mod = config.modules.portainer;
 in
-{
-  options.modules.portainer = {
-    enable = mkEnableOption "Portainer";
-    port = mkOption { default = 9443; };
-  };
-  
+{  
   config = mkIf mod.enable {
     services.portainer = {
       enable = true;
