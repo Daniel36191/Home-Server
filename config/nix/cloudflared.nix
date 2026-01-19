@@ -20,7 +20,7 @@ let
   ## Create Rules
   ingress = lib.mapAttrs' (name: cfg: {
     name = "${cfg.domain}.${vars.sld}.${vars.tld}";
-    value = "${if cfg.secure or false then "http" else "https"}://localhost:${toString cfg.port}";
+    value = "${if cfg.secure then "https" else "http"}://localhost:${toString cfg.port}";
   }) enabledServices;
 in
 {
