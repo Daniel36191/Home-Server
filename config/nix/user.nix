@@ -1,7 +1,7 @@
 {
   pkgs,
   options,
-  username,
+  vars,
   config,
   ...
 }:
@@ -44,7 +44,7 @@
       # gid = 100; ## Dissable for auto select
       members = [
         "root"
-        "${username}"
+        "${vars.username}"
         "caddy"
         "crafty"
         "jellyfin"
@@ -57,10 +57,10 @@
 
   ## Setup user
   users.users = {
-    "${username}" = {
+    "${vars.username}" = {
       homeMode = "755";
       isNormalUser = true;
-      description = "${username}";
+      description = "${vars.username}";
       shell = pkgs.bash;
       extraGroups = [
         "services"
@@ -82,7 +82,7 @@
   };
   nix.settings.trusted-users = [
     "root"
-    "${username}"
+    "${vars.username}"
   ];
   environment = { 
     shells = with pkgs; [
@@ -120,14 +120,14 @@
 
   age.secrets = {
     "ssh" = {
-      path = "/home/${username}/.ssh/ssh";
-      owner = username;
+      path = "/home/${vars.username}/.ssh/ssh";
+      owner = vars.username;
       mode = "600";
     };
   };
 
   ## SSH Client & Git Auth
-  home-manager.users.${username} = let ssh-private = config.age.secrets."ssh"; in { pkgs, config, ssh-public-key, ... }: {
+  home-manager.users.${vars.username} = let ssh-private = config.age.secrets."ssh"; in { pkgs, config, ssh-public-key, ... }: {
     home.file.".ssh/ssh.pub" = { text = ssh-public-key; force = true; };
     programs.ssh = {
       enable = true;
