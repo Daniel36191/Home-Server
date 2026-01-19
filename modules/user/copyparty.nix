@@ -24,6 +24,7 @@ in
         i = "0.0.0.0"; ## Allowed ip/s
         p = [ mod.port ]; ## Port/s
         no-reload = true;
+        rproxy = -1;
       };
 
       ## Create users

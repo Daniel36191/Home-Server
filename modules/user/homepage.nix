@@ -32,7 +32,7 @@ in
       allowedHosts = concatStrings [
         "${vars.localipaddress}:${builtins.toString mod.port},"
         "${mod.domain}.${vars.sld}.${if mod.public then vars.tld else "local"}"
-        ] ++ mkIf mod.default then "${vars.sld}.${if mod.public then vars.tld else "local"}";
+        ] ++ optional mod.default "${vars.sld}.${if mod.public then vars.tld else "local"}";
       environmentFile = "";
       
       bookmarks = [
