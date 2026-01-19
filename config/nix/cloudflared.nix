@@ -5,7 +5,7 @@
   ... 
 }:
 let
-  id = "0bd0c551-d1bd-483c-bcb9-65180e17bb82";
+  id = "43387887-077c-4587-8be7-58fcc0f35558";
 
   ## Filter
   enabledServices = lib.filterAttrs (_: cfg: 
