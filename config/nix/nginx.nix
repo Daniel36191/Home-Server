@@ -29,7 +29,7 @@ let
       value = {
         default = lib.mkDefault cfg.default or false;
         locations."/" = {
-          proxyPass = lib.mkForce "${if cfg.secure then "https" else "http"}://:${toString cfg.port}/";
+          proxyPass = lib.mkForce "${if cfg.secure then "https" else "http"}://127.0.0.1:${toString cfg.port}/";
           proxyWebsockets = lib.mkDefault true;
           extraConfig = lib.mkDefault ''
             proxy_ssl_server_name on;
