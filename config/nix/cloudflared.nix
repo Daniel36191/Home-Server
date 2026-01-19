@@ -40,7 +40,7 @@ in
         ingress = if mode == "auto" then ingress else if mode == "catchAll" then {
           "*.${vars.sld}.${vars.tld}" = "http://localhost:80";
           "*.${vars.sld}.${vars.tld}" = "https://localhost:443";
-        } else if mode == "manual" then {} else {};
+        } else if mode == "manual" then null else null;
       };
     };
   };
