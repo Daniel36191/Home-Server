@@ -14,6 +14,7 @@ let
     "homepage"
     "immich"
     "minecraft"
+    "radicale"
   ];
 
 

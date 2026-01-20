@@ -41,6 +41,7 @@
       enable = true;
       port = 3923;
       domain = "files";
+      public = true;
 
       abbr = "FS";
       homepage = true;
@@ -92,6 +93,16 @@
     
       data-directory = "/services/minecraft/stary";
       runCommand = ''${pkgs.javaPackages.compiler.temurin-bin.jre-17}/bin/java @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-47.4.0/unix_args.txt "$@"'';
+    };
+
+    caldav = {
+      enable = false;
+      port = 5232;
+      secure = true;
+      domain = "caldav";
+      public = true;
+
+      data-directory = "/services/caldav"
     };
   };
 }
