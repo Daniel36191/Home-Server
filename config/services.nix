@@ -15,7 +15,7 @@
 
     portainer = {
       enable = true;
-      port = 9443;
+      port = 8443;
 
       abbr = "PT";
       homepage = true;
