@@ -14,7 +14,7 @@ let
     "homepage"
     "immich"
     "minecraft"
-    "radicale"
+    "caldav"
   ];
 
 
