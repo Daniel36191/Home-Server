@@ -102,7 +102,7 @@
       domain = "caldav";
       public = true;
 
-      data-directory = "/services/caldav"
+      data-directory = "/services/caldav";
     };
   };
 }
