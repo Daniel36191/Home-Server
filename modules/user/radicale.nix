@@ -32,7 +32,7 @@ in
       };
     };
     systemd.tmpfiles.rules = [
-      "d ${mod.data-directory} 0775 ${mod.owner} services } -"
+      "d ${mod.data-directory} 0775 ${mod.owner} services -"
     ];
   };
 }
