@@ -18,10 +18,11 @@ let
       value = {
         extraConfig = ''
           encode gzip zstd
+          tls self_signed
           reverse_proxy 127.0.0.1:${toString cfg.port}{
             transport http {
             ${if cfg.secure then ''
-              tls self_signed
+              tls
               tls_insecure_skip_verify
             '' else ""}
             }
