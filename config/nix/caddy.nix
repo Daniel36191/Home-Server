@@ -18,7 +18,13 @@ let
       value = {
         extraConfig = ''
           encode gzip zstd
-          reverse_proxy ${if cfg.secure then "https" else "http"}://127.0.0.1:${toString cfg.port}{
+          reverse_proxy 127.0.0.1:${toString cfg.port}{
+            transport http {
+            ${if cfg.secure then ''
+              tls
+              tls_insecure_skip_verify
+            '' else ""}
+            }
           }
         '';
             # header_up Host {host}

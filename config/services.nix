@@ -41,7 +41,7 @@
       enable = true;
       port = 3923;
       domain = "files";
-      public = true;
+      public = false;
 
       abbr = "FS";
       homepage = true;
