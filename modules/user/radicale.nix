@@ -5,7 +5,7 @@
 }:
 with lib;
 let
-  mod = config.modules.caldav;
+  mod = config.modules.radicale;
 in
 {
   config = mkIf mod.enable {
@@ -30,6 +30,9 @@ in
       };
       rights = {
       };
+      systemd.tmpfiles.rules = [
+        "d ${mod.data-directory} 0775 ${mod.owner} services } -"
+      ];
     };
   };
 }

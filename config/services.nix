@@ -95,14 +95,16 @@
       runCommand = ''${pkgs.javaPackages.compiler.temurin-bin.jre-17}/bin/java @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-47.4.0/unix_args.txt "$@"'';
     };
 
-    caldav = {
+    radicale = {
       enable = true;
       port = 5232;
       secure = true;
-      domain = "caldav";
+      domain = "radicale";
       public = true;
 
-      data-directory = "/services/caldav";
+
+      data-directory = "/services/radicale";
+      owner = "radicale";
     };
   };
 }
