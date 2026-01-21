@@ -35,6 +35,6 @@ in
   "cloudflared-token.age".publicKeys = systems;
   "cloudflared-creds.age".publicKeys = systems;
 
-  ## Caldav
-  "caldav-creds.age".publicKeys = systems;
+  ## radicale
+  "radicale-creds.age".publicKeys = systems;
 }

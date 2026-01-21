@@ -46,6 +46,7 @@
       abbr = "FS";
       homepage = true;
       
+      owner = "copyparty";
       data-directory = "/services/copyparty/public"; ## Only the public folder listed here
     };
 

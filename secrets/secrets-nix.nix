@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  config,
   vars,
   ...
 }:
@@ -18,7 +19,7 @@
     ## Copyparty
     "copyparty-user-daniel" = {
       file = ./copyparty-user-daniel.age;
-      owner = "copyparty";
+      owner = config.modules.copyparty.owner;
     };
 
     ## Nextcloud
@@ -61,8 +62,9 @@
     };
 
     ## Caldav
-    "caldav-creds" = {
-      file = ./caldav-creds.age;
+    "radicale-creds" = {
+      file = ./radicale-creds.age;
+      owner = config.modules.radicale.owner;
     };
   };
 }
