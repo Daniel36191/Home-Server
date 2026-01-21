@@ -100,7 +100,7 @@
     radicale = {
       enable = true;
       port = 5232;
-      secure = true;
+      secure = false;
       domain = "radicale";
       public = true;
 
