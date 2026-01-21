@@ -21,7 +21,7 @@ let
           reverse_proxy 127.0.0.1:${toString cfg.port}{
             transport http {
             ${if cfg.secure then ''
-              tls
+              tls self_signed
               tls_insecure_skip_verify
             '' else ""}
             }
