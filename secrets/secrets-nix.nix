@@ -59,5 +59,10 @@
     "cloudflared-creds" = {
       file = ./cloudflared-creds.age;
     };
+
+    ## Caldav
+    "caldav-creds" = {
+      file = ./caldav-creds.age;
+    };
   };
 }

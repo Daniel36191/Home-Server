@@ -96,7 +96,7 @@
     };
 
     caldav = {
-      enable = false;
+      enable = true;
       port = 5232;
       secure = true;
       domain = "caldav";
