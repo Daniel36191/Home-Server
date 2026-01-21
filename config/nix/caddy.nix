@@ -14,11 +14,10 @@ let
   ## Create vhosts from enabled services
   vhosts = lib.mapAttrs'
     (name: cfg: {
-      name = "${if cfg.public or false then "${cfg.domain}.${vars.sld}.${vars.tld}" else "${cfg.domain}.${vars.sld}.local"}";
+      name = "${if cfg.public or false then "http://${cfg.domain}.${vars.sld}.${vars.tld}" else "${cfg.domain}.${vars.sld}.local"}";
       value = {
         extraConfig = ''
           encode gzip zstd
-          tls internal
           reverse_proxy 127.0.0.1:${toString cfg.port}{
             transport http {
             ${if cfg.secure then ''
