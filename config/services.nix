@@ -72,6 +72,7 @@
       enable = true;
       port = 8125;
       domain = "home";
+      public = true;
       secure = false;
       default = true;
     };

@@ -18,6 +18,11 @@ let
       value = {
         extraConfig = ''
           encode gzip zstd
+          log {
+            output file /var/log/caddy/access.log {
+              mode 0644
+            }
+          }
           reverse_proxy 127.0.0.1:${toString cfg.port}{
             transport http {
             ${if cfg.secure then ''
