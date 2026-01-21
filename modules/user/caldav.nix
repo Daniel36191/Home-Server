@@ -5,7 +5,7 @@
 }:
 with lib;
 let
-  mod = config.caldav;
+  mod = config.modules.caldav;
 in
 {
   config = mkIf mod.enable {
