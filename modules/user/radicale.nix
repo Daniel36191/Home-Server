@@ -30,9 +30,9 @@ in
       };
       rights = {
       };
-      systemd.tmpfiles.rules = [
-        "d ${mod.data-directory} 0775 ${mod.owner} services } -"
-      ];
     };
+    systemd.tmpfiles.rules = [
+      "d ${mod.data-directory} 0775 ${mod.owner} services } -"
+    ];
   };
 }
