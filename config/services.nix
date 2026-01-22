@@ -16,7 +16,9 @@
     portainer = {
       enable = true;
       port = 8443;
+      secure = true;
       public = true;
+      domain = "portainer";
 
       abbr = "PT";
       homepage = true;
