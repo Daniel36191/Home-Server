@@ -115,7 +115,7 @@
     vaultwarden = {
       enable = true;
       port = 8222;
-      secure = true;
+      secure = false;
       domain = "vault";
       public = true;
 
