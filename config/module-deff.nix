@@ -15,6 +15,7 @@ let
     "immich"
     "minecraft"
     "radicale"
+    "vaultwarden"
   ];
 
 
