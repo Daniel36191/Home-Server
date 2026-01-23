@@ -111,5 +111,15 @@
       data-directory = "/services/radicale";
       owner = "radicale";
     };
+
+    vaultwarden = {
+      enable = true;
+      port = 8222;
+      secure = true;
+      domain = "vault";
+      public = true;
+
+      data-directory = "/services/vaultwarden"
+    };
   };
 }

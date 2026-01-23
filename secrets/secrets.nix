@@ -37,4 +37,7 @@ in
 
   ## radicale
   "radicale-creds.age".publicKeys = systems;
+
+  ## Vaultwarden
+  "vaultwarden-admin-token.age".publicKeys = systems;
 }

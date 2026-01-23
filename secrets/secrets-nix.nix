@@ -66,5 +66,10 @@
       file = ./radicale-creds.age;
       owner = config.modules.radicale.owner;
     };
+
+    ## Vaultwarden
+    "vaultwarden-admin-token" = {
+      file = ./vaultwarden-admin-token.age;
+    };
   };
 }
