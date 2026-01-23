@@ -1,12 +1,11 @@
 {
   inputs,
-  pkgs,
   config,
   vars,
   ...
 }:
 {
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     inputs.agenix.packages.${vars.system}.default ## Cli tool
   ];
 

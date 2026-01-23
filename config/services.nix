@@ -119,7 +119,7 @@
       domain = "vault";
       public = true;
 
-      data-directory = "/services/vaultwarden"
+      data-directory = "/services/vaultwarden";
     };
   };
 }
