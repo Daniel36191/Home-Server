@@ -15,7 +15,7 @@ in
       domain = "${mod.domain}.${vars.sld}.${vars.tld}";
       configureNginx = if config.services.caddy.enable then false else true;
       backupDir = "${mod.data-directory}/backups";
-      dbBackend = "postgresql";
+      dbBackend = "sqlite";
       environmentFile = config.age.secrets."vaultwarden-admin-token".path;
       config = {
         ROCKET_ADDRESS = "0.0.0.0";
