@@ -84,6 +84,7 @@
       enable = true;
       port = 2283;
       public = true;
+      secure = false;
 
       homepage = true;
 

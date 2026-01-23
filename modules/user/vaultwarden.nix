@@ -5,9 +5,9 @@
   ...
 }:
 with lib;
-let 
+let
   mod = config.modules.vaultwarden;
-in 
+in
 {
   config = mkIf mod.enable {
     services.vaultwarden = {
