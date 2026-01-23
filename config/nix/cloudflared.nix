@@ -5,29 +5,12 @@
   ... 
 }:
 
-## WARN: Doesn't create dns CNAME records
+## WARN: Doesn't create dns CNAME record for "*.SLD.TLD"
 
 let
   id = "43387887-077c-4587-8be7-58fcc0f35558";
-
-  ## Filter
-  enabledServices = lib.filterAttrs (_: cfg: 
-    cfg.enable or false && 
-    cfg.public or false && 
-    cfg.domain or null != null
-  ) config.modules;
-
-  ## Create Rules
-  ingress = lib.mapAttrs' (name: cfg: {
-    name = "${cfg.domain}.${vars.sld}.${vars.tld}";
-    value = "${if cfg.secure then "https" else "http"}://localhost:${toString cfg.port}";
-  }) enabledServices;
 in
 {
-  options.modules.cloudflared = {
-    services = lib.mkOption { default = ingress; };
-};
-
   config = {
     services.cloudflared = {
       enable = true;
@@ -38,7 +21,9 @@ in
         originRequest = {
           noTLSVerify = true;
         };
-        ingress = ingress;
+        ingress = {
+          "*.${vars.sld}.${vars.tld}" = "http://localhost";
+        };
       };
     };
   };
