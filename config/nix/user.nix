@@ -1,10 +1,8 @@
 {
   pkgs,
   options,
-  username,
+  vars,
   config,
-  lib,
-  services,
   ...
 }:
 {
@@ -46,24 +44,23 @@
       # gid = 100; ## Dissable for auto select
       members = [
         "root"
-        "${username}"
-        "${config.services.caddy.user}"
-      ] ## Services
-      ++ lib.optional (services.immich.enable or false) "immich"
-      ++ lib.optional (services.copyparty.enable or false) "copyparty"
-      ++ lib.optional (services.jellyfin.enable or false) "jellyfin"
-      ++ lib.optional (services.crafty.enable or false) "crafty"
-      ;
+        "${vars.username}"
+        "caddy"
+        "crafty"
+        "jellyfin"
+        "copyparty"
+        "immich"
+      ];
     };
   };
 
 
   ## Setup user
   users.users = {
-    "${username}" = {
+    "${vars.username}" = {
       homeMode = "755";
       isNormalUser = true;
-      description = "${username}";
+      description = "${vars.username}";
       shell = pkgs.bash;
       extraGroups = [
         "services"
@@ -85,7 +82,7 @@
   };
   nix.settings.trusted-users = [
     "root"
-    "${username}"
+    "${vars.username}"
   ];
   environment = { 
     shells = with pkgs; [
@@ -123,15 +120,15 @@
 
   age.secrets = {
     "ssh" = {
-      path = "/home/${username}/.ssh/ssh";
-      owner = username;
+      path = "/home/${vars.username}/.ssh/ssh";
+      owner = vars.username;
       mode = "600";
     };
   };
 
   ## SSH Client & Git Auth
-  home-manager.users.${username} = let ssh-private = config.age.secrets."ssh"; in { pkgs, config, ssh-public-key, ... }: {
-    home.file.".ssh/ssh.pub" = { text = ssh-public-key; force = true; };
+  home-manager.users.${vars.username} = let ssh-private = config.age.secrets."ssh"; in { pkgs, config, vars, ... }: {
+    home.file.".ssh/ssh.pub" = { text = vars.ssh-public-key; force = true; };
     programs.ssh = {
       enable = true;
       enableDefaultConfig = false;
@@ -162,7 +159,7 @@
       enable = true;
       settings.user = {
         Name = "Daniel36191";
-        Email = "dmoeller3998@gmail.com";
+        Email = "${vars.email}";
       };
     };
     programs = {

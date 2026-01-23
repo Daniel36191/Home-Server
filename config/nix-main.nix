@@ -1,14 +1,8 @@
 {
   pkgs,
   lib,
-  services,
   ...
-}:
-let
-  sD = path: ./nix/services + path;
-  cD = path : ./nix/services/containers + path;
-  core = path: ./nix/core + path;
-in 
+}: 
 {
   imports = [
 
@@ -19,35 +13,26 @@ in
     ./nix/tailscale.nix
     # ./nix/nginx.nix
     ./nix/caddy.nix
-    # ./nix/cloudflared.nix
+    ./nix/cloudflared.nix
 
 
     ##########
     ## Core ##
     ##########
 
+    ./services.nix
+    ./module-deff.nix
+    
     ./nix/apps.nix
     ../secrets/secrets-nix.nix
-    ( core /containers.nix)
-    ( core /networking.nix)
-    ( core /user.nix)
-    ( core /boot.nix)
-    ( core /hardware.nix)
+    ./nix/containers.nix
+    ./nix/networking.nix
+    ./nix/user.nix
+    ./nix/core/boot.nix
+    ./nix/core/hardware.nix
   ]
-  ++ lib.optional (services.homepage.enable or false) (sD /homepage.nix)
-  ++ lib.optional (services.portainer.enable or false) (cD /portainer.nix)
-  ++ lib.optional (services.proxmox.enable or false) (sD /proxmox.nix)
-  ++ lib.optional (services.crafty.enable or false) (cD /crafty-compose2.nix)
-  ++ lib.optional (services.syncthing.enable or false) (sD /syncthing.nix)
-  ++ lib.optional (services.copyparty.enable or false) (sD /copyparty.nix)
-  ++ lib.optional (services.kasm.enable or false) (sD /kasm.nix)
-  ++ lib.optional (services.nextcloud.enable or false) (sD /nextcloud.nix)
-  ++ lib.optional (services.jellyfin.enable or false) (sD /jellyfin.nix)
-  ++ lib.optional (services.immich.enable or false) (sD /immich.nix)
-  ++ lib.optional (services.minecraft.enable or false) (cD /minecraft.nix)
-  ++ lib.optional (services.home-assistant.enable or false) (sD /home-assistant.nix)
-  ++ lib.optional (services.duckdns.enable or false) (sD /duckdns.nix)
-  ++ lib.optional (services.authentik.enable or false) (sD /authentik.nix)
+    ++ lib.filesystem.listFilesRecursive ../modules/user
+    ++ lib.filesystem.listFilesRecursive ../modules/admin
   ;
   
 

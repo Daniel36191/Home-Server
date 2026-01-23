@@ -1,200 +1,126 @@
 {
-  example = { ## Service entry
-    enable = false; ## Wether to enable the module
-    port = 8080; ## What the ui port should be 
+  pkgs,
+  ...
+}:
+{
+  modules = {
+    authentik = {
+      enable = true;
+      port = 3443;
+      domain = "auth";
+      public = true;
 
-    data-directory = "/services/example"; ## The Direcory of any sored data
-    owner = "example-user"; ## The user who will own the data created
+      homepage = true;
+    };
 
-    abbr = "EX"; ## Abbreavation for Homepage
-    homepage = true; ## Wether to enable homepage entry
-    icon = "example"; ## The icon from https://dashboardicons.com/ names pulled from https://github.com/homarr-labs/dashboard-icons/tree/main/svg
+    portainer = {
+      enable = true;
+      port = 8443;
+      secure = true;
+      public = true;
+      domain = "portainer";
 
-    default = false; ## Default entry for <hostname.local> when accessed *Can only be one set to true
-    domain = "home"; ## The subdomain to <hostname.local> for url acess
-    secure = false; ## Wether to use https for proxy
-    sockets = false; ## Are websockets needed through proxy
-    public = false; ## If true then accessable through cloudflared
-  };
+      abbr = "PT";
+      homepage = true;
+    };
 
-  ## Static
-  homepage = {
-    enable = true;
-    port = 54321;
+    proxmox = {
+      enable = false;
+      port = 8006;
 
-    default = true;
-    domain = "homepage";
-    secure = false;
-    sockets = false;
-  };
-  portainer = {
-    enable = false;
-    port = 9443;
+      abbr = "PX";
+      homepage = true;
+    };
 
-    abbr = "PT";
-    homepage = true;
-    icon = "portainer";
+    syncthing = {
+      enable = true;
+      port = 8384;
 
-    domain = "portainer";
-    secure = true;
-    sockets = false;
-  };
+      abbr = "ST";
+      homepage = true;
+    };
 
-  ## Dynamic
-  immich = {
-    enable = true;
-    port = 2283;
+    copyparty = {
+      enable = true;
+      port = 3923;
+      domain = "files";
+      public = true;
 
-    data-directory = "/services/immich";
-    owner = "immich";
+      abbr = "FS";
+      homepage = true;
+      
+      owner = "copyparty";
+      data-directory = "/services/copyparty/public"; ## Only the public folder listed here
+    };
 
-    abbr = "IM";
-    homepage = true;
-    icon = "immich";
+    home-assistant = {
+      enable = false;
+      port = 8123;
+      domain = "home";
 
-    domain = "immich";
-    secure = false;
-    sockets = true;
-    public = true;
-  };
-  proxmox = {
-    enable = false;
-    port = 8006;
+      abbr = "HA";
+      homepage = true;
+      
+      data-directory = "/services/home-assistant";
 
-    abbr = "PX";
-    homepage = true;
-    icon = "proxmox";
+      love-config-writeable = true; ## Set to true to edit dashboard in ui, copy file yaml file next to home-assistant.nix then rebuild.
+      connectors = [
+      ];
+      lovelace-modules = with pkgs.home-assistant-custom-lovelace-modules; [
+        mini-graph-card
+      ];
+    };
 
-    domain = "proxmox";
-    secure = true;
-    sockets = false;
-  };
-  syncthing = {
-    enable = true;
-    port = 8384;
+    homepage = {
+      enable = true;
+      port = 8125;
+      domain = "home";
+      public = true;
+      secure = false;
+      default = true;
+    };
 
-    abbr = "ST";
-    homepage = true;
-    icon = "syncthing";
+    immich = {
+      enable = true;
+      port = 2283;
+      public = true;
+      secure = false;
 
-    domain = "syncthing";
-    secure = false;
-    sockets = true;
-  };
-  copyparty = {
-    enable = true;
-    port = 3923;
+      homepage = true;
 
-    abbr = "FS";
-    homepage = true;
-    icon = "copyparty";
+      data-directory = "/services/immich";
+      owner = "immich";
+    };
+
+    minecraft = {
+      enable = false;
+      port = 25500;
+      url = false;
     
-    data-directory = "/services/copyparty/public"; ## Only the public folder listed here
-    owner = "copyparty";
+      data-directory = "/services/minecraft/stary";
+      runCommand = ''${pkgs.javaPackages.compiler.temurin-bin.jre-17}/bin/java @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-47.4.0/unix_args.txt "$@"'';
+    };
 
-    domain = "files";
-    secure = true;
-    sockets = true;
-  };
-  jellyfin = {
-    enable = false;
-    port = 8920;
-
-    abbr = "JF";
-    homepage = true;
-    icon = "jellyfin";
-
-    domain = "jellyfin";
-    secure = true;
-    sockets = true;
-  };
-  minecraft = {
-    enable = true;
-    port = 25500;
-  
-    data-directory = "/services/minecraft/stary";
-
-  };
-  home-assistant = {
-    enable = false;
-    port = 8123;
-
-    abbr = "HA";
-    homepage = true;
-    icon = "home-assistant";
-    
-    data-directory = "/services/home-assistant";
-
-    love-config-writeable = true; ## Set to true to edit dashboard in ui, copy file yaml file next to home-assistant.nix then rebuild.
-
-    domain = "home";
-    secure = false;
-    sockets = true;
-  };
-  duckdns = {
-    enable = false;
-
-    domains = [
-      "immich-public" ## immich-public.duckdns.org
-    ];
-  };
-  authentik = {
-    enable = true;
-    port = 3443;
-
-    abbr = "AU";
-    homepage = true;
-    icon = "authentik";
-
-    domain = "auth";
-    secure = true;
-    sockets = true;
-    public = true;
-  };
+    radicale = {
+      enable = true;
+      port = 5232;
+      secure = false;
+      domain = "radicale";
+      public = true;
 
 
+      data-directory = "/services/radicale";
+      owner = "radicale";
+    };
 
-  ## Not Working Serives
-  crafty = {
-    enable = false;
-    port = 8443;
+    vaultwarden = {
+      enable = true;
+      port = 8222;
+      secure = false;
+      domain = "vault";
+      public = true;
 
-    abbr = "CC";
-    homepage = true;
-    icon = "crafty-controller";
-
-    data-directory = "/services/minecraft";
-    owner = "crafty";
-
-    domain = "crafty";
-    secure = true;
-    sockets = true;
-  };
-  nextcloud = {
-    enable = false;
-    port = 8080;
-
-    abbr = "NC";
-    homepage = true;
-    icon = "nextcloud";
-
-    data-directory = "/services/nextcloud";
-    owner = "nextcloud";
-
-    domain = "nextcloud";
-    secure = true;
-    sockets = true;
-  };
-  kasm = {
-    enable = false;
-    port = 3069;
-
-    abbr = "KM";
-    homepage = true;
-    icon = "kasm";
-
-    domain = "kasm";
-    secure = true;
-    sockets = true;
+      data-directory = "/services/vaultwarden";
+    };
   };
 }

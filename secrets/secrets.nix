@@ -31,7 +31,13 @@ in
   ## Authentik
   "authentik-env.age".publicKeys = systems;
 
-  ##Cloudflared
+  ## Cloudflared
   "cloudflared-token.age".publicKeys = systems;
   "cloudflared-creds.age".publicKeys = systems;
+
+  ## radicale
+  "radicale-creds.age".publicKeys = systems;
+
+  ## Vaultwarden
+  "vaultwarden-admin-token.age".publicKeys = systems;
 }

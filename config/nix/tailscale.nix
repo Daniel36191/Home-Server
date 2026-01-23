@@ -1,7 +1,6 @@
 {
   config,
   nix-host,
-  pkgs,
   ...
 }:
 {

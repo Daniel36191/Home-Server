@@ -1,31 +1,30 @@
 {
   lib,
   config,
-  public-address,
-  services,
-  ...
+  vars,
+  ... 
 }:
-let
-    ## Filter enabled services
-  enabledServices = lib.filterAttrs (_: cfg: cfg.domain or null != null) (lib.filterAttrs (_: cfg: cfg.public or false) (lib.filterAttrs (_: cfg: cfg.enable or false) services));
 
-  ## Create vhosts from enabled services
-  ingress-hosts = lib.mapAttrs'
-    (name: cfg: {
-      name = "${cfg.domain}.${public-address}";
-      value = "${if cfg.secure then "https" else "http"}://127.0.0.1:${toString cfg.port}";
-    })
-    enabledServices;
+## WARN: Doesn't create dns CNAME record for "*.SLD.TLD"
+
+let
+  id = "43387887-077c-4587-8be7-58fcc0f35558";
 in
 {
-  services.cloudflared = {
-    enable = true;
-    certificateFile = config.age.secrets."cloudflared-token".path;
-
-    tunnels."c8729276-c5da-4ca9-a170-a1535782266a" = {
-      credentialsFile = config.age.secrets."cloudflared-creds".path;
-      default = "http_status:404";
-      # ingress = ingress-hosts;
+  config = {
+    services.cloudflared = {
+      enable = true;
+      certificateFile = config.age.secrets."cloudflared-token".path;
+      tunnels."${id}" = {
+        credentialsFile = config.age.secrets."cloudflared-creds".path;
+        default = "http_status:404";
+        originRequest = {
+          noTLSVerify = true;
+        };
+        ingress = {
+          "*.${vars.sld}.${vars.tld}" = "http://localhost";
+        };
+      };
     };
   };
 }

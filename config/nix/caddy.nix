@@ -1,24 +1,36 @@
 { 
   lib,
   config,
-  services,
-  local-address,
-  public-address,
-  email,
+  vars,
   ...
 }:
 let
   ## Filter enabled services
-  enabledServices = lib.filterAttrs (_: cfg: cfg.domain or null != null) (lib.filterAttrs (_: cfg: cfg.enable or false) services);
+  enabledServices = lib.filterAttrs (_: cfg: 
+    (cfg.enable or false) && 
+    (cfg.url or false)
+  ) config.modules;
 
   ## Create vhosts from enabled services
   vhosts = lib.mapAttrs'
     (name: cfg: {
-      name = "${if cfg.public or false then "${cfg.domain}.${public-address}" else "${cfg.domain}.${local-address}"}";
+      name = "${if cfg.public or false then "http://${cfg.domain}.${vars.sld}.${vars.tld}" else "${cfg.domain}.${vars.sld}.local"}";
       value = {
         extraConfig = ''
           encode gzip zstd
-          reverse_proxy ${if cfg.secure then "https" else "http"}://127.0.0.1:${toString cfg.port}
+          log {
+            output file /var/log/caddy/access.log {
+              mode 0644
+            }
+          }
+          reverse_proxy 127.0.0.1:${toString cfg.port}{
+            transport http {
+            ${if cfg.secure then ''
+              tls
+              tls_insecure_skip_verify
+            '' else ""}
+            }
+          }
         '';
       };
     })
@@ -27,14 +39,8 @@ let
 in {
   services.caddy = {
     enable = true;
-    email = email;
+    email = vars.email;
 
     virtualHosts = vhosts;
   };
-
-  # systemd.tmpfiles.rules = [
-  #   "d ${dir} 0775 ${config.services.caddy.user} services -"
-  #   "d ${config.services.caddy.dataDir} 0775 ${config.services.caddy.user} services -"
-  #   "d ${config.services.caddy.logDir} 0775 ${config.services.caddy.user} services -"
-  # ];
 }

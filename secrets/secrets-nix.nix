@@ -1,11 +1,12 @@
 {
   inputs,
-  pkgs,
+  config,
+  vars,
   ...
 }:
 {
-  environment.systemPackages = with pkgs; [
-    inputs.agenix.packages.${system}.default ## Cli tool
+  environment.systemPackages = [
+    inputs.agenix.packages.${vars.system}.default ## Cli tool
   ];
 
   age.secrets = {
@@ -17,7 +18,7 @@
     ## Copyparty
     "copyparty-user-daniel" = {
       file = ./copyparty-user-daniel.age;
-      owner = "copyparty";
+      owner = config.modules.copyparty.owner;
     };
 
     ## Nextcloud
@@ -57,6 +58,17 @@
     };
     "cloudflared-creds" = {
       file = ./cloudflared-creds.age;
+    };
+
+    ## Caldav
+    "radicale-creds" = {
+      file = ./radicale-creds.age;
+      owner = config.modules.radicale.owner;
+    };
+
+    ## Vaultwarden
+    "vaultwarden-admin-token" = {
+      file = ./vaultwarden-admin-token.age;
     };
   };
 }
