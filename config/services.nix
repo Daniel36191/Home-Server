@@ -122,5 +122,23 @@
 
       data-directory = "/services/vaultwarden";
     };
+
+    opencloud = {
+      enable = true;
+      port = 9200;
+      secure = true;
+      domain = "cloud";
+      public = true;
+
+      data-directory = "/services/opencloud";
+    };
+
+    beammp = { ## Impliment only a compose file in /services/beamng
+    	enable = true;
+    	port = 30814;
+    	secure = false;
+    	domain = "beammp";
+    	public = true;
+    }
   };
 }

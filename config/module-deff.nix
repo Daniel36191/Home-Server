@@ -16,6 +16,8 @@ let
     "minecraft"
     "radicale"
     "vaultwarden"
+    "opencloud"
+    "beammp"
   ];
 
 
