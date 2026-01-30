@@ -25,7 +25,7 @@ in
         p = [ mod.port ]; ## Port/s
         no-reload = true;
         rproxy = "1";
-        xff-hdr = "cf-connecting-ip";
+        xff-hdr = "x-forwarded-for";
       };
 
       ## Create users
