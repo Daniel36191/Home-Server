@@ -13,7 +13,7 @@ in
       enable = true;
       appriseSupport = true;
       settings = {
-        PORT = mkString mod.port;
+        PORT = ${mod.port};
         HOST="127.0.0.1";
       };
     };
