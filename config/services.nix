@@ -126,7 +126,7 @@
     kuma = {
       enable = true;
       port = 8484;
-      secure = true;
+      secure = false;
       domain = "kuma";
       public = true;
 
