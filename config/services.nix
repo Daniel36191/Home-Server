@@ -126,7 +126,9 @@
     kuma = {
       enable = true;
       port = 8484;
-
+      secure = true;
+      domain = "kuma";
+      public = true;
 
       data-directory = "/services/kuma";
     };
