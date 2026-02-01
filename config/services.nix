@@ -122,5 +122,13 @@
 
       data-directory = "/services/vaultwarden";
     };
+
+    kuma = {
+      enable = true;
+      port = 8484;
+
+
+      data-directory = "/services/kuma";
+    };
   };
 }

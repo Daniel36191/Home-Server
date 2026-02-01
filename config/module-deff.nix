@@ -16,6 +16,7 @@ let
     "minecraft"
     "radicale"
     "vaultwarden"
+    "kuma"
   ];
 
 
