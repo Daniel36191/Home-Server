@@ -10,7 +10,6 @@
     useRoutingFeatures = "both";
     extraUpFlags = [
       "--advertise-exit-node"
-      "--exit-node-allow-lan-access"
       # "--accept-routes"
       # "--auth-key=file:${config.age.secrets."tailscale-${nix-host}".path}"
       "--reset"
