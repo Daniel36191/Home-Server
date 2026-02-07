@@ -14,6 +14,7 @@
     # ./nix/nginx.nix
     ./nix/caddy.nix
     ./nix/cloudflared.nix
+    ./nix/code-server.nix
 
 
     ##########

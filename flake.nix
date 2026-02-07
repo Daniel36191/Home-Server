@@ -36,6 +36,8 @@
     arion.url = "github:hercules-ci/arion";
 
     authentik-nix.url = "github:nix-community/authentik-nix";
+
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
   outputs =
@@ -52,6 +54,7 @@
       jellarr,
       arion,
       authentik-nix,
+      vscode-server,
       ...
     }@inputs:
     let
@@ -85,6 +88,7 @@
         jellarr.nixosModules.default
         arion.nixosModules.arion
         authentik-nix.nixosModules.default
+        vscode-server.nixosModules.default
       ];
     in
     {
