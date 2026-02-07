@@ -56,7 +56,7 @@
     home-assistant = {
       enable = true;
       port = 8123;
-      domain = "home";
+      domain = "auto";
 
       abbr = "HA";
       homepage = true;
