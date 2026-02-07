@@ -54,7 +54,7 @@
     };
 
     home-assistant = {
-      enable = false;
+      enable = true;
       port = 8123;
       domain = "home";
 

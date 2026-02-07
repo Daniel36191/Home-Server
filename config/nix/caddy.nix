@@ -41,6 +41,6 @@ in {
     enable = true;
     email = vars.email;
 
-    virtualHosts = vhosts;
+    virtualHosts = lib.mergeAttrs vhosts config.extra-proxys.caddy;
   };
 }

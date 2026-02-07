@@ -23,7 +23,7 @@ in
     if [[ -d ${mod.data-directory} ]]; then
       mkdir -p /var/lib/private
       chmod 700 /var/lib/private
-      ln -s ${mod.data-directory} /var/lib/private/uptime-kuma
+      ln -sf ${mod.data-directory} /var/lib/private/uptime-kuma
     fi
     '';
   };
