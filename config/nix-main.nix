@@ -77,6 +77,21 @@
     ln -sf ${pkgs.bash}/bin/bash /bin/bash
   '';
 
+  ###################
+  ## Auto Restarts ##
+  ###################
+  systemd.user.services = {
+    ## Restart at 5am
+    poweroff = {
+      description = "Poweroff Service";
+      startAt = [ "*-*-* 5:00:00" ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "/run/current-system/sw/bin/reboot";
+      };
+    };
+  };
+
   ## This value determines the NixOS release from which the default
   ## settings for stateful data, like file locations and database versions
   ## on your system were taken. It‘s perfectly fine and recommended to leave
