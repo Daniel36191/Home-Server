@@ -9,7 +9,7 @@
     lazygit
     micro
     nh
-    code-server
+    vscode
     neovim
   ];
 }
