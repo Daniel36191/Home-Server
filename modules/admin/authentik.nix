@@ -8,7 +8,7 @@ with lib;
 let
   mod = config.modules.authentik;
 in
-{  
+{
   config = mkIf mod.enable {
     services.authentik = {
       enable = true;

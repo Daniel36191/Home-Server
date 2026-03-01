@@ -78,6 +78,10 @@
         "video"
         "dialout"
       ];
+      openssh.authorizedKeys.keys = [ 
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINUbaQCPcnGcg26JmKGXEDUGDywf95UhziIQ7YIXkzYC daniel@nixos-pc"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII9c9zTmuA1SpRohO5UF0cF2+npGnJWDUprgOufipDtc daniel@nixos-laptop"
+      ];
     };
   };
   nix.settings.trusted-users = [
@@ -88,10 +92,14 @@
     shells = with pkgs; [
       bashInteractive
     ];
-    shellAliases = {
+    shellAliases = let utils = pkgs.uutils-coreutils-noprefix; in {
       sudonix = "git pull && nh os switch -H server ./";
       updatenix = "git pull && nh os switch -H server ./ --update";
       cleannix = "sudo nix-collect-garbage -d";
+
+      cp = "${utils}/bin/cp --progress";
+      mv = "${utils}/bin/mv --progress";
+      rm = "${utils}/bin/rm --progress";
 
       log = "journalctl -xef -u";
       logs = "journalctl -xe -u";

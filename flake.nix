@@ -7,6 +7,7 @@
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/25.05";
+    # nixpkgs-otterwiki.url = "github:nixos/nixpkgs/101422ad186fa7d20c5424428a87c42dd46464c3";
 
     ############
     ## Inputs ##
@@ -58,14 +59,12 @@
       ...
     }@inputs:
     let
-      # services = import ./config/services.nix;
       vars = import ./config/variables.nix;
       
       ## Common function to create arguments for systems
       commonArgs = {
         inherit inputs;
         inherit 
-          # services
           vars
           ;
         
@@ -74,6 +73,18 @@
           inherit vars;
           config.allowUnfree = true;
         };
+        # pkgs-otterwiki = import ( pkgs.applyPatches {
+        #   src = pkgs.path;
+        #   patches = [
+        #     (pkgs.fetchpatch2 {
+        #       url = "https://github.com/NixOS/nixpkgs/pull/440513.patch";
+        #       sha256 = "";
+        #     })
+        #   ];
+        # };){
+        #   inherit vars;
+        #   config.allowUnfree = true;
+        # };
 
         proxmoxOverlay = proxmox-nixos.overlays.${vars.system};
         minecraftoverlay = nix-minecraft.overlay;

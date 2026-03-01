@@ -6,10 +6,11 @@
   modules = {
     authentik = {
       enable = true;
-      port = 3443;
-      domain = "auth";
-      public = true;
-
+      proxy = {
+        port = 3443;
+        domain = "auth";
+        public = true;
+      };
       homepage = true;
     };
 
@@ -51,12 +52,17 @@
       
       owner = "copyparty";
       data-directory = "/services/copyparty/public"; ## Only the public folder listed here
+      backup = true; ## Enable Backups
+      backup-offset = "../"; ## Offset to read files from base is data-directory
+      exclude = ""; ## regEx exclude pattern
     };
 
     home-assistant = {
       enable = true;
       port = 8123;
-      domain = "auto";
+      domain = "home";
+      public = true;
+      secure = false;
 
       abbr = "HA";
       homepage = true;
@@ -74,7 +80,7 @@
     homepage = {
       enable = true;
       port = 8125;
-      domain = "home";
+      domain = "homepage";
       public = true;
       secure = false;
       default = true;
@@ -93,12 +99,12 @@
     };
 
     minecraft = {
-      enable = false;
+      enable = true;
       port = 25500;
-      url = false;
+      url = false; ## Use ip only
     
-      data-directory = "/services/minecraft/stary";
-      runCommand = ''${pkgs.javaPackages.compiler.temurin-bin.jre-17}/bin/java @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-47.4.0/unix_args.txt "$@"'';
+      data-directory = "/services/minecraft/LiminalIndustries";
+      runCommand = ''${pkgs.javaPackages.compiler.temurin-bin.jre-17}/bin/java @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-47.4.13/unix_args.txt "$@"'';
     };
 
     radicale = {
@@ -131,6 +137,15 @@
       public = true;
 
       data-directory = "/services/kuma";
+    };
+
+    otterwiki = {
+      enable = false;
+      port = 8982;
+      secure = false;
+      domain = "wiki";
+
+      homepage = false;
     };
   };
 }

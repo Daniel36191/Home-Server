@@ -1,7 +1,10 @@
 {
   pkgs,
+  pkgs-otterwiki,
   ...
 }:
+let
+in
 {
   environment.systemPackages = with pkgs; [
     kitty
@@ -11,5 +14,11 @@
     nh
     vscode
     neovim
+    uutils-coreutils-noprefix
+
+    ## Language servers
+    nixd
+    nil
+    nixfmt
   ];
 }

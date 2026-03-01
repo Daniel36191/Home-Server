@@ -6,5 +6,5 @@
   username = "lillypond";
   email = "dmoeller3998@gmail.com";
 
-  ssh-public-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIv464AZB6omIM7lrgKqZKnK62iP72YOrcYsV9pplsyF";
+  ssh-public-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIv464AZB6omIM7lrgKqZKnK62iP72YOrcYsV9pplsyF lillypond@lillypond";
 }

@@ -50,12 +50,13 @@ in
       "OC\\Preview\\HEIC"
     ];
   };
-  services.nginx.virtualHosts."${config.services.nextcloud.hostName}".listen = [
-    {
-      addr = "127.0.0.1";
-      port = services.nextcloud.port;
-    }
-  ];
+  ##
+  # services.nginx.virtualHosts."${config.services.nextcloud.hostName}".listen = [
+  #   {
+  #     addr = "127.0.0.1";
+  #     port = services.nextcloud.port;
+  #   }
+  # ];
 }
 
 

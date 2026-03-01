@@ -24,14 +24,16 @@ in
       openFirewall = true;
       config = {
         default_config = {};
-        http.server_port = mod.port;
-        use_x_forwarded_for = true;
-        trusted_proxies = [
-          "127.0.0.1"
-          "localhost"
-          "${mod.domain}.${vars.sld}.${if mod.public then vars.tld else "local" }"
-        ];
-        http.server_host = [ "0.0.0.0" ];
+        http = {
+          server_port = mod.port;
+          server_host = [ "0.0.0.0" ];
+          use_x_forwarded_for = true;
+          trusted_proxies = [
+            "127.0.0.1"
+            #"localhost"
+            # "${mod.domain}.${vars.sld}.${if mod.public then vars.tld else "local" }"
+          ];
+        };
         lovelace = {
           mode = if mod.love-config-writeable then "storage" else "yaml";
         };
@@ -44,6 +46,7 @@ in
         "radio_browser"
       ];
       customComponents = with pkgs.home-assistant-custom-components; [
+        localtuya
       ] ++ mod.connectors;
       customLovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
       ] ++ mod.lovelace-modules;

@@ -14,7 +14,7 @@ in
     runCommand = mkOption { default = ""; };
   };
 
-  config = {
+  config = mkIf mod.enable {
     virtualisation.arion.projects."${serviceName}" = {
       serviceName = "${serviceName}"; ## Systemd service name ex: arion-${serviceName}
       settings = {
