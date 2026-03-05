@@ -97,8 +97,8 @@
       port = 25500;
       url = false;
     
-      data-directory = "/services/minecraft/stary";
-      runCommand = ''${pkgs.javaPackages.compiler.temurin-bin.jre-17}/bin/java @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-47.4.0/unix_args.txt "$@"'';
+      data-directory = "/services/minecraft/LiminalIndustries";
+      runCommand = ''${pkgs.javaPackages.compiler.temurin-bin.jre-17}/bin/java @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-47.4.13/unix_args.txt "$@"'';
     };
 
     radicale = {

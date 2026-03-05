@@ -78,6 +78,10 @@
         "video"
         "dialout"
       ];
+      openssh.authorizedKeys.keys = [
+      	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII9c9zTmuA1SpRohO5UF0cF2+npGnJWDUprgOufipDtc daniel@nixos-laptop"
+      	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINUbaQCPcnGcg26JmKGXEDUGDywf95UhziIQ7YIXkzYC daniel@nixos-pc"
+      ];
     };
   };
   nix.settings.trusted-users = [
@@ -92,6 +96,8 @@
       sudonix = "git pull && nh os switch -H server ./";
       updatenix = "git pull && nh os switch -H server ./ --update";
       cleannix = "sudo nix-collect-garbage -d";
+
+      mi = "${pkgs.micro}/bin/micro";
 
       log = "journalctl -xef -u";
       logs = "journalctl -xe -u";
