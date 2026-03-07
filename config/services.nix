@@ -16,10 +16,12 @@
 
     portainer = {
       enable = true;
-      port = 8443;
-      secure = true;
-      public = true;
-      domain = "portainer";
+      proxy = {
+        port = 8443;
+        secure = true;
+        public = true;
+        domain = "portainer";
+      };
 
       abbr = "PT";
       homepage = true;
@@ -27,7 +29,9 @@
 
     proxmox = {
       enable = false;
-      port = 8006;
+      proxy = {
+        port = 8006;
+      };
 
       abbr = "PX";
       homepage = true;
@@ -35,7 +39,9 @@
 
     syncthing = {
       enable = true;
-      port = 8384;
+      proxy = {
+        port = 8384;
+      };
 
       abbr = "ST";
       homepage = true;
@@ -43,9 +49,11 @@
 
     copyparty = {
       enable = true;
-      port = 3923;
-      domain = "files";
-      public = true;
+      proxy = {
+        port = 3923;
+        domain = "files";
+        public = true;
+      };
 
       abbr = "FS";
       homepage = true;
@@ -59,10 +67,12 @@
 
     home-assistant = {
       enable = true;
-      port = 8123;
-      domain = "home";
-      public = true;
-      secure = false;
+      proxy = {
+        port = 8123;
+        domain = "home";
+        public = true;
+        secure = false;
+      };
 
       abbr = "HA";
       homepage = true;
@@ -79,18 +89,22 @@
 
     homepage = {
       enable = true;
-      port = 8125;
-      domain = "homepage";
-      public = true;
-      secure = false;
-      default = true;
+      proxy = {
+        port = 8125;
+        domain = "homepage";
+        public = true;
+        secure = false;
+        default = true;
+      };
     };
 
     immich = {
       enable = true;
-      port = 2283;
-      public = true;
-      secure = false;
+      proxy = {
+        port = 2283;
+        public = true;
+        secure = false;
+      };
 
       homepage = true;
 
@@ -100,8 +114,10 @@
 
     minecraft = {
       enable = true;
-      port = 25500;
-      url = false; ## Use ip only
+      proxy = {
+        enable = false; ## Ip only
+        port = 25500;
+      };
     
       data-directory = "/services/minecraft/LiminalIndustries";
       runCommand = ''${pkgs.javaPackages.compiler.temurin-bin.jre-17}/bin/java @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-47.4.13/unix_args.txt "$@"'';
@@ -109,11 +125,12 @@
 
     radicale = {
       enable = true;
-      port = 5232;
-      secure = false;
-      domain = "radicale";
-      public = true;
-
+      proxy = {
+        port = 5232;
+        secure = false;
+        domain = "radicale";
+        public = true;
+      };
 
       data-directory = "/services/radicale";
       owner = "radicale";
@@ -121,29 +138,35 @@
 
     vaultwarden = {
       enable = true;
-      port = 8222;
-      secure = false;
-      domain = "vault";
-      public = true;
+      proxy = {
+        port = 8222;
+        secure = false;
+        domain = "vault";
+        public = true;
+      }; 
 
       data-directory = "/services/vaultwarden";
     };
 
     kuma = {
       enable = true;
-      port = 8484;
-      secure = false;
-      domain = "kuma";
-      public = true;
+      proxy = {
+        port = 8484;
+        secure = false;
+        domain = "kuma";
+        public = true;
+      };
 
       data-directory = "/services/kuma";
     };
 
     otterwiki = {
       enable = false;
-      port = 8982;
-      secure = false;
-      domain = "wiki";
+      proxy = {
+        port = 8982;
+        secure = false;
+        domain = "wiki";
+      };
 
       homepage = false;
     };

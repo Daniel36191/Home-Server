@@ -8,13 +8,13 @@ let
   ## Filter enabled services
   enabledServices = lib.filterAttrs (_: cfg: 
     (cfg.enable or false) && 
-    (cfg.url or false)
+    (cfg.proxy.enable or false)
   ) config.modules;
 
   ## Create vhosts from enabled services
   vhosts = lib.mapAttrs'
     (name: cfg: {
-      name = "${if cfg.public or false then "http://${cfg.domain}.${vars.sld}.${vars.tld}" else "${cfg.domain}.${vars.sld}.local"}";
+      name = "${if cfg.proxy.public or false then "http://${cfg.proxy.domain}.${vars.sld}.${vars.tld}" else "${cfg.proxy.domain}.${vars.sld}.local"}";
       value = {
         extraConfig = ''
           encode gzip zstd
@@ -23,9 +23,9 @@ let
               mode 0644
             }
           }
-          reverse_proxy 127.0.0.1:${toString cfg.port}{
+          reverse_proxy 127.0.0.1:${toString cfg.proxy.port}{
             transport http {
-            ${if cfg.secure then ''
+            ${if cfg.proxy.secure then ''
               tls
               tls_insecure_skip_verify
             '' else ""}
