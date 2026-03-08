@@ -8,67 +8,97 @@ with lib;
 let
   mod = config.modules.minecraft;
   serviceName = "minecraft";
+
+  parseProperties = file:
+    let
+      content = builtins.readFile file;
+      lines = splitString "\n" content;
+      nonEmpty = filter (l: l != "" && !(hasPrefix "#" l)) lines;
+      pairs = map (l: let parts = splitString "=" l; in {
+        name = head parts;
+        value = concatStringsSep "=" (tail parts);
+      }) nonEmpty;
+    in listToAttrs pairs;
+
+  props = parseProperties "${mod.data-directory}/server.properties";
+
+  rconPort = toInt (props."rcon.port" or "25575");
+  rconPassword = props."rcon.password" or "";
+  serverPort = toInt (props."server-port" or "25565");
+
+  rconScript = pkgs.writeShellScriptBin "mc-rcon" ''
+    exec ${pkgs.mcrcon}/bin/mcrcon \
+      -H 127.0.0.1 \
+      -P ${toString rconPort} \
+      -p ${rconPassword} \
+      -t
+  '';
 in
 {
   options.modules.minecraft = {
-    runCommand = mkOption { default = ""; };
-    rconPort = mkOption { default = 25575; };
-    rconPassword = mkOption { default = "changeme"; };
+    data-directory = mkOption {
+      default = "/var/lib/minecraft";
+    };
+    runCommand = mkOption {
+      default = ''chmod +x ./run.sh && ./run.sh'';
+    };
+    javaPackage = mkOption {
+      default = pkgs.javaPackages.compiler.temurin-bin.jre-17;
+    };
   };
+
   config = {
-    virtualisation.arion.projects."${serviceName}" = {
-      serviceName = "${serviceName}";
-      settings = {
-        project.name = "${serviceName}";
-        services = {
-          "${serviceName}" = {
-            image = {
-              name = "${serviceName}";
-              enableRecommendedContents = true;
-            };
-            service = {
-              command = [ "sh" "-c" ''
-                "${pkgs.writeShellScript "minecraft-wrapper" ''
-                  set -e
-                  cd "/${serviceName}"
+    assertions = [
+      {
+        assertion = (props."enable-rcon" or "false") == "true";
+        message = "Minecraft: enable-rcon must be true in server.properties for graceful shutdown to work";
+      }
+      {
+        assertion = rconPassword != "";
+        message = "Minecraft: rcon.password must be set in server.properties";
+      }
+    ];
 
-                  savestop() {
-                    echo "Sending stop via RCON..."
-                    ${pkgs.mcrcon}/bin/mcrcon \
-                      -H 127.0.0.1 \
-                      -P ${builtins.toString mod.rconPort} \
-                      -p "${mod.rconPassword}" \
-                      "stop" || true
-                    ## Wait up to 30s for graceful shutdown
-                    for i in $(seq 1 30); do
-                      kill -0 "$java_pid" 2>/dev/null || break
-                      sleep 1
-                    done
-                    ## Force kill if still running
-                    
-                    kill -0 "$java_pid" 2>/dev/null && kill -9 "$java_pid" || true
-                    exit 0
-                  }
+    users.users.${serviceName} = {
+      isSystemUser = true;
+      group = serviceName;
+      home = mod.data-directory;
+      createHome = true;
+    };
+    users.groups.${serviceName} = {};
 
-                  trap 'savestop' SIGTERM SIGINT
+    networking.firewall.allowedTCPPorts = [ serverPort ];
 
-                  ${mod.runCommand} &
-                  java_pid=$!
-                  wait $java_pid
-                ''}"''];
-              ports = [
-                "${builtins.toString mod.port}:25565/tcp"
-                "127.0.0.1:${builtins.toString mod.rconPort}:${builtins.toString mod.rconPort}/tcp"
-              ];
-              volumes = [
-                "${mod.data-directory}:/${serviceName}"
-              ];
-              useHostStore = true;
-              restart = "always";
-              stop_signal = "SIGTERM";
-            };
-          };
-        };
+    environment.systemPackages = [ rconScript ];
+
+    system.activationScripts.minecraft-rcon = ''
+      ln -sf ${rconScript}/bin/mc-rcon ${mod.data-directory}/rcon.sh
+    '';
+
+    systemd.services.${serviceName} = {
+      description = "Minecraft Server";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network.target" ];
+
+      serviceConfig = {
+        User = serviceName;
+        Group = serviceName;
+        WorkingDirectory = mod.data-directory;
+
+        ExecStart = "${pkgs.bash}/bin/bash -c '${javaPackag} ${mod.runCommand}'";
+
+        ExecStop = "${pkgs.mcrcon}/bin/mcrcon -H 127.0.0.1 -P ${toString rconPort} -p ${rconPassword} stop";
+
+        TimeoutStopSec = "60s";
+        KillMode = "mixed";
+
+        PrivateTmp = true;
+        ProtectSystem = "strict";
+        ReadWritePaths = [ mod.data-directory ];
+        NoNewPrivileges = true;
+
+        Restart = "on-failure";
+        RestartSec = "10s";
       };
     };
   };
