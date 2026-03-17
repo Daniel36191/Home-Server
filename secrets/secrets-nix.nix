@@ -70,5 +70,12 @@
     "vaultwarden-admin-token" = {
       file = ./vaultwarden-admin-token.age;
     };
+
+    ## Minecraft
+    "minecraft-rcon" = {
+      file = ./minecraft-rcon.age;
+      group = "services";
+      owner = "minecraft";
+    };
   };
 }

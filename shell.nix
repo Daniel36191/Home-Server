@@ -6,6 +6,7 @@ pkgs.mkShell {
     compose2nix
     zellij
     lnav
+    nixd
   ];
 
   shellHook = ''

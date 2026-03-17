@@ -50,6 +50,7 @@
         "jellyfin"
         "copyparty"
         "immich"
+        "${config.modules.minecraft.owner}"
       ];
     };
   };

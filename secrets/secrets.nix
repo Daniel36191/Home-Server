@@ -40,4 +40,7 @@ in
 
   ## Vaultwarden
   "vaultwarden-admin-token.age".publicKeys = systems;
+
+  ## Minecraft
+  "minecraft-rcon.age".publicKeys = systems;
 }

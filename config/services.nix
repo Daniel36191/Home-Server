@@ -92,13 +92,16 @@
       owner = "immich";
     };
 
-    minecraft = {
-      enable = false;
+    minecraft = { ## Set rcon password in secrets
+      enable = true;
       port = 25500;
       url = false;
     
-      data-directory = "/services/minecraft/LiminalIndustries";
-      runCommand = ''${pkgs.javaPackages.compiler.temurin-bin.jre-17}/bin/java @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-47.4.13/unix_args.txt "$@"'';
+      data-directory = "/services/minecraft/Create-Astral";
+      owner = "minecraft";
+      packName = "Create-Astral";
+      runArgs = ''-Xms6G -Xmx6G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar server.jar --nogui'';
+      javaPackage = pkgs.javaPackages.compiler.temurin-bin.jre-17;
     };
 
     radicale = {
