@@ -46,20 +46,12 @@ let
     owner = mkOption { default = "${name}"; }; ## *Data/Service owner
     backups = {
       enable = mkOption { default = false; }; ## Enable backups - Must have data-directory set
-      offset = mkOption { default = "./"; }; ## Offset from data-directory
-      exclude = mkOption { default = ""; }; ## RegEx for excluding files from backups
+      include = mkOption { default = [ ]; }; ## Absolute paths as sting list
+      exclude = mkOption { default = [ ]; }; ## RegEx strings list for excluding files from backups
     };
 
   }; }) module-list);
 in
 {
  options.modules = {} // options;
-
-
-  ## Desired output:
-  #  options.modules.<service> = {
-  #   abbr = mkOption {default = ""; };
-  #   homepage = mkOption { default = false; };
-  #   icon = mkOption { default = ""; };
-  # };
 }

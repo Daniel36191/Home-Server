@@ -60,9 +60,9 @@
       
       owner = "copyparty";
       data-directory = "/services/copyparty/public"; ## Only the public folder listed here
-      backup = true; ## Enable Backups
-      backup-offset = "../"; ## Offset to read files from base is data-directory
-      exclude = ""; ## regEx exclude pattern
+      backup = true;
+      include = [ "/services/copyparty" ]
+      exclude = [];
     };
 
     home-assistant = {
