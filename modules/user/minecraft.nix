@@ -15,9 +15,6 @@ let
       -P ${mod.rconPort} \
       -p "$(cat ${rconPassword})" \
   '';
-  permsScript = pkgs.writeShellScriptBin "mc-perms" ''
-    chown -R ${mod.owner}:services ./
-  '';
 in
 {
   options.modules.minecraft = {
@@ -29,6 +26,9 @@ in
     };
     rconPort = mkOption {
       default = "25575";
+    };
+    autoStart = mkOption {
+      default = false;
     };
     packName = mkOption {
       default = "Server";
@@ -43,17 +43,20 @@ in
       home = mod.data-directory;
     };
 
-    environment.systemPackages = [ rconScript permsScript ];
-    system.activationScripts.minecraft-rcon = ''
-      ln -sf ${rconScript}/bin/mc-rcon ${mod.data-directory}/rcon.sh
-      ln -sf ${permsScript}/bin/mc-perms ${mod.data-directory}/permsScript.sh
-    '';
+    environment.systemPackages = [ rconScript ];
+    system.activationScripts = {
+      minecraft-rcon = ''
+        ln -sf ${rconScript}/bin/mc-rcon ${mod.data-directory}/rcon.sh
+      '';
+      mcPerms = ''
+        chown -R ${mod.owner}:services ./
+      '';
+    };
 
     networking.firewall.allowedTCPPorts = [ mod.port ];
 
     systemd.services."minecraft-${mod.packName}" = {
       description = "Minecraft Server";
-      # wantedBy = [ "multi-user.target" ]; ## Auto start
       after = [ "network.target" ];
 
       serviceConfig = {
@@ -71,9 +74,12 @@ in
         ReadWritePaths = [ mod.data-directory ];
         NoNewPrivileges = true;
 
-        Restart = "no"; # "on-failure";
+        Restart = if mod.autoStart then "on-failure" else "no";
         RestartSec = "10s";
       };
+    } // mkIf mod.autoStart {
+      wantedBy = [ "multi-user.target" ];
     };
   };
+
 }
