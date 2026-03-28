@@ -60,9 +60,11 @@
       
       owner = "copyparty";
       data-directory = "/services/copyparty/public"; ## Only the public folder listed here
-      backup = true;
-      include = [ "/services/copyparty" ]
-      exclude = [];
+      backups = {
+      	enable = true;
+      	include = [ "/services/copyparty" ]
+      	exclude = [];
+      };
     };
 
     home-assistant = {
