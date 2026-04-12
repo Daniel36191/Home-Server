@@ -15,6 +15,9 @@ let
       -P ${mod.rconPort} \
       -p "$(cat ${rconPassword})" \
   '';
+  permsScript = pkgs.writeShellScriptBin "mc-perms" ''
+  	chown -R ${mod.owner}:services ${mod.data-directory}
+  '';
 in
 {
   options.modules.minecraft = {
@@ -45,17 +48,18 @@ in
 
     environment.systemPackages = [ rconScript ];
     system.activationScripts = {
-      minecraft-rcon = ''
+      mc-rcon = ''
         ln -sf ${rconScript}/bin/mc-rcon ${mod.data-directory}/rcon.sh
       '';
       mcPerms = ''
-        chown -R ${mod.owner}:services ./
+        ln -sf ${permsScript}/bin/mc-perms ${mod.data-directory}/perms.sh
       '';
     };
 
     networking.firewall.allowedTCPPorts = [ mod.port ];
 
     systemd.services."minecraft-${mod.packName}" = {
+      enable = true;
       description = "Minecraft Server";
       after = [ "network.target" ];
 

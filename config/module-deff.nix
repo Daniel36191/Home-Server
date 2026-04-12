@@ -24,6 +24,7 @@ let
     enable = mkEnableOption "${name}";
     port = mkOption { default = 0; };
     secure = mkOption { default = true; };
+    authentik-auth = mkOption { default = false; }; ## Use authentik proxy auth for protection
     domain = mkOption { default = "${name}"; };
     public = mkOption { default = false; };
     default = mkOption { default = false; };

@@ -35,7 +35,21 @@
     ++ lib.filesystem.listFilesRecursive ../modules/user
     ++ lib.filesystem.listFilesRecursive ../modules/admin
   ;
+
+
+  ##############
+  ## Hardware ##
+  ##############
   
+    services.auto-cpufreq = {
+    enable = true;
+    settings = {
+      charger = {
+        governor = "performance";
+        turbo = "auto";
+      };
+    };
+  };
 
   ###########
   ## Nixos ##

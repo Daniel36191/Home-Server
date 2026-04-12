@@ -45,6 +45,7 @@
       port = 3923;
       domain = "files";
       public = true;
+      secure = false;
 
       abbr = "FS";
       homepage = true;
@@ -77,6 +78,7 @@
       domain = "home";
       public = true;
       secure = false;
+      authentik-auth = true;
       default = true;
     };
 
