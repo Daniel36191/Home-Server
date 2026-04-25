@@ -92,6 +92,8 @@
       ];
     in
     {
+      ## Exported Values
+      pulicSSHKey = vars.ssh-public-key;
       nixosConfigurations = {
         "server" = nixpkgs.lib.nixosSystem {
           specialArgs = commonArgs;
