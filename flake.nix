@@ -8,6 +8,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/25.05";
 
+    ## Workstations
+    workstations.url = "github:Daniel36191/Nixos_V2";
+
     ############
     ## Inputs ##
     ############
@@ -45,6 +48,7 @@
       self,
       nixpkgs,
       nixpkgs-stable,
+      workstations,
       home-manager,
       agenix,
       proxmox-nixos,
@@ -64,10 +68,7 @@
       ## Common function to create arguments for systems
       commonArgs = {
         inherit inputs;
-        inherit 
-          # services
-          vars
-          ;
+        inherit vars;
         
         ## Pinning Nixpkgs versions
         pkgs-stable = import nixpkgs-stable {

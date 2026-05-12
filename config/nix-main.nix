@@ -95,10 +95,10 @@
   ## Auto Restarts ##
   ###################
   systemd.user.services = {
-    ## Restart at 5am
+    ## Restart at 6:30am
     poweroff = {
       description = "Poweroff Service";
-      startAt = [ "*-*-* 5:00:00" ];
+      startAt = [ "*-*-* 6:30:00" ];
       serviceConfig = {
         Type = "oneshot";
         ExecStart = "/run/current-system/sw/bin/reboot";

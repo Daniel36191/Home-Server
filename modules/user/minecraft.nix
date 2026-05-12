@@ -38,7 +38,7 @@ in
     };
   };
 
-  config = {
+  config = mkIf mod.enable {
     users.users.${mod.owner} = {
       isSystemUser = true;
       createHome = false;
@@ -62,6 +62,7 @@ in
       enable = true;
       description = "Minecraft Server";
       after = [ "network.target" ];
+      wantedBy = [ "default.target" ] ++ lib.optional mod.autoStart "multi-user.target";
 
       serviceConfig = {
         User = mod.owner;
@@ -81,8 +82,6 @@ in
         Restart = if mod.autoStart then "on-failure" else "no";
         RestartSec = "10s";
       };
-    } // mkIf mod.autoStart {
-      wantedBy = [ "multi-user.target" ];
     };
   };
 

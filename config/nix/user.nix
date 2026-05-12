@@ -3,6 +3,7 @@
   options,
   vars,
   config,
+  inputs,
   ...
 }:
 {
@@ -80,9 +81,7 @@
         "dialout"
       ];
       openssh.authorizedKeys.keys = [
-      	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII9c9zTmuA1SpRohO5UF0cF2+npGnJWDUprgOufipDtc daniel@nixos-laptop"
-      	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINUbaQCPcnGcg26JmKGXEDUGDywf95UhziIQ7YIXkzYC daniel@nixos-pc"
-      ];
+      ] ++ inputs.workstations.publicSSHKeys;
     };
   };
   nix.settings.trusted-users = [
