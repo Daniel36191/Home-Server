@@ -71,7 +71,7 @@ in
 
         ExecStart = "${pkgs.bash}/bin/bash -c '${mod.javaPackage}/bin/java ${mod.runArgs}'";
 
-        ExecStop = "${pkgs.mcrcon}/bin/mcrcon -w 2 -P ${toString mod.rconPort} -p $(cat ${rconPassword}) save-all stop";
+        ExecStop = "${pkgs.mcrcon}/bin/mcrcon -P ${toString mod.rconPort} -p $(cat ${rconPassword}) stop";
 
         TimeoutStopSec = "60s";
         KillMode = "mixed";
