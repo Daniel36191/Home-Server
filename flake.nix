@@ -64,12 +64,12 @@
     let
       # services = import ./config/services.nix;
       vars = import ./config/variables.nix;
-      
+
       ## Common function to create arguments for systems
       commonArgs = {
         inherit inputs;
         inherit vars;
-        
+
         ## Pinning Nixpkgs versions
         pkgs-stable = import nixpkgs-stable {
           inherit vars;
@@ -110,7 +110,8 @@
               };
             }
             ./config/nix-main.nix
-          ] ++ commonModules;
+          ]
+          ++ commonModules;
         };
       };
     };

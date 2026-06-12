@@ -42,8 +42,11 @@ in
         ## Create a volume at "/" (the webroot), which will
         "/Public" = {
           ## Storage Path
-          path = mod.data-directory;
-          access.rw = "*"; ## Everyone gets read-access
+          path = "${mod.data-directory}/public/";
+          access = {
+            rw = "*"; ## Everyone gets read-access
+            A = config.services.copyparty.groups.admin;
+          };
 
           ## See `copyparty --help-flags` for available options
           flags = {
@@ -52,6 +55,19 @@ in
             ## Scan for new files every 60sec
             scan = 60;
             ## Skips hashing file contents if path matches *.iso
+            nohash = "\.iso$";
+          };
+        };
+        "/Private" = {
+          path = "${mod.data-directory}/private/";
+          access = {
+            g = "*";
+            A = config.services.copyparty.groups.admin;
+          };
+
+          flags = {
+            fk = 4;
+            scan = 60;
             nohash = "\.iso$";
           };
         };

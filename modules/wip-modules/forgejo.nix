@@ -17,12 +17,13 @@ in
       enable = true;
       database.type = "postgres";
       lfs.enable = true;
+      stateDir = mod.data-directory
       settings = {
         server = {
           DOMAIN = with vars; "forgejo.${sld}.${tld}";
           # You need to specify this to remove the port from URLs in the web UI.
           ROOT_URL = "https://${srv.DOMAIN}/"; 
-          HTTP_PORT = 3000;
+          HTTP_PORT = mod.port;
         };
         # You can temporarily allow registration to create an admin user.
         service.DISABLE_REGISTRATION = true; 
@@ -35,21 +36,12 @@ in
         # You can send a test email from the web UI at:
         # Profile Picture > Site Administration > Configuration >  Mailer Configuration 
         mailer = {
-          ENABLED = true;
-          SMTP_ADDR = "mail.example.com";
-          FROM = "noreply@${srv.DOMAIN}";
-          USER = "noreply@${srv.DOMAIN}";
+          ENABLED = false;
+          # SMTP_ADDR = "mail.example.com";
+          # FROM = "noreply@${srv.DOMAIN}";
+          # USER = "noreply@${srv.DOMAIN}";
         };
       };
-      secrets = {
-        mailer.PASSWD = config.age.secrets.forgejo-mailer-password.path;
-      };
-    };
-
-    age.secrets.forgejo-mailer-password = {
-      file = ../secrets/forgejo-mailer-password.age;
-      mode = "400";
-      owner = "forgejo";
     };
   };
 }
