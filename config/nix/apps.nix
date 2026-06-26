@@ -11,5 +11,9 @@
     nh
     vscode
     neovim
+    nixfmt
+    nixd
+    nil
+    zellij
   ];
 }

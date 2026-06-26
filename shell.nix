@@ -10,6 +10,6 @@ pkgs.mkShell {
   ];
 
   shellHook = ''
-    alias agenixedit='sudo EDITOR=$EDITOR agenix --identity ./host_key.key -e'
+    alias agenixedit='sudo EDITOR=$EDITOR agenix --identity /etc/ssh/ssh_host_ed25519_key -e'
   '';
 }

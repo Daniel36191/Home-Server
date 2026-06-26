@@ -77,5 +77,11 @@
       group = "services";
       owner = "minecraft";
     };
+
+    "authentikClientSecret" = {
+      file = ./authentikClientSecret.age;
+      group = "forgejo";
+      owner = "forgejo";
+    };
   };
 }

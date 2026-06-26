@@ -16,13 +16,13 @@ let
       -p "$(cat ${rconPassword})" \
   '';
   permsScript = pkgs.writeShellScriptBin "mc-perms" ''
-  	chown -R ${mod.owner}:services ${mod.data-directory}
+    	chown -R ${mod.owner}:services ${mod.data-directory}
   '';
 in
 {
   options.modules.minecraft = {
     runArgs = mkOption {
-      default = ''chmod +x ./run.sh && ./run.sh'';
+      default = "chmod +x ./run.sh && ./run.sh";
     };
     javaPackage = mkOption {
       default = pkgs.javaPackages.compiler.temurin-bin.jre-17;

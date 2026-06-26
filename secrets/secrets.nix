@@ -43,4 +43,7 @@ in
 
   ## Minecraft
   "minecraft-rcon.age".publicKeys = systems;
+
+  ## forgejo
+  "authentikClientSecret.age".publicKeys = systems;
 }

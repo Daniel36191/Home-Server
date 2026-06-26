@@ -17,6 +17,7 @@ let
     "radicale"
     "vaultwarden"
     "kuma"
+    "forgejo"
   ];
 
 
