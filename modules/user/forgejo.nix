@@ -29,20 +29,20 @@ in
   config = mkIf mod.enable {
     services.forgejo = {
       enable = true;
-      database.type = "mysql";
+      database.type = "sqlite3";
       lfs.enable = true;
       stateDir = mod.data-directory;
 
       settings = {
         server = {
           DOMAIN = with vars; "${mod.domain}.${sld}.${tld}";
-          ROOT_URL = "${cfg.settings.PROTOCAL}://${mod.domain}.${vars.sld}.${vars.tld}/";
-          PROTOCAL = if mod.secure then "https" else "http";
+          ROOT_URL = "${cfg.settings.server.PROTOCAL}://${mod.domain}.${vars.sld}.${vars.tld}/";
+          PROTOCAL = "https";
           HTTP_PORT = mod.port;
 
           START_SSH_SERVER = true;
-          SSH_PORT = sshPort;
-          SSH_LISTEN_PORT = sshPort;
+          SSH_PORT = mod.sshPort;
+          SSH_LISTEN_PORT = mod.sshPort;
           SSH_DOMAIN = with vars; "ssh.${sld}.${tld}";
         };
         service = {
@@ -68,7 +68,7 @@ in
       instances.default = {
         enable = true;
         name = "forgejo-runner";
-        url = "${cfg.settings.PROTOCAL}://${mod.domain}.${vars.sld}.${vars.tld}";
+        url = "${cfg.settings.server.PROTOCAL}://${mod.domain}.${vars.sld}.${vars.tld}";
         tokenFile = config.age.secrets.forgejo-runner-token.path;
         labels = mod.runnerLabels;
       };
@@ -79,7 +79,7 @@ in
       let
         forgejo-cli = "${config.services.forgejo.package}/bin/forgejo";
         cfg = config.services.forgejo;
-        discoveryUrl = "${cfg.settings.PROTOCAL}://${config.modules.authentik.domain}.${vars.sld}.${vars.tld}/application/o/forgejo/.well-known/openid-configuration";
+        discoveryUrl = "${cfg.settings.server.PROTOCAL}://${config.modules.authentik.domain}.${vars.sld}.${vars.tld}/application/o/forgejo/.well-known/openid-configuration";
       in
       ''
         if ! ${forgejo-cli} admin auth list --config ${cfg.customDir}/conf/app.ini \

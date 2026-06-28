@@ -152,7 +152,7 @@
       abbr = "Git";
       homepage = true;
 
-      data-directory = "/services/git";
+      data-directory = "/services/forgejo";
       owner = "forgejo";
 
       authentikClientId = "Rn13Cn2yj50mU4Ru9Ti7BIuPfdNx67w9PNa5IRy1";
