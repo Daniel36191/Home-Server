@@ -24,6 +24,9 @@ in
     runnerLabels = mkOption {
       default = [ "native:host" ];
     };
+    forgeSync = mkOption {
+      default = false;
+    };
   };
 
   config = mkIf mod.enable {
@@ -95,5 +98,30 @@ in
             --icon-url "https://goauthentik.io/img/icon.png"
         fi
       '';
+
+    services.forgesync = mkIf mod.forgeSync {
+      enable = true;
+      jobs = {
+        github = {
+          source = "${cfg.settings.server.PROTOCAL}://${mod.domain}.${vars.sld}.${vars.tld}/api/v1";
+          target = "github";
+          settings = {
+            remirror = true;
+            description-template = "{description} (Mirror of {url})";
+            feature = [
+              "issues"
+              "pull-requests"
+            ];
+            on-commit = true;
+            mirror-interval = "24h0m0s";
+          };
+          secretFile = config.age.secrets.forgesync.path;
+          timerConfig = {
+            OnCalendar = "daily";
+            Persistent = true;
+          };
+        };
+      };
+    };
   };
 }

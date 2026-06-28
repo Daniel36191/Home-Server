@@ -78,16 +78,20 @@
       owner = "minecraft";
     };
 
+
+    ## Forgejo
     "authentikClientSecret" = {
       file = ./authentikClientSecret.age;
       group = "forgejo";
       owner = "forgejo";
     };
-
     "forgejo-runner-token" = {
       file = ./forgejo-runner-token.age;
       group = "forgejo";
       owner = "forgejo";
+    };
+    "forgesync" = {
+      file = ./forgesync.age;
     };
   };
 }

@@ -9,7 +9,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/25.05";
 
     ## Workstations
-    workstations.url = "github:Daniel36191/Nixos_V2";
+    workstations.url = "git+https://git.lillypond.name/dmoeller/Nixos_V2";
 
     ############
     ## Inputs ##
@@ -41,6 +41,8 @@
     authentik-nix.url = "github:nix-community/authentik-nix";
 
     vscode-server.url = "github:nix-community/nixos-vscode-server";
+
+    forgesync.url = "git+https://hack.moontide.ink/helvetica/forgesync";
   };
 
   outputs =
@@ -59,6 +61,7 @@
       arion,
       authentik-nix,
       vscode-server,
+      forgesync,
       ...
     }@inputs:
     let
@@ -90,6 +93,7 @@
         arion.nixosModules.arion
         authentik-nix.nixosModules.default
         vscode-server.nixosModules.default
+        forgesync.nixosModules.default
       ];
     in
     {

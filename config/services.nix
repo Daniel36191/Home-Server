@@ -155,6 +155,8 @@
       data-directory = "/services/forgejo";
       owner = "forgejo";
 
+      ## Setup all keys for https://hack.moontide.ink/helvetica/forgesync : SOURCE(forgejo), TARGET(github), MIRROR(github)
+      forgeSync = true;
       authentikClientId = "Rn13Cn2yj50mU4Ru9Ti7BIuPfdNx67w9PNa5IRy1";
       sshPort = 2222;
       ## Generate key and place in age from web-ui
