@@ -83,5 +83,11 @@
       group = "forgejo";
       owner = "forgejo";
     };
+
+    "forgejo-runner-token" = {
+      file = ./forgejo-runner-token.age;
+      group = "forgejo";
+      owner = "forgejo";
+    };
   };
 }

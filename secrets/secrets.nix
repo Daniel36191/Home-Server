@@ -46,4 +46,5 @@ in
 
   ## forgejo
   "authentikClientSecret.age".publicKeys = systems;
+  "forgejo-runner-token.age".publicKeys = systems;
 }
