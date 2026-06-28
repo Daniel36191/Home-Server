@@ -27,12 +27,13 @@ in
         server = {
           DOMAIN = with vars; "${mod.domain}.${sld}.${tld}";
           ROOT_URL = "https://${mod.domain}.${vars.sld}.${vars.tld}/";
-          PROTOCALL = "https";
+          PROTOCAL = "https";
           HTTP_PORT = mod.port;
 
           START_SSH_SERVER = true;
           SSH_PORT = 2222;
           SSH_LISTEN_PORT = 2222;
+          SSH_DOMAIN = with vars; "ssh.${sld}.${tld}";
         };
         service = {
           DISABLE_REGISTRATION = true;

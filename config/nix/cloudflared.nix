@@ -6,7 +6,7 @@
   ... 
 }:
 
-## WARN: Doesn't create dns CNAME record for "*.SLD.TLD"
+## WARN: Doesn't create routes via dash.cloudflare.com => Networking => Tunnels => Routes
 
 let
   id = "43387887-077c-4587-8be7-58fcc0f35558";
@@ -32,10 +32,10 @@ in
           noTLSVerify = true;
         };
         ingress = [
-          {
-            hostname = "git.${vars.sld}.${vars.tld}";
-            service = "ssh://localhost:2222";
-          }
+          # {
+          #   hostname = "ssh.${vars.sld}.${vars.tld}";
+          #   service = "ssh://localhost:2222";
+          # }
           {
             hostname = "*.${vars.sld}.${vars.tld}";
             service = "http://localhost";

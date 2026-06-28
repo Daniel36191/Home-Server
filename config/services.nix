@@ -140,7 +140,9 @@
       data-directory = "/services/kuma";
     };
 
-    forgejo = { ## Set authentikClientSecret in secrets
+    forgejo = { 
+      ## Set authentikClientSecret in secrets
+      ## Port forwar 2222 through cloudflare
     	enable = true;
     	port = 3000;
     	secure = false;
