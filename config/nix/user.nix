@@ -126,7 +126,7 @@
 
   age.secrets = {
     "ssh" = {
-      path = "/home/${vars.username}/.ssh/ssh";
+      path = "/home/${vars.username}/.ssh/id_ed25519";
       owner = vars.username;
       mode = "600";
     };
@@ -134,7 +134,7 @@
 
   ## SSH Client & Git Auth
   home-manager.users.${vars.username} = let ssh-private = config.age.secrets."ssh"; in { pkgs, config, vars, ... }: {
-    home.file.".ssh/ssh.pub" = { text = vars.ssh-public-key; force = true; };
+    home.file.".ssh/id_ed25519.pub" = { text = vars.ssh-public-key; force = true; };
     programs.ssh = {
       enable = true;
       enableDefaultConfig = false;
@@ -152,6 +152,15 @@
           controlMaster = "no";
           controlPath = "~/.ssh/master-%r@%n:%p";
           controlPersist = "no"; 
+        };
+
+        "ssh.lillypond.name" = {
+          hostname = "ssh.lillypond.name";
+          port = 2222;
+          user = "forgejo";
+          extraOptions = {
+            WarnWeakCrypto = "no";
+          };
         };
 
         "github.com" = {
