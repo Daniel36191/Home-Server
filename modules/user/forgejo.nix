@@ -11,7 +11,7 @@ let
   cfg = config.services.forgejo;
 in
 {
-  options.modules.forgejo = {
+  options.modules.forgejo.settings = {
     authentikClientId = mkOption {
       default = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
     };
