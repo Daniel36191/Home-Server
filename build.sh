@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-nh os build -H server ./ -vt
+nh os build -H server ./
