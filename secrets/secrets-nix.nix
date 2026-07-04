@@ -24,7 +24,7 @@ in
     ## Copyparty
     "copyparty-user-daniel" = mkIf mods.copyparty.enable {
       file = ./copyparty-user-daniel.age;
-      owner = mods.copyparty.owner;
+      owner = mods.copyparty.data.owner;
     };
 
     ## Nextcloud
@@ -69,7 +69,7 @@ in
     ## Caldav
     "radicale-creds" = mkIf mods.radicale.enable {
       file = ./radicale-creds.age;
-      owner = mods.radicale.owner;
+      owner = mods.radicale.data.owner;
     };
 
     ## Vaultwarden

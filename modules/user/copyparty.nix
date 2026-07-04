@@ -15,14 +15,14 @@ in
     services.copyparty = {
       enable = true;
       ## The user to run the service as
-      user = mod.owner;
+      user = mod.data.owner;
       ## The group to run the service as
       group = "services";
       ## Directly maps to values in the [global] section of the copyparty config.
       ## See `copyparty --help` for available options
       settings = {
-        i = "0.0.0.0"; ## Allowed ip/s
-        p = [ mod.port ]; ## Port/s
+        i = "0.0.0.0"; # # Allowed ip/s
+        p = [ mod.proxy.port ]; # # Port/s
         no-reload = true;
         rproxy = "1";
         xff-hdr = "cf-connecting-ip";
@@ -42,9 +42,9 @@ in
         ## Create a volume at "/" (the webroot), which will
         "/Public" = {
           ## Storage Path
-          path = "${mod.data-directory}/public/";
+          path = "${mod.data.data-directory}/public/";
           access = {
-            rw = "*"; ## Everyone gets read-access
+            rw = "*"; # # Everyone gets read-access
             A = config.services.copyparty.groups.admin;
           };
 
@@ -59,7 +59,7 @@ in
           };
         };
         "/Private" = {
-          path = "${mod.data-directory}/private/";
+          path = "${mod.data.data-directory}/private/";
           access = {
             g = "*";
             A = config.services.copyparty.groups.admin;

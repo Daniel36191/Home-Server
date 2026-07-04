@@ -13,17 +13,17 @@ in
       enable = true;
       appriseSupport = true;
       settings = {
-        PORT = "${toString mod.port}";
+        PORT = "${toString mod.proxy.port}";
         HOST = "0.0.0.0";
       };
     };
 
     ## Has to link becasue of systemd hardneing see https://github.com/NixOS/nixpkgs/issues/324105
     system.activationScripts.uptime-kuma = ''
-    if [[ -d ${mod.data-directory} ]]; then
+    if [[ -d ${mod.data.data-directory} ]]; then
       mkdir -p /var/lib/private
       chmod 700 /var/lib/private
-      ln -sf ${mod.data-directory} /var/lib/private/uptime-kuma
+      ln -sf ${mod.data.data-directory} /var/lib/private/uptime-kuma
     fi
     '';
   };

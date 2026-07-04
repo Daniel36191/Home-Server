@@ -25,14 +25,14 @@ in
           delay = 1;
         };
         storage = {
-          filesystem_folder = mod.data-directory;
+          filesystem_folder = mod.data.data-directory;
         };
       };
       rights = {
       };
     };
     systemd.tmpfiles.rules = [
-      "d ${mod.data-directory} 0775 ${mod.owner} services -"
+      "d ${mod.data.data-directory} 0775 ${mod.data.owner} services -"
     ];
   };
 }
