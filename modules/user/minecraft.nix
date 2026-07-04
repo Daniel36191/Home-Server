@@ -20,7 +20,7 @@ let
   '';
 in
 {
-  options.modules.minecraft = {
+  options.modules.minecraft.settings = {
     runArgs = mkOption {
       default = "chmod +x ./run.sh && ./run.sh";
     };

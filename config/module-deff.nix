@@ -20,34 +20,36 @@ let
     "forgejo"
   ];
 
+  options = listToAttrs (
+    map (name: {
+      name = name;
+      value = {
+        enable = mkEnableOption "${name}";
+        proxy = {
+          port = mkOption { default = 0; };
+          secure = mkOption { default = true; };
+          authentik-auth = mkOption { default = false; }; # Use authentik proxy auth for protection
+          domain = mkOption { default = "${name}"; };
+          public = mkOption { default = false; };
+          default = mkOption { default = false; };
+          url = mkOption { default = true; };
+        };
 
-  options = listToAttrs (map (name: {name = name; value = {
-    enable = mkEnableOption "${name}";
-    port = mkOption { default = 0; };
-    secure = mkOption { default = true; };
-    authentik-auth = mkOption { default = false; }; ## Use authentik proxy auth for protection
-    domain = mkOption { default = "${name}"; };
-    public = mkOption { default = false; };
-    default = mkOption { default = false; };
-    url = mkOption { default = true; };
+        homepage = {
+          abbr = mkOption { default = "${toUpper (substring 0 2 name)}"; };
+          homepage = mkOption { default = false; };
+          icon = mkOption { default = "${name}"; };
+        };
 
-    abbr = mkOption {default = "${toUpper (substring 0 2 name)}"; };
-    homepage = mkOption { default = false; };
-    icon = mkOption { default = "${name}"; };
+        data = {
+          owner = mkOption { default = "${name}"; };
+          data-directory = mkOption { default = "/services/${name}"; };
+        };
 
-    owner = mkOption { default = "${name}"; };
-    data-directory = mkOption { default = "/services/${name}"; };
-
-  }; }) module-list);
+      };
+    }) module-list
+  );
 in
 {
- options.modules = {} // options;
-
-
-  ## Desired output:
-  #  options.modules.<service> = {
-  #   abbr = mkOption {default = ""; };
-  #   homepage = mkOption { default = false; };
-  #   icon = mkOption { default = ""; };
-  # };
+  options.modules = { } // options;
 }
