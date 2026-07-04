@@ -18,7 +18,8 @@
   time.timeZone = "America/New_York";
   ## Set time server
   networking.timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
-  location.provider = "geoclue2"; # # Auto Location
+  ## Auto Location
+  location.provider = "geoclue2";
 
   ## Select internationalisation properties
   i18n =
