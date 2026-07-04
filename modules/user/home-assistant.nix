@@ -24,19 +24,19 @@ in
       openFirewall = true;
       config = {
         default_config = { };
-        http.server_port = mod.proxy.port;
+        http.server_port = mod.port;
         use_x_forwarded_for = true;
         trusted_proxies = [
           "127.0.0.1"
           "localhost"
-          "${mod.proxy.domain}.${vars.sld}.${if mod.proxy.public then vars.tld else "local"}"
+          "${mod.domain}.${vars.sld}.${if mod.public then vars.tld else "local"}"
         ];
         http.server_host = [ "0.0.0.0" ];
         lovelace = {
-          mode = if mod.settings.love-config-writeable then "storage" else "yaml";
+          mode = if mod.love-config-writeable then "storage" else "yaml";
         };
       };
-      configDir = "${mod.data.data-directory}/config";
+      configDir = "${mod.data-directory}/config";
       extraComponents = [
         ## Onboarding
         "esphome"
@@ -47,19 +47,16 @@ in
         with pkgs.home-assistant-custom-components;
         [
         ]
-        ++ mod.settings.connectors;
+        ++ mod.connectors;
       customLovelaceModules =
         with pkgs.home-assistant-custom-lovelace-modules;
         [
         ]
-        ++ mod.settings.lovelace-modules;
+        ++ mod.lovelace-modules;
 
-      lovelaceConfigWritable = mod.settings.love-config-writeable;
+      lovelaceConfigWritable = mod.love-config-writeable;
       lovelaceConfigFile =
-        if mod.settings.love-config-writeable == false then
-          ../extra-configs/home-assistant-lovelace.yaml
-        else
-          null;
+        if mod.love-config-writeable == false then ../extra-configs/home-assistant-lovelace.yaml else null;
     };
   };
 }
