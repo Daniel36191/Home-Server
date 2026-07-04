@@ -16,13 +16,13 @@ in
     services.immich = {
       enable = true;
       openFirewall = true;
-      port = mod.port;
-      user = mod.owner;
+      port = mod.proxy.port;
+      user = mod.data.owner;
       group = "services";
-      mediaLocation = mod.data-directory;
+      mediaLocation = mod.data.data-directory;
       host = "0.0.0.0";
 
-      machine-learning.enable = true; ## Dectect faces & objects
+      machine-learning.enable = true; # # Dectect faces & objects
       accelerationDevices = [ "/dev/dri/renderD128" ];
     };
     systemd.tmpfiles.rules = [

@@ -6,7 +6,7 @@
 }:
 {
   environment.systemPackages = [
-    inputs.agenix.packages.${vars.system}.default ## Cli tool
+    inputs.agenix.packages.${vars.system}.default # # Cli tool
   ];
 
   age.secrets = {
@@ -18,7 +18,7 @@
     ## Copyparty
     "copyparty-user-daniel" = {
       file = ./copyparty-user-daniel.age;
-      owner = config.modules.copyparty.owner;
+      owner = config.modules.copyparty.data.owner;
     };
 
     ## Nextcloud
@@ -63,7 +63,7 @@
     ## Caldav
     "radicale-creds" = {
       file = ./radicale-creds.age;
-      owner = config.modules.radicale.owner;
+      owner = config.modules.radicale.data.owner;
     };
 
     ## Vaultwarden
@@ -77,7 +77,6 @@
       group = "services";
       owner = "minecraft";
     };
-
 
     ## Forgejo
     "authentikClientSecret" = {
