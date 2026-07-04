@@ -2,17 +2,11 @@
   inputs,
   config,
   vars,
-  lib,
   ...
 }:
-with lib;
-let
-  mods = config.modules;
-in
 {
   environment.systemPackages = [
-    ## Cli tool
-    inputs.agenix.packages.${vars.system}.default
+    inputs.agenix.packages.${vars.system}.default # # Cli tool
   ];
 
   age.secrets = {
@@ -22,9 +16,9 @@ in
     };
 
     ## Copyparty
-    "copyparty-user-daniel" = mkIf mods.copyparty.enable {
+    "copyparty-user-daniel" = {
       file = ./copyparty-user-daniel.age;
-      owner = mods.copyparty.data.owner;
+      owner = config.modules.copyparty.data.owner;
     };
 
     ## Nextcloud
@@ -67,9 +61,9 @@ in
     };
 
     ## Caldav
-    "radicale-creds" = mkIf mods.radicale.enable {
+    "radicale-creds" = {
       file = ./radicale-creds.age;
-      owner = mods.radicale.data.owner;
+      owner = config.modules.radicale.data.owner;
     };
 
     ## Vaultwarden
@@ -78,22 +72,22 @@ in
     };
 
     ## Minecraft
-    "minecraft-rcon" = lib.mkIf mods.minecraft.enable {
+    "minecraft-rcon" = {
       file = ./minecraft-rcon.age;
       group = "services";
-      owner = mods.minecraft.owner;
+      owner = "minecraft";
     };
 
     ## Forgejo
-    "authentikClientSecret" = mkIf mods.forgejo.enable {
+    "authentikClientSecret" = {
       file = ./authentikClientSecret.age;
       group = "forgejo";
-      owner = mods.forgejo.owner;
+      owner = "forgejo";
     };
-    "forgejo-runner-token" = mkIf mods.forgejo.enable {
+    "forgejo-runner-token" = {
       file = ./forgejo-runner-token.age;
       group = "forgejo";
-      owner = mods.forgejo.owner;
+      owner = "forgejo";
     };
     "forgesync" = {
       file = ./forgesync.age;
