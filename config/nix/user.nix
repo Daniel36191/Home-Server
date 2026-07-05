@@ -4,6 +4,7 @@
   vars,
   config,
   inputs,
+  lib,
   ...
 }:
 {
@@ -42,21 +43,25 @@
     };
 
   ## Setup Services group
-  users.groups = {
-    "services" = {
-      # gid = 100; ## Dissable for auto select
-      members = [
+  users.groups =
+    let
+      enabledServices = lib.filterAttrs (_: cfg: (cfg.enable or false)) config.modules;
+      optionsAttrs = lib.concatMapAttrs (name: cfg: {
+        ${name} = cfg.data.owner;
+      }) enabledServices;
+      list = builtins.attrValues optionsAttrs;
+      extraMembers = [
         "root"
         "${vars.username}"
         "caddy"
-        "crafty"
-        "jellyfin"
-        "copyparty"
-        "immich"
-        "${config.modules.minecraft.data.owner}"
       ];
+      members = lib.unique (list ++ extraMembers);
+    in
+    {
+      "services" = {
+        members = members;
+      };
     };
-  };
 
   ## Setup user
   users.users = {
@@ -66,7 +71,6 @@
       description = "${vars.username}";
       shell = pkgs.bash;
       extraGroups = [
-        "services"
         "networkmanager"
         "wheel"
         "libvirtd"
