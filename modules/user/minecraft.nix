@@ -12,15 +12,15 @@ let
 
   rconScript = pkgs.writeShellScriptBin "mc-rcon" ''
     ${pkgs.mcrcon}/bin/mcrcon \
-      -P ${mod.rconPort} \
+      -P ${mod.settings.rconPort} \
       -p "$(cat ${rconPassword})" \
   '';
   permsScript = pkgs.writeShellScriptBin "mc-perms" ''
-    	chown -R ${mod.owner}:services ${mod.data-directory}
+    	chown -R ${mod.data.owner}:services ${mod.data.data-directory}
   '';
 in
 {
-  options.modules.minecraft = {
+  options.modules.minecraft.settings = {
     runArgs = mkOption {
       default = "chmod +x ./run.sh && ./run.sh";
     };
@@ -39,47 +39,47 @@ in
   };
 
   config = mkIf mod.enable {
-    users.users.${mod.owner} = {
+    users.users.${mod.data.owner} = {
       isSystemUser = true;
       createHome = false;
       group = "services";
-      home = mod.data-directory;
+      home = mod.data.data-directory;
     };
 
     environment.systemPackages = [ rconScript ];
     system.activationScripts = {
       mc-rcon = ''
-        ln -sf ${rconScript}/bin/mc-rcon ${mod.data-directory}/rcon.sh
+        ln -sf ${rconScript}/bin/mc-rcon ${mod.data.data-directory}/rcon.sh
       '';
       mcPerms = ''
-        ln -sf ${permsScript}/bin/mc-perms ${mod.data-directory}/perms.sh
+        ln -sf ${permsScript}/bin/mc-perms ${mod.data.data-directory}/perms.sh
       '';
     };
 
-    networking.firewall.allowedTCPPorts = [ mod.port ];
+    networking.firewall.allowedTCPPorts = [ mod.proxy.port ];
 
-    systemd.services."minecraft-${mod.packName}" = {
+    systemd.services."minecraft-${mod.settings.packName}" = {
       enable = true;
       description = "Minecraft Server";
       after = [ "network.target" ];
-      wantedBy = [ "default.target" ] ++ lib.optional mod.autoStart "multi-user.target";
+      wantedBy = [ "default.target" ] ++ lib.optional mod.settings.autoStart "multi-user.target";
 
       serviceConfig = {
-        User = mod.owner;
+        User = mod.data.owner;
         Group = "services";
-        WorkingDirectory = mod.data-directory;
+        WorkingDirectory = mod.data.data-directory;
 
-        ExecStart = "${pkgs.bash}/bin/bash -c '${mod.javaPackage}/bin/java ${mod.runArgs}'";
+        ExecStart = "${pkgs.bash}/bin/bash -c '${mod.settings.javaPackage}/bin/java ${mod.settings.runArgs}'";
 
-        ExecStop = "${pkgs.mcrcon}/bin/mcrcon -P ${toString mod.rconPort} -p $(cat ${rconPassword}) stop";
+        ExecStop = "${pkgs.mcrcon}/bin/mcrcon -P ${toString mod.settings.rconPort} -p $(cat ${rconPassword}) stop";
 
         TimeoutStopSec = "60s";
         KillMode = "mixed";
 
-        ReadWritePaths = [ mod.data-directory ];
+        ReadWritePaths = [ mod.data.data-directory ];
         NoNewPrivileges = true;
 
-        Restart = if mod.autoStart then "on-failure" else "no";
+        Restart = if mod.settings.autoStart then "on-failure" else "no";
         RestartSec = "10s";
       };
     };

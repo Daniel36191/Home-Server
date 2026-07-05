@@ -10,46 +10,56 @@ let
   mod = config.modules.home-assistant;
 in
 {
-  options.modules.home-assistant = {
+  options.modules.home-assistant.settings = {
     love-config-writeable = mkOption { default = false; };
 
-    connectors = mkOption { default = []; };
-    
-    lovelace-modules = mkOption { default = []; };
+    connectors = mkOption { default = [ ]; };
+
+    lovelace-modules = mkOption { default = [ ]; };
   };
 
   config = mkIf mod.enable {
-      services.home-assistant = {
+    services.home-assistant = {
       enable = true;
       openFirewall = true;
       config = {
-        default_config = {};
-        http.server_port = mod.port;
+        default_config = { };
+        http.server_port = mod.proxy.port;
         use_x_forwarded_for = true;
         trusted_proxies = [
           "127.0.0.1"
           "localhost"
-          "${mod.domain}.${vars.sld}.${if mod.public then vars.tld else "local" }"
+          "${mod.proxy.domain}.${vars.sld}.${if mod.proxy.public then vars.tld else "local"}"
         ];
         http.server_host = [ "0.0.0.0" ];
         lovelace = {
-          mode = if mod.love-config-writeable then "storage" else "yaml";
+          mode = if mod.settings.love-config-writeable then "storage" else "yaml";
         };
       };
-      configDir = "${mod.data-directory}/config";
+      configDir = "${mod.data.data-directory}/config";
       extraComponents = [
         ## Onboarding
         "esphome"
         "met"
         "radio_browser"
       ];
-      customComponents = with pkgs.home-assistant-custom-components; [
-      ] ++ mod.connectors;
-      customLovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
-      ] ++ mod.lovelace-modules;
+      customComponents =
+        with pkgs.home-assistant-custom-components;
+        [
+        ]
+        ++ mod.settings.connectors;
+      customLovelaceModules =
+        with pkgs.home-assistant-custom-lovelace-modules;
+        [
+        ]
+        ++ mod.settings.lovelace-modules;
 
-      lovelaceConfigWritable = mod.love-config-writeable;
-      lovelaceConfigFile = if mod.love-config-writeable == false then ../extra-configs/home-assistant-lovelace.yaml else null;
+      lovelaceConfigWritable = mod.settings.love-config-writeable;
+      lovelaceConfigFile =
+        if mod.settings.love-config-writeable == false then
+          ../extra-configs/home-assistant-lovelace.yaml
+        else
+          null;
     };
   };
 }

@@ -13,7 +13,7 @@ in
       enable = true;
       version = "latest";
       openFirewall = true;
-      port = mod.port;
+      port = mod.proxy.port;
     };
   };
 }

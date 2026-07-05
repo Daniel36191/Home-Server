@@ -18,26 +18,28 @@
   time.timeZone = "America/New_York";
   ## Set time server
   networking.timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
-  location.provider = "geoclue2"; ## Auto Location
+  ## Auto Location
+  location.provider = "geoclue2";
 
   ## Select internationalisation properties
-  i18n = let 
-    locale = "en_US.UTF-8";
-  in{
-    defaultLocale = locale;
-    extraLocaleSettings = {
-      LC_ADDRESS = locale;
-      LC_IDENTIFICATION = locale;
-      LC_MEASUREMENT = locale;
-      LC_MONETARY = locale;
-      LC_NAME = locale;
-      LC_NUMERIC = locale;
-      LC_PAPER = locale;
-      LC_TELEPHONE = locale;
-      LC_TIME = locale;
+  i18n =
+    let
+      locale = "en_US.UTF-8";
+    in
+    {
+      defaultLocale = locale;
+      extraLocaleSettings = {
+        LC_ADDRESS = locale;
+        LC_IDENTIFICATION = locale;
+        LC_MEASUREMENT = locale;
+        LC_MONETARY = locale;
+        LC_NAME = locale;
+        LC_NUMERIC = locale;
+        LC_PAPER = locale;
+        LC_TELEPHONE = locale;
+        LC_TIME = locale;
+      };
     };
-  };
-
 
   ## Setup Services group
   users.groups = {
@@ -51,11 +53,10 @@
         "jellyfin"
         "copyparty"
         "immich"
-        "${config.modules.minecraft.owner}"
+        "${config.modules.minecraft.data.owner}"
       ];
     };
   };
-
 
   ## Setup user
   users.users = {
@@ -81,14 +82,15 @@
         "dialout"
       ];
       openssh.authorizedKeys.keys = [
-      ] ++ inputs.workstations.publicSSHKeys;
+      ]
+      ++ inputs.workstations.publicSSHKeys;
     };
   };
   nix.settings.trusted-users = [
     "root"
     "${vars.username}"
   ];
-  environment = { 
+  environment = {
     shells = with pkgs; [
       bashInteractive
     ];
@@ -116,10 +118,12 @@
     allowSFTP = true;
     settings = {
       PasswordAuthentication = true;
-      AllowUsers = null; ## Allows all users by default. Can be [ "user1" "user2" ]
+      ## AllowUsers Allows all users by default. Can be [ "user1" "user2" ]
+      AllowUsers = null;
       UseDns = false;
       X11Forwarding = false;
-      PermitRootLogin = "yes"; ## "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
+      ## PermitRootLogin "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
+      PermitRootLogin = "yes";
       PubkeyAuthentication = "yes";
     };
   };
@@ -133,53 +137,66 @@
   };
 
   ## SSH Client & Git Auth
-  home-manager.users.${vars.username} = let ssh-private = config.age.secrets."ssh"; in { pkgs, config, vars, ... }: {
-    home.file.".ssh/id_ed25519.pub" = { text = vars.ssh-public-key; force = true; };
-    programs.ssh = {
-      enable = true;
-      enableDefaultConfig = false;
-      matchBlocks = {
-        "*" = {
-          port = 22;
-          identityFile = ssh-private.path;
-          forwardAgent = false;
-          addKeysToAgent = "yes";
-          compression = false;
-          serverAliveInterval = 0;
-          serverAliveCountMax = 3;
-          hashKnownHosts = false;
-          userKnownHostsFile = "~/.ssh/known_hosts";
-          controlMaster = "no";
-          controlPath = "~/.ssh/master-%r@%n:%p";
-          controlPersist = "no"; 
-        };
+  home-manager.users.${vars.username} =
+    let
+      ssh-private = config.age.secrets."ssh";
+    in
+    {
+      pkgs,
+      config,
+      vars,
+      ...
+    }:
+    {
+      home.file.".ssh/id_ed25519.pub" = {
+        text = vars.ssh-public-key;
+        force = true;
+      };
+      programs.ssh = {
+        enable = true;
+        enableDefaultConfig = false;
+        matchBlocks = {
+          "*" = {
+            port = 22;
+            identityFile = ssh-private.path;
+            forwardAgent = false;
+            addKeysToAgent = "yes";
+            compression = false;
+            serverAliveInterval = 0;
+            serverAliveCountMax = 3;
+            hashKnownHosts = false;
+            userKnownHostsFile = "~/.ssh/known_hosts";
+            controlMaster = "no";
+            controlPath = "~/.ssh/master-%r@%n:%p";
+            controlPersist = "no";
+          };
 
-        "ssh.lillypond.name" = {
-          hostname = "ssh.lillypond.name";
-          port = 2222;
-          user = "forgejo";
-          extraOptions = {
-            WarnWeakCrypto = "no";
+          "ssh.lillypond.name" = {
+            hostname = "ssh.lillypond.name";
+            port = 2222;
+            user = "forgejo";
+            extraOptions = {
+              WarnWeakCrypto = "no";
+            };
+          };
+
+          "github.com" = {
+            hostname = "github.com";
+            port = 22;
+            user = "git";
           };
         };
-
-        "github.com" = {
-          hostname = "github.com";
-          port = 22;
-          user = "git";
+      };
+      programs.git = {
+        enable = true;
+        settings.user = {
+          Name = "Daniel36191";
+          Email = "${vars.email}";
         };
       };
-    };
-    programs.git = {
-      enable = true;
-      settings.user = {
-        Name = "Daniel36191";
-        Email = "${vars.email}";
+      programs = {
+        gh.enable = true;
       };
     };
-    programs = {
-      gh.enable = true;
-    };
-  };
 
 }

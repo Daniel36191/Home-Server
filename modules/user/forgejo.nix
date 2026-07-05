@@ -11,7 +11,7 @@ let
   cfg = config.services.forgejo;
 in
 {
-  options.modules.forgejo = {
+  options.modules.forgejo.settings = {
     authentikClientId = mkOption {
       default = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
     };
@@ -34,18 +34,18 @@ in
       enable = true;
       database.type = "sqlite3";
       lfs.enable = true;
-      stateDir = mod.data-directory;
+      stateDir = mod.data.data-directory;
 
       settings = {
         server = {
-          DOMAIN = with vars; "${mod.domain}.${sld}.${tld}";
-          ROOT_URL = "${cfg.settings.server.PROTOCAL}://${mod.domain}.${vars.sld}.${vars.tld}/";
+          DOMAIN = with vars; "${mod.proxy.domain}.${sld}.${tld}";
+          ROOT_URL = "${cfg.settings.server.PROTOCAL}://${mod.proxy.domain}.${vars.sld}.${vars.tld}/";
           PROTOCAL = "https";
-          HTTP_PORT = mod.port;
+          HTTP_PORT = mod.proxy.port;
 
           START_SSH_SERVER = true;
-          SSH_PORT = mod.sshPort;
-          SSH_LISTEN_PORT = mod.sshPort;
+          SSH_PORT = mod.settings.sshPort;
+          SSH_LISTEN_PORT = mod.settings.sshPort;
           SSH_DOMAIN = with vars; "ssh.${sld}.${tld}";
         };
         service = {
@@ -53,7 +53,7 @@ in
           ENABLE_INTERNAL_SIGNIN = false;
           ENABLE_BASIC_AUTHENTICATION = false;
         };
-        actions.ENABLED = mod.runnerEnable;
+        actions.ENABLED = mod.settings.runnerEnable;
         oauth2.ENABLED = true;
         oauth2_client = {
           ENABLE_AUTO_REGISTRATION = true;
@@ -66,23 +66,22 @@ in
       };
     };
 
-    services.gitea-actions-runner = mkIf mod.runnerEnable {
+    services.gitea-actions-runner = mkIf mod.settings.runnerEnable {
       package = pkgs.forgejo-runner;
       instances.default = {
         enable = true;
         name = "forgejo-runner";
-        url = "${cfg.settings.server.PROTOCAL}://${mod.domain}.${vars.sld}.${vars.tld}";
+        url = "${cfg.settings.server.PROTOCAL}://${mod.proxy.domain}.${vars.sld}.${vars.tld}";
         tokenFile = config.age.secrets.forgejo-runner-token.path;
-        labels = mod.runnerLabels;
+        labels = mod.settings.runnerLabels;
       };
     };
 
     # Register the Authentik OAuth2
     systemd.services.forgejo.postStart =
       let
-        forgejo-cli = "${config.services.forgejo.package}/bin/forgejo";
-        cfg = config.services.forgejo;
-        discoveryUrl = "${cfg.settings.server.PROTOCAL}://${config.modules.authentik.domain}.${vars.sld}.${vars.tld}/application/o/forgejo/.well-known/openid-configuration";
+        forgejo-cli = "${cfg.package}/bin/forgejo";
+        discoveryUrl = "${cfg.settings.server.PROTOCAL}://${config.modules.authentik.proxy.domain}.${vars.sld}.${vars.tld}/application/o/forgejo/.well-known/openid-configuration";
       in
       ''
         if ! ${forgejo-cli} admin auth list --config ${cfg.customDir}/conf/app.ini \
@@ -91,7 +90,7 @@ in
             --config ${cfg.customDir}/conf/app.ini \
             --name "Authentik" \
             --provider openidConnect \
-            --key "${mod.authentikClientId}" \
+            --key "${mod.settings.authentikClientId}" \
             --secret "$(cat ${config.age.secrets."authentikClientSecret".path})" \
             --auto-discover-url "${discoveryUrl}" \
             --scopes "openid profile email" \
@@ -99,11 +98,11 @@ in
         fi
       '';
 
-    services.forgesync = mkIf mod.forgeSync {
+    services.forgesync = mkIf mod.settings.forgeSync {
       enable = true;
       jobs = {
         github = {
-          source = "${cfg.settings.server.PROTOCAL}://${mod.domain}.${vars.sld}.${vars.tld}/api/v1";
+          source = cfg.settings.server.ROOT_URL;
           target = "github";
           settings = {
             remirror = true;
