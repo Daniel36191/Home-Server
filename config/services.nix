@@ -64,7 +64,8 @@
 
       data-directory = "/services/home-assistant";
 
-      love-config-writeable = true; # # Set to true to edit dashboard in ui, copy file yaml file next to home-assistant.nix then rebuild.
+      ## Set to true to edit dashboard in ui, copy file yaml file next to home-assistant.nix then rebuild.
+      love-config-writeable = true;
       connectors = [
       ];
       lovelace-modules = with pkgs.home-assistant-custom-lovelace-modules; [
