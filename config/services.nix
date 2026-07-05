@@ -71,7 +71,7 @@
     };
 
     home-assistant = {
-      enable = false;
+      enable = true;
       proxy = {
         port = 8123;
         domain = "auto";
@@ -124,7 +124,7 @@
 
     minecraft = {
       ## Set rcon password in secrets
-      enable = false;
+      enable = true;
       proxy = {
         port = 25500;
         url = false;
