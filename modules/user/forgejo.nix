@@ -53,6 +53,11 @@ in
           ENABLE_INTERNAL_SIGNIN = false;
           ENABLE_BASIC_AUTHENTICATION = false;
         };
+        repository = {
+          ENABLE_PUSH_CREATE_USER = true;
+          ENABLE_PUSH_CREATE_ORG = true;
+          DEFAULT_PUSH_CREATE_PRIVATE = false;
+        };
         actions.ENABLED = mod.settings.runnerEnable;
         oauth2.ENABLED = true;
         oauth2_client = {
