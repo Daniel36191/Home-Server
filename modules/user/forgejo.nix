@@ -107,10 +107,10 @@ in
       enable = true;
       jobs = {
         github = {
-          source = cfg.settings.server.ROOT_URL;
+          source = "${cfg.settings.server.ROOT_URL}/api/v1";
           target = "github";
           settings = {
-            remirror = true;
+            remirror = false;
             description-template = "{description} (Mirror of {url})";
             feature = [
               "issues"
