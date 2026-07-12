@@ -6,7 +6,7 @@
     #############
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/25.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/26.05";
 
     ## Workstations
     workstations.url = "git+https://git.lillypond.name/dmoeller/Nixos_V2";

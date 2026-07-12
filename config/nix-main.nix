@@ -2,7 +2,7 @@
   pkgs,
   lib,
   ...
-}: 
+}:
 {
   imports = [
 
@@ -16,14 +16,13 @@
     ./nix/cloudflared.nix
     ./nix/code-server.nix
 
-
     ##########
     ## Core ##
     ##########
 
     ./services.nix
     ./module-deff.nix
-    
+
     ./nix/apps.nix
     ../secrets/secrets-nix.nix
     ./nix/containers.nix
@@ -32,16 +31,14 @@
     ./nix/core/boot.nix
     ./nix/core/hardware.nix
   ]
-    ++ lib.filesystem.listFilesRecursive ../modules/user
-    ++ lib.filesystem.listFilesRecursive ../modules/admin
-  ;
-
+  ++ lib.filesystem.listFilesRecursive ../modules/user
+  ++ lib.filesystem.listFilesRecursive ../modules/admin;
 
   ##############
   ## Hardware ##
   ##############
-  
-    services.auto-cpufreq = {
+
+  services.auto-cpufreq = {
     enable = true;
     settings = {
       charger = {
@@ -54,6 +51,11 @@
   ###########
   ## Nixos ##
   ###########
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "nodejs-20.20.2"
+    "nodejs-slim-20.20.2"
+  ];
 
   ## SSD partition cleanup
   services.fstrim = {
