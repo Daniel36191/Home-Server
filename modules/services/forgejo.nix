@@ -34,7 +34,7 @@ in
       enable = true;
       database.type = "sqlite3";
       lfs.enable = true;
-      stateDir = mod.data.data-directory;
+      stateDir = mod.data.dataDirectory;
 
       settings = {
         server = {

@@ -146,8 +146,6 @@
       ssh-private = config.age.secrets."ssh";
     in
     {
-      pkgs,
-      config,
       vars,
       ...
     }:

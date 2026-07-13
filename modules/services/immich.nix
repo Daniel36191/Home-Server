@@ -19,7 +19,7 @@ in
       port = mod.proxy.port;
       user = mod.data.owner;
       group = "services";
-      mediaLocation = mod.data.data-directory;
+      mediaLocation = mod.data.dataDirectory;
       host = "0.0.0.0";
 
       machine-learning.enable = true; # # Dectect faces & objects

@@ -40,7 +40,7 @@ let
               mode 0644
             }
           }
-          ${if cfg.authentik-auth or false then authentikForwardAuth else ""}
+          ${if cfg.authentikAuth or false then authentikForwardAuth else ""}
           reverse_proxy 127.0.0.1:${toString cfg.port} {
             header_up CF-Connecting-IP {header.CF-Connecting-IP}
             ${

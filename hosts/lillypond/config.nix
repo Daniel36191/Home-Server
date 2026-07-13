@@ -66,11 +66,11 @@
       };
       data = {
         owner = "copyparty";
-        data-directory = "/services/copyparty";
+        dataDirectory = "/services/copyparty";
       };
     };
 
-    home-assistant = {
+    homeAssistant = {
       enable = false;
       proxy = {
         port = 8123;
@@ -81,14 +81,14 @@
         homepage = true;
       };
       data = {
-        data-directory = "/services/home-assistant";
+        dataDirectory = "/services/home-assistant";
       };
       settings = {
         ##Set to true to edit dashboard in ui, copy file yaml file next to home-assistant.nix then rebuild.
-        love-config-writeable = true;
-        connectors = [
-        ];
-        lovelace-modules = with pkgs.home-assistant-custom-lovelace-modules; [
+        loveConfigWriteable = true;
+        # connectors = with pkgs.home-assistant-custom-components; [
+        # ];
+        lovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
           mini-graph-card
         ];
       };
@@ -101,7 +101,7 @@
         domain = "home";
         public = true;
         secure = false;
-        authentik-auth = true;
+        authentikAuth = true;
         default = true;
       };
     };
@@ -117,7 +117,7 @@
         homepage = true;
       };
       data = {
-        data-directory = "/services/immich";
+        dataDirectory = "/services/immich";
         owner = "immich";
       };
     };
@@ -130,7 +130,7 @@
         url = false;
       };
       data = {
-        data-directory = "/services/minecraft/DeceasedCraft-old";
+        dataDirectory = "/services/minecraft/DeceasedCraft-old";
         owner = "minecraft";
       };
       settings = {
@@ -150,7 +150,7 @@
         public = true;
       };
       data = {
-        data-directory = "/services/radicale";
+        dataDirectory = "/services/radicale";
         owner = "radicale";
       };
     };
@@ -164,7 +164,7 @@
         public = true;
       };
       data = {
-        data-directory = "/services/vaultwarden";
+        dataDirectory = "/services/vaultwarden";
       };
     };
 
@@ -177,7 +177,7 @@
         public = true;
       };
       data = {
-        data-directory = "/services/kuma";
+        dataDirectory = "/services/kuma";
       };
     };
 
@@ -196,7 +196,7 @@
         homepage = true;
       };
       data = {
-        data-directory = "/services/forgejo";
+        dataDirectory = "/services/forgejo";
         owner = "forgejo";
       };
       settings = {

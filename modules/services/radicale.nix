@@ -13,7 +13,10 @@ in
       enable = true;
       settings = {
         server = {
-          hosts = [ "0.0.0.0:5232" "[::]:5232" ];
+          hosts = [
+            "0.0.0.0:5232"
+            "[::]:5232"
+          ];
           max_connections = 20;
           timeout = 30;
           max_content_length = 100000000;
@@ -25,14 +28,14 @@ in
           delay = 1;
         };
         storage = {
-          filesystem_folder = mod.data.data-directory;
+          filesystem_folder = mod.data.dataDirectory;
         };
       };
       rights = {
       };
     };
     systemd.tmpfiles.rules = [
-      "d ${mod.data.data-directory} 0775 ${mod.data.owner} services -"
+      "d ${mod.data.dataDirectory} 0775 ${mod.data.owner} services -"
     ];
   };
 }

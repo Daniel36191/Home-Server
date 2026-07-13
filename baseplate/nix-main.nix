@@ -20,10 +20,10 @@
     ../secrets/secrets-nix.nix
     ./nix/networking.nix
     ./nix/user.nix
-    ./nix/core/boot.nix
+    ./nix/boot.nix
   ]
   ++ lib.filesystem.listFilesRecursive ../modules/services
-  ++ lib.filesystem.listFilesRecursive ../modules/admin-modules`;
+  ++ lib.filesystem.listFilesRecursive ../modules/admin-modules;
 
   ##############
   ## Hardware ##

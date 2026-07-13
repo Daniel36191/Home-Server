@@ -16,7 +16,7 @@ let
       -p "$(cat ${rconPassword})" \
   '';
   permsScript = pkgs.writeShellScriptBin "mc-perms" ''
-    	chown -R ${mod.data.owner}:services ${mod.data.data-directory}
+    	chown -R ${mod.data.owner}:services ${mod.data.dataDirectory}
   '';
 in
 {
@@ -43,16 +43,16 @@ in
       isSystemUser = true;
       createHome = false;
       group = "services";
-      home = mod.data.data-directory;
+      home = mod.data.dataDirectory;
     };
 
     environment.systemPackages = [ rconScript ];
     system.activationScripts = {
       mc-rcon = ''
-        ln -sf ${rconScript}/bin/mc-rcon ${mod.data.data-directory}/rcon.sh
+        ln -sf ${rconScript}/bin/mc-rcon ${mod.data.dataDirectory}/rcon.sh
       '';
       mcPerms = ''
-        ln -sf ${permsScript}/bin/mc-perms ${mod.data.data-directory}/perms.sh
+        ln -sf ${permsScript}/bin/mc-perms ${mod.data.dataDirectory}/perms.sh
       '';
     };
 
@@ -67,7 +67,7 @@ in
       serviceConfig = {
         User = mod.data.owner;
         Group = "services";
-        WorkingDirectory = mod.data.data-directory;
+        WorkingDirectory = mod.data.dataDirectory;
 
         ExecStart = "${pkgs.bash}/bin/bash -c '${mod.settings.javaPackage}/bin/java ${mod.settings.runArgs}'";
 
@@ -76,7 +76,7 @@ in
         TimeoutStopSec = "60s";
         KillMode = "mixed";
 
-        ReadWritePaths = [ mod.data.data-directory ];
+        ReadWritePaths = [ mod.data.dataDirectory ];
         NoNewPrivileges = true;
 
         Restart = if mod.settings.autoStart then "on-failure" else "no";

@@ -42,7 +42,7 @@ in
         ## Create a volume at "/" (the webroot), which will
         "/Public" = {
           ## Storage Path
-          path = "${mod.data.data-directory}/public/";
+          path = "${mod.data.dataDirectory}/public/";
           access = {
             rw = "*"; # # Everyone gets read-access
             A = config.services.copyparty.groups.admin;
@@ -59,7 +59,7 @@ in
           };
         };
         "/Private" = {
-          path = "${mod.data.data-directory}/private/";
+          path = "${mod.data.dataDirectory}/private/";
           access = {
             g = "*";
             A = config.services.copyparty.groups.admin;

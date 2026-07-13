@@ -6,11 +6,11 @@
 }:
 let
   dirs = {
-    servers = "${services.crafty.data-directory}/servers";
-    config = "${services.crafty.data-directory}/config";
-    import = "${services.crafty.data-directory}/import";
-    backups = "${services.crafty.data-directory}/backups";
-    logs = "${services.crafty.data-directory}/logs";
+    servers = "${services.crafty.dataDirectory}/servers";
+    config = "${services.crafty.dataDirectory}/config";
+    import = "${services.crafty.dataDirectory}/import";
+    backups = "${services.crafty.dataDirectory}/backups";
+    logs = "${services.crafty.dataDirectory}/logs";
   };
 in
 {
@@ -50,7 +50,7 @@ in
   #   "d ${dirs.backups} 0755 ${services.crafty.owner} services -"
   #   "d ${dirs.logs} 0755 ${services.crafty.owner} services -"
   # ];
-  
+
   systemd.services."docker-crafty_container" = {
     serviceConfig = {
       Restart = lib.mkOverride 90 "always";

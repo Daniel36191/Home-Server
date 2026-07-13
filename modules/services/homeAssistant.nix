@@ -7,15 +7,15 @@
 }:
 with lib;
 let
-  mod = config.modules.home-assistant;
+  mod = config.modules.homeAssistant;
 in
 {
-  options.modules.home-assistant.settings = {
-    love-config-writeable = mkOption { default = false; };
+  options.modules.homeAssistant.settings = {
+    loveConfigWriteable = mkOption { default = false; };
 
     connectors = mkOption { default = [ ]; };
 
-    lovelace-modules = mkOption { default = [ ]; };
+    lovelaceModules = mkOption { default = [ ]; };
   };
 
   config = mkIf mod.enable {
@@ -33,10 +33,10 @@ in
         ];
         http.server_host = [ "0.0.0.0" ];
         lovelace = {
-          mode = if mod.settings.love-config-writeable then "storage" else "yaml";
+          mode = if mod.settings.loveConfigWriteable then "storage" else "yaml";
         };
       };
-      configDir = "${mod.data.data-directory}/config";
+      configDir = "${mod.data.dataDirectory}/config";
       extraComponents = [
         ## Onboarding
         "esphome"
@@ -52,11 +52,11 @@ in
         with pkgs.home-assistant-custom-lovelace-modules;
         [
         ]
-        ++ mod.settings.lovelace-modules;
+        ++ mod.settings.lovelaceModules;
 
-      lovelaceConfigWritable = mod.settings.love-config-writeable;
+      lovelaceConfigWritable = mod.settings.loveConfigWriteable;
       lovelaceConfigFile =
-        if mod.settings.love-config-writeable == false then
+        if mod.settings.loveConfigWriteable == false then
           ../extra-configs/home-assistant-lovelace.yaml
         else
           null;

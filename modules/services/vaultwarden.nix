@@ -16,7 +16,7 @@ in
       enable = true;
       domain = "${mod.proxy.domain}.${vars.sld}.${vars.tld}";
       configureNginx = if config.services.caddy.enable then false else true;
-      backupDir = "${mod.data.data-directory}/backups";
+      backupDir = "${mod.data.dataDirectory}/backups";
       dbBackend = "sqlite";
       environmentFile = config.age.secrets."vaultwarden-admin-token".path;
       config = {

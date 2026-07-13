@@ -20,11 +20,11 @@ in
 
     ## Has to link becasue of systemd hardneing see https://github.com/NixOS/nixpkgs/issues/324105
     system.activationScripts.uptime-kuma = ''
-    if [[ -d ${mod.data.data-directory} ]]; then
-      mkdir -p /var/lib/private
-      chmod 700 /var/lib/private
-      ln -sf ${mod.data.data-directory} /var/lib/private/uptime-kuma
-    fi
+      if [[ -d ${mod.data.dataDirectory} ]]; then
+        mkdir -p /var/lib/private
+        chmod 700 /var/lib/private
+        ln -sf ${mod.data.dataDirectory} /var/lib/private/uptime-kuma
+      fi
     '';
   };
 }
