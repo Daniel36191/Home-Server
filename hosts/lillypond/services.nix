@@ -213,5 +213,10 @@
         ];
       };
     };
+
+    vsCode = {
+      enable = true;
+      proxy.url = true;
+    };
   };
 }

@@ -2,7 +2,7 @@
   pkgs,
   lib,
   ...
-}: 
+}:
 {
   imports = [
 
@@ -10,38 +10,26 @@
     ## Services ##
     ##############
 
-    ./nix/tailscale.nix
-    # ./nix/nginx.nix
-    ./nix/caddy.nix
-    ./nix/cloudflared.nix
-    ./nix/code-server.nix
-
-
     ##########
     ## Core ##
     ##########
 
-    ./services.nix
     ./module-deff.nix
-    
+
     ./nix/apps.nix
     ../secrets/secrets-nix.nix
-    ./nix/containers.nix
     ./nix/networking.nix
     ./nix/user.nix
     ./nix/core/boot.nix
-    ./nix/core/hardware.nix
   ]
-    ++ lib.filesystem.listFilesRecursive ../modules/user
-    ++ lib.filesystem.listFilesRecursive ../modules/admin
-  ;
-
+  ++ lib.filesystem.listFilesRecursive ../modules/services
+  ++ lib.filesystem.listFilesRecursive ../modules/admin-modules`;
 
   ##############
   ## Hardware ##
   ##############
-  
-    services.auto-cpufreq = {
+
+  services.auto-cpufreq = {
     enable = true;
     settings = {
       charger = {
