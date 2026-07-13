@@ -2049,15 +2049,15 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1769018530,
-        "narHash": "sha256-MJ27Cy2NtBEV5tsK+YraYr2g851f3Fl1LpNHDzDX15c=",
-        "owner": "NixOS",
+        "lastModified": 1783776592,
+        "narHash": "sha256-UgCQzxeWI75XM8G+hPrPh+MKzEPjG3SpAj7dtqSbksA=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "88d3861acdd3d2f0e361767018218e51810df8a1",
+        "rev": "e7a3ca8092b61ff85b6a45bf863ea2b2d6a661b3",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
+        "owner": "nixos",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
@@ -2080,6 +2080,22 @@
       }
     },
     "nixpkgs-unstable_3": {
+      "locked": {
+        "lastModified": 1769018530,
+        "narHash": "sha256-MJ27Cy2NtBEV5tsK+YraYr2g851f3Fl1LpNHDzDX15c=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "88d3861acdd3d2f0e361767018218e51810df8a1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-unstable_4": {
       "locked": {
         "lastModified": 1778443072,
         "narHash": "sha256-zi7/fsqM/kFdNuED//4WOCUtezGtKKqRNORjMvfwjnA=",
@@ -2648,7 +2664,7 @@
         "flake-compat": "flake-compat_3",
         "nixpkgs-libvncserver": "nixpkgs-libvncserver",
         "nixpkgs-stable": "nixpkgs-stable_2",
-        "nixpkgs-unstable": "nixpkgs-unstable",
+        "nixpkgs-unstable": "nixpkgs-unstable_2",
         "utils": "utils"
       },
       "locked": {
@@ -2670,7 +2686,7 @@
         "flake-compat": "flake-compat_9",
         "nixpkgs-libvncserver": "nixpkgs-libvncserver_2",
         "nixpkgs-stable": "nixpkgs-stable_4",
-        "nixpkgs-unstable": "nixpkgs-unstable_2",
+        "nixpkgs-unstable": "nixpkgs-unstable_3",
         "utils": "utils_2"
       },
       "locked": {
@@ -2901,6 +2917,7 @@
         "nix-minecraft": "nix-minecraft",
         "nixpkgs": "nixpkgs_8",
         "nixpkgs-stable": "nixpkgs-stable",
+        "nixpkgs-unstable": "nixpkgs-unstable",
         "portainer-on-nixos": "portainer-on-nixos",
         "proxmox-nixos": "proxmox-nixos",
         "vscode-server": "vscode-server",
@@ -3550,7 +3567,7 @@
         "nixpkgs-personal": "nixpkgs-personal",
         "nixpkgs-spotifyPin": "nixpkgs-spotifyPin",
         "nixpkgs-stable": "nixpkgs-stable_5",
-        "nixpkgs-unstable": "nixpkgs-unstable_3",
+        "nixpkgs-unstable": "nixpkgs-unstable_4",
         "noctalia": "noctalia",
         "noctalia-qs": "noctalia-qs",
         "quickshell": "quickshell_2",

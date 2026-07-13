@@ -7,6 +7,7 @@
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/25.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     ## Workstations
     workstations.url = "git+https://git.lillypond.name/dmoeller/Nixos_V2";
@@ -50,6 +51,7 @@
       self,
       nixpkgs,
       nixpkgs-stable,
+      nixpkgs-unstable,
       workstations,
       home-manager,
       agenix,
@@ -67,6 +69,7 @@
     let
       # services = import ./config/services.nix;
       vars = import ./config/variables.nix;
+      system = vars.system;
 
       ## Common function to create arguments for systems
       commonArgs = {
@@ -76,6 +79,12 @@
         ## Pinning Nixpkgs versions
         pkgs-stable = import nixpkgs-stable {
           inherit vars;
+          inherit system;
+          config.allowUnfree = true;
+        };
+        pkgs-unstable = import nixpkgs-unstable {
+          inherit vars;
+          inherit system;
           config.allowUnfree = true;
         };
 

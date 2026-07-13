@@ -2,6 +2,7 @@
   config,
   lib,
   vars,
+  pkgs-unstable,
   ...
 }:
 with lib;
@@ -11,6 +12,7 @@ in
 {
   config = mkIf mod.enable {
     services.vaultwarden = {
+      package = pkgs-unstable.vaultwarden;
       enable = true;
       domain = "${mod.proxy.domain}.${vars.sld}.${vars.tld}";
       configureNginx = if config.services.caddy.enable then false else true;
