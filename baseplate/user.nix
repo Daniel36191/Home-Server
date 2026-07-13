@@ -151,7 +151,7 @@
     }:
     {
       home.file.".ssh/id_ed25519.pub" = {
-        text = vars.ssh-public-key;
+        text = vars.sshPublicKey;
         force = true;
       };
       programs.ssh = {

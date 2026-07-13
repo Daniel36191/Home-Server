@@ -107,7 +107,8 @@
     in
     {
       ## Exported Values
-      pulicSSHKey = vars.ssh-public-key;
+      ## TODO remap too all hosts and map to sys
+      # pulicSSHKey = vars.sshPublicKey;
       nixosConfigurations = {
         "server" = nixpkgs.lib.nixosSystem {
           specialArgs = commonArgs;

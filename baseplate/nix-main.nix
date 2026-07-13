@@ -1,5 +1,5 @@
 {
-  pkgs,
+  host,
   lib,
   ...
 }:
@@ -21,9 +21,11 @@
     ./nix/networking.nix
     ./nix/user.nix
     ./nix/boot.nix
+
   ]
   ++ lib.filesystem.listFilesRecursive ../modules/services
-  ++ lib.filesystem.listFilesRecursive ../modules/admin-modules;
+  ++ lib.filesystem.listFilesRecursive ../modules/admin-modules
+  ++ lib.filesystem.listFilesRecursive ../hosts/${host}
 
   ##############
   ## Hardware ##

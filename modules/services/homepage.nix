@@ -7,6 +7,7 @@
 with lib;
 let
   mod = config.modules.homepage;
+  sys = config.host;
 
   homepageServices = lib.filterAttrs (
     _: cfg: (cfg.enable or false) && (cfg.homepage.homepage or false)
@@ -33,7 +34,7 @@ in
       listenPort = mod.proxy.port;
       # allowedHosts = "something.local";
       allowedHosts = concatStrings [
-        "${vars.localipaddress}:${builtins.toString mod.proxy.port},"
+        "${sys.localIpAddress}:${toString mod.proxy.port},"
         "${mod.proxy.domain}.${vars.sld}.${if mod.proxy.public then vars.tld else "local"},"
         "${vars.sld}.${if mod.proxy.public then vars.tld else "local"}"
       ];
