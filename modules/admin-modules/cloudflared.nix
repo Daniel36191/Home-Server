@@ -1,16 +1,20 @@
 {
   config,
   vars,
+  lib,
   ...
 }:
-
-## WARN: Doesn't create routes via dash.cloudflare.com => Networking => Tunnels => Routes
-
+with lib;
 let
-  id = "43387887-077c-4587-8be7-58fcc0f35558";
+  mod = config.modules.cloudflared;
 in
+## WARN: Doesn't create routes via dash.cloudflare.com => Networking => Tunnels => Routes
 {
-  config = {
+  options.modules.cloudflared.settings = {
+    id = mkOption { default = ""; };
+  };
+
+  config = mkIf mod.enable {
     services.cloudflared = {
       enable = true;
       certificateFile = config.age.secrets."cloudflared-token".path;

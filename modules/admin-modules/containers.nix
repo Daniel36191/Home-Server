@@ -3,40 +3,36 @@
   lib,
   ...
 }:
+with lib;
+let
+  mod = config.moduels.containers;
+in
 {
-  environment.systemPackages = with pkgs; [
-    arion
+  config = mkIf mod.enable {
+    environment.systemPackages = with pkgs; [
+      arion
 
-    ## Not needed when virtualisation.docker.enable = true; ## https://docs.hercules-ci.com/arion/#_nixos
-    docker-client
+      ## Not needed when virtualisation.docker.enable = true; ## https://docs.hercules-ci.com/arion/#_nixos
+      docker-client
 
-    # podman-compose
-    docker-compose
-  ];
-  virtualisation = {
-    containers.enable = true;
-    oci-containers.backend = "docker";
-    docker = {
-      enable = lib.mkDefault true;
-      autoPrune.enable = true;
-      rootless = {
-        enable = false;
-        setSocketVariable = false;
+      # podman-compose
+      docker-compose
+    ];
+    virtualisation = {
+      containers.enable = true;
+      oci-containers.backend = "docker";
+      docker = {
+        enable = lib.mkDefault true;
+        autoPrune.enable = true;
+        rootless = {
+          enable = false;
+          setSocketVariable = false;
+        };
       };
     };
-  };
 
-  virtualisation.arion = {
-    backend = "docker";
+    virtualisation.arion = {
+      backend = "docker";
+    };
   };
-
-  # virtualisation = {
-  #   docker.enable = lib.mkForce false;
-  #   containers.enable = true;
-  #   podman = {
-  #     enable = true;
-  #     dockerCompat = true;
-  #     defaultNetwork.settings.dns_enabled = true;
-  #   };
-  # };
 }

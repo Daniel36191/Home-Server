@@ -37,6 +37,7 @@ let
           domain = mkOption { default = "${name}"; };
           public = mkOption { default = false; };
           default = mkOption { default = false; };
+          ## TO-Do invert this so you must enable the proxy url
           url = mkOption { default = true; };
         };
 

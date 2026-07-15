@@ -221,7 +221,34 @@
 
     vsCode = {
       enable = true;
-      proxy.url = true;
+      proxy.url = false;
+    };
+
+    caddy = {
+      enable = true;
+      proxy.url = false;
+    };
+
+    nginx = {
+      enable = false;
+      proxy.url = false;
+    };
+
+    cloudflared = {
+      enable = true;
+      proxy.url = false;
+
+      settings.id = "43387887-077c-4587-8be7-58fcc0f35558";
+    };
+
+    containers = {
+      enable = true;
+      proxy.url = false;
+    };
+
+    tailscale = {
+      enable = true;
+      proxy.url = false;
     };
   };
 }

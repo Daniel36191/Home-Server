@@ -1,7 +1,8 @@
 {
   config,
   ...
-}:{
+}:
+{
   services.jellyfin = {
     enable = true;
     openFirewall = true;
@@ -25,7 +26,7 @@
       version = 1;
       base_url = "http://localhost:8096";
       system = {
-        enableMetrics = false;  ## Prometheus
+        enableMetrics = false; # # Prometheus
         pluginRepositories = [
           {
             name = "Jellyfin Official";
