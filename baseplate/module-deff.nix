@@ -31,14 +31,13 @@ let
       value = {
         enable = mkEnableOption "${name}";
         proxy = {
+          enable = mkEnableOption "Enable Proxy";
           port = mkOption { default = 0; };
           secure = mkOption { default = true; };
           authentikAuth = mkOption { default = false; }; # Use authentik proxy auth for protection
           domain = mkOption { default = "${name}"; };
           public = mkOption { default = false; };
           default = mkOption { default = false; };
-          ## TO-Do invert this so you must enable the proxy url
-          url = mkOption { default = true; };
         };
 
         homepage = {

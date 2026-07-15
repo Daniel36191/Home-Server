@@ -13,7 +13,7 @@ in
     services.caddy =
       let
         enabledServices = lib.filterAttrs (
-          _: cfg: (cfg.enable or false) && (cfg.proxy.url or false)
+          _: cfg: (cfg.enable or false) && (cfg.proxy.enable or false)
         ) config.modules;
 
         authentikForwardAuth = ''

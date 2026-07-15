@@ -12,6 +12,7 @@
     authentik = {
       enable = true;
       proxy = {
+        enable = true;
         port = 3443;
         domain = "auth";
         public = true;
@@ -24,6 +25,7 @@
     portainer = {
       enable = true;
       proxy = {
+        enable = true;
         port = 8443;
         secure = true;
         public = true;
@@ -38,6 +40,7 @@
     proxmox = {
       enable = false;
       proxy = {
+        enable = true;
         port = 8006;
       };
       homepage = {
@@ -49,6 +52,7 @@
     syncthing = {
       enable = true;
       proxy = {
+        enable = true;
         port = 8384;
       };
       homepage = {
@@ -60,6 +64,7 @@
     copyparty = {
       enable = true;
       proxy = {
+        enable = true;
         port = 3923;
         domain = "files";
         public = true;
@@ -78,6 +83,7 @@
     homeAssistant = {
       enable = false;
       proxy = {
+        enable = true;
         port = 8123;
         domain = "auto";
       };
@@ -102,6 +108,7 @@
     homepage = {
       enable = true;
       proxy = {
+        enable = true;
         port = 8125;
         domain = "home";
         public = true;
@@ -114,6 +121,7 @@
     immich = {
       enable = true;
       proxy = {
+        enable = true;
         port = 2283;
         public = true;
         secure = false;
@@ -131,8 +139,8 @@
       ## Set rcon password in secrets
       enable = false;
       proxy = {
+        enable = false;
         port = 25500;
-        url = false;
       };
       data = {
         dataDirectory = "/services/minecraft/DeceasedCraft-old";
@@ -149,6 +157,7 @@
     radicale = {
       enable = true;
       proxy = {
+        enable = true;
         port = 5232;
         secure = false;
         domain = "radicale";
@@ -163,6 +172,7 @@
     vaultwarden = {
       enable = true;
       proxy = {
+        enable = true;
         port = 8222;
         secure = false;
         domain = "vault";
@@ -176,6 +186,7 @@
     kuma = {
       enable = true;
       proxy = {
+        enable = true;
         port = 8484;
         secure = false;
         domain = "kuma";
@@ -191,6 +202,7 @@
       ## Port forwar 2222 through cloudflare
       enable = true;
       proxy = {
+        enable = true;
         port = 3000;
         secure = false;
         domain = "git";
@@ -221,34 +233,27 @@
 
     vsCode = {
       enable = true;
-      proxy.url = false;
     };
 
     caddy = {
       enable = true;
-      proxy.url = false;
     };
 
     nginx = {
       enable = false;
-      proxy.url = false;
     };
 
     cloudflared = {
       enable = true;
-      proxy.url = false;
-
       settings.id = "43387887-077c-4587-8be7-58fcc0f35558";
     };
 
     containers = {
       enable = true;
-      proxy.url = false;
     };
 
     tailscale = {
       enable = true;
-      proxy.url = false;
     };
   };
 }
