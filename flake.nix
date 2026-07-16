@@ -8,6 +8,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-personal.url = "git+https://git.lillypond.name/dmoeller/nixpkgs-personal";
 
     ## Workstations
     workstations.url = "git+https://git.lillypond.name/dmoeller/Nixos_V2";
@@ -44,15 +45,21 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
 
     forgesync.url = "git+https://hack.moontide.ink/helvetica/forgesync";
+
   };
 
   outputs =
     {
-      self,
+      ## Nixpkgs
       nixpkgs,
       nixpkgs-stable,
       nixpkgs-unstable,
+      nixpkgs-personal,
+
+      ## Workstations
       workstations,
+
+      ## Inputs
       home-manager,
       agenix,
       proxmox-nixos,
@@ -64,69 +71,79 @@
       authentik-nix,
       vscode-server,
       forgesync,
+
+      ## ETC
+      self,
       ...
     }@inputs:
     let
-      # services = import ./config/services.nix;
-      vars = import ./config/variables.nix;
-      system = vars.system;
+      system = "x86_64-linux";
+      lib = nixpkgs.lib;
+      modulesFolder = ./modules;
+      hostsFolder = ./hosts;
 
-      ## Common function to create arguments for systems
-      commonArgs = {
-        inherit inputs;
-        inherit vars;
-
-        ## Pinning Nixpkgs versions
-        pkgs-stable = import nixpkgs-stable {
-          inherit vars;
-          inherit system;
-          config.allowUnfree = true;
-        };
-        pkgs-unstable = import nixpkgs-unstable {
-          inherit vars;
-          inherit system;
-          config.allowUnfree = true;
-        };
-
-        proxmoxOverlay = proxmox-nixos.overlays.${vars.system};
-        minecraftoverlay = nix-minecraft.overlay;
+      vars = import ./baseplate/vars.nix;
+      fun = import ./baseplate/functions.nix {
+        inherit lib;
+        inherit modulesFolder;
+        inherit hostsFolder;
       };
-      commonModules = [
-        home-manager.nixosModules.home-manager
-        agenix.nixosModules.default
-        proxmox-nixos.nixosModules.proxmox-ve
-        portainer-on-nixos.nixosModules.portainer
-        nix-minecraft.nixosModules.minecraft-servers
-        copyparty.nixosModules.default
-        jellarr.nixosModules.default
-        arion.nixosModules.arion
-        authentik-nix.nixosModules.default
-        vscode-server.nixosModules.default
-        forgesync.nixosModules.default
-      ];
+
+      imports = {
+        commonArgs = {
+          inherit inputs vars fun;
+          pkgs-stable = import nixpkgs-stable {
+            inherit vars;
+            inherit system;
+            config.allowUnfree = true;
+          };
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit vars;
+            inherit system;
+            config.allowUnfree = true;
+          };
+          pkgs-personal = nixpkgs-personal.packages.${system};
+
+          proxmoxOverlay = proxmox-nixos.overlays.${system};
+          minecraftoverlay = nix-minecraft.overlay;
+        };
+
+        commonNixModules = [
+          proxmox-nixos.nixosModules.proxmox-ve
+          portainer-on-nixos.nixosModules.portainer
+          nix-minecraft.nixosModules.minecraft-servers
+          copyparty.nixosModules.default
+          jellarr.nixosModules.default
+          arion.nixosModules.arion
+          authentik-nix.nixosModules.default
+          vscode-server.nixosModules.default
+          forgesync.nixosModules.default
+
+          ## Core
+          ./baseplate/nix-main.nix
+          ./secrets/secrets-nix.nix
+          home-manager.nixosModules.home-manager
+          agenix.nixosModules.default
+        ];
+
+        commonHmModules = [
+          ## Core
+          ./baseplate/hm-main.nix
+        ];
+      };
+
     in
     {
-      ## Exported Values
-      ## TODO remap too all hosts and map to sys
-      # pulicSSHKey = vars.sshPublicKey;
+      sshPublicKey = fun.hostSSHKeys;
       nixosConfigurations = {
-        "server" = nixpkgs.lib.nixosSystem {
-          specialArgs = commonArgs;
-          modules = [
-            {
-              nixpkgs.config.allowUnfree = true;
-              home-manager = {
-                extraSpecialArgs = commonArgs;
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                backupFileExtension = "backup";
-                users.${vars.username} = import ./config/hm-main.nix;
-              };
-            }
-            ./config/nix-main.nix
-          ]
-          ++ commonModules;
-        };
+        lillypond =
+          fun.mkHost imports "lillypond"
+            [
+              ## Nix Modules
+            ]
+            [
+              ## Hm Modules
+            ];
       };
     };
 }

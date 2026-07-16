@@ -1,12 +1,12 @@
 {
-    vars,
-    ...
+  config,
+  ...
 }:
 {
   ## Home Manager Settings
   home = {
-    username = "${vars.username}";
-    homeDirectory = "/home/${vars.username}";
+    username = "${config.host.username}";
+    homeDirectory = "/home/${config.host.username}";
     stateVersion = "25.05";
   };
   programs = {

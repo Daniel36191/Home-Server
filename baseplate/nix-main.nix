@@ -25,7 +25,7 @@
   ]
   ++ lib.filesystem.listFilesRecursive ../modules/services
   ++ lib.filesystem.listFilesRecursive ../modules/admin-modules
-  ++ lib.filesystem.listFilesRecursive ../hosts/${host}
+  ++ lib.filesystem.listFilesRecursive ../hosts/${host};
 
   ##############
   ## Hardware ##
@@ -87,6 +87,7 @@
   systemd.user.services = {
     ## Restart at 6:30am
     poweroff = {
+      enable = true;
       description = "Poweroff Service";
       startAt = [ "*-*-* 6:30:00" ];
       serviceConfig = {

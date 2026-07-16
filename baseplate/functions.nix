@@ -1,10 +1,14 @@
 {
   lib,
+  modulesFolder,
+  hostsFolder,
   ...
 }:
 with lib;
 let
-  modulesFolder = ../modules;
+  ######################
+  ## Generate Modules ##
+  ######################
   nixFiles = builtins.filter (p: lib.hasSuffix ".nix" (toString p)) (
     lib.filesystem.listFilesRecursive modulesFolder
   );
@@ -25,7 +29,7 @@ let
   parsed = map parseFile nixFiles;
   servicesList = lib.unique (map (p: p.stem) (builtins.filter (p: p.depth == 1) parsed));
 
-  options = listToAttrs (
+  generateModuleOptions = listToAttrs (
     map (name: {
       name = name;
       value = {
@@ -54,7 +58,45 @@ let
       };
     }) servicesList
   );
+
+  ##############
+  ## SSH Keys ##
+  ##############
+  nixConfigFiles = builtins.filter (p: lib.hasSuffix "config.nix" (toString p)) (
+    allFiles hostsFolder
+  );
+  hostSSHKeys = lib.forEach nixConfigFiles (p: (import p { }).hostConf.sshPublicKey);
+
+  ############
+  ## MkHost ##
+  ############
+  mkHost =
+    imports: host: extraNixModules: extraHmImports:
+    nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = imports.commonArgs // {
+        inherit host;
+      };
+      modules = [
+        {
+          nixpkgs.config.allowUnfree = true;
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            backupFileExtension = "backup";
+            extraSpecialArgs = imports.commonArgs // {
+              inherit host;
+            };
+            users.${host}.imports = imports.commonHmModules ++ extraHmImports ++ [ ];
+          };
+        }
+      ]
+      ++ imports.commonNixModules
+      ++ extraNixModules;
+    };
 in
 {
-  options.modules = { } // options;
+  inherit generateModuleOptions;
+  inherit hostSSHKeys;
+  inherit mkHost;
 }
