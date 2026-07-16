@@ -78,20 +78,24 @@
     }@inputs:
     let
       system = "x86_64-linux";
-      lib = nixpkgs.lib;
       modulesFolder = ./modules;
       hostsFolder = ./hosts;
 
       vars = import ./baseplate/vars.nix;
       fun = import ./baseplate/functions.nix {
-        inherit lib;
+        inherit nixpkgs;
         inherit modulesFolder;
         inherit hostsFolder;
       };
 
       imports = {
         commonArgs = {
-          inherit inputs vars fun;
+          inherit
+            inputs
+            vars
+            fun
+            system
+            ;
           pkgs-stable = import nixpkgs-stable {
             inherit vars;
             inherit system;
@@ -130,11 +134,13 @@
           ## Core
           ./baseplate/hm-main.nix
         ];
+
+        inherit system;
       };
 
     in
     {
-      sshPublicKey = fun.hostSSHKeys;
+      sshPublicKeys = fun.hostSSHKeys;
       nixosConfigurations = {
         lillypond =
           fun.mkHost imports "lillypond"

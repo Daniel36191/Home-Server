@@ -18,7 +18,7 @@ in
     services.cloudflared = {
       enable = true;
       certificateFile = config.age.secrets."cloudflared-token".path;
-      tunnels."${id}" = {
+      tunnels."${mod.settings.id}" = {
         credentialsFile = config.age.secrets."cloudflared-creds".path;
         default = "http_status:404";
         originRequest = {

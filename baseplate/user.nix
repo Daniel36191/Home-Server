@@ -2,8 +2,10 @@
   pkgs,
   options,
   config,
+  host,
   inputs,
   lib,
+  vars,
   ...
 }:
 {
@@ -51,7 +53,7 @@
       list = builtins.attrValues optionsAttrs;
       extraMembers = [
         "root"
-        "${config.host.username}"
+        "${host}"
         "caddy"
       ];
       members = lib.unique (list ++ extraMembers);
@@ -64,10 +66,10 @@
 
   ## Setup user
   users.users = {
-    "${config.host.username}" = {
+    "${host}" = {
       homeMode = "755";
       isNormalUser = true;
-      description = "${config.host.username}";
+      description = "${host}";
       shell = pkgs.bash;
       extraGroups = [
         "networkmanager"
@@ -91,7 +93,7 @@
   };
   nix.settings.trusted-users = [
     "root"
-    "${config.host.username}"
+    "${host}"
   ];
   environment = {
     shells = with pkgs; [
@@ -133,24 +135,24 @@
 
   age.secrets = {
     "ssh" = {
-      path = "/home/${config.host.username}/.ssh/id_ed25519";
-      owner = config.host.username;
+      path = "/home/${host}/.ssh/id_ed25519";
+      owner = host;
       mode = "600";
     };
   };
 
   ## SSH Client & Git Auth
-  home-manager.users.${config.host.username} =
+  home-manager.users.${host} =
     let
       ssh-private = config.age.secrets."ssh";
     in
     {
-      vars,
+      osConfig,
       ...
     }:
     {
       home.file.".ssh/id_ed25519.pub" = {
-        text = vars.sshPublicKey;
+        text = osConfig.host.sshPublicKey;
         force = true;
       };
       programs.ssh = {

@@ -1,7 +1,7 @@
 {
   inputs,
   config,
-  vars,
+  system,
   lib,
   ...
 }:
@@ -11,7 +11,7 @@ let
 in
 {
   environment.systemPackages = [
-    inputs.agenix.packages.${vars.system}.default
+    inputs.agenix.packages.${system}.default
   ];
 
   age.secrets = {

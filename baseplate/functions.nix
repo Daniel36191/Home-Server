@@ -1,11 +1,16 @@
 {
-  lib,
+  nixpkgs,
   modulesFolder,
   hostsFolder,
   ...
 }:
+let
+  lib = nixpkgs.lib;
+in
 with lib;
 let
+  allFiles = d: lib.filesystem.listFilesRecursive d;
+
   ######################
   ## Generate Modules ##
   ######################
@@ -65,15 +70,15 @@ let
   nixConfigFiles = builtins.filter (p: lib.hasSuffix "config.nix" (toString p)) (
     allFiles hostsFolder
   );
-  hostSSHKeys = lib.forEach nixConfigFiles (p: (import p { }).hostConf.sshPublicKey);
+  hostSSHKeys = lib.forEach nixConfigFiles (p: (import p { pkgs = nixpkgs; }).host.sshPublicKey);
 
   ############
   ## MkHost ##
   ############
   mkHost =
     imports: host: extraNixModules: extraHmImports:
-    nixpkgs.lib.nixosSystem {
-      inherit system;
+    lib.nixosSystem {
+      system = imports.system;
       specialArgs = imports.commonArgs // {
         inherit host;
       };

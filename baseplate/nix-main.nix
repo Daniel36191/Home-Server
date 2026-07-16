@@ -1,6 +1,7 @@
 {
   host,
   lib,
+  pkgs,
   ...
 }:
 {
@@ -14,13 +15,12 @@
     ## Core ##
     ##########
 
-    ./module-deff.nix
+    ./config-deff.nix
 
-    ./nix/apps.nix
-    ../secrets/secrets-nix.nix
-    ./nix/networking.nix
-    ./nix/user.nix
-    ./nix/boot.nix
+    ./apps.nix
+    ./networking.nix
+    ./user.nix
+    ./boot.nix
 
   ]
   ++ lib.filesystem.listFilesRecursive ../modules/services

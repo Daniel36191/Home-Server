@@ -1,11 +1,12 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }:
 with lib;
 let
-  mod = config.moduels.containers;
+  mod = config.modules.containers;
 in
 {
   config = mkIf mod.enable {
