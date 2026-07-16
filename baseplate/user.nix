@@ -173,8 +173,8 @@
             controlPersist = "no";
           };
 
-          "ssh.lillypond.name" = {
-            hostname = "ssh.lillypond.name";
+          "ssh.${vars.sld}.${vars.sld}" = {
+            hostname = "ssh.${vars.sld}.${vars.sld}";
             port = 2222;
             user = "forgejo";
             extraOptions = {
