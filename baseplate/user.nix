@@ -54,7 +54,6 @@
       extraMembers = [
         "root"
         "${host}"
-        "caddy"
       ];
       members = lib.unique (list ++ extraMembers);
     in
@@ -193,7 +192,7 @@
       programs.git = {
         enable = true;
         settings.user = {
-          Name = "Daniel36191";
+          Name = "${vars.gitUsername}";
           Email = "${vars.email}";
         };
       };

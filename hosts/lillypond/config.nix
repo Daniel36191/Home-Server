@@ -237,10 +237,14 @@
 
     caddy = {
       enable = true;
+
+      data.owner = "caddy";
     };
 
     nginx = {
       enable = false;
+
+      data.owner = "nginx";
     };
 
     cloudflared = {
