@@ -4,28 +4,16 @@
   pkgs,
   ...
 }:
+let
+  allFiles = d: lib.filesystem.listFilesRecursive d;
+in
 {
   imports = [
-
-    ##############
-    ## Services ##
-    ##############
-
-    ##########
-    ## Core ##
-    ##########
-
-    ./config-deff.nix
-
-    ./apps.nix
-    ./networking.nix
-    ./user.nix
-    ./boot.nix
-
   ]
-  ++ lib.filesystem.listFilesRecursive ../modules/services
-  ++ lib.filesystem.listFilesRecursive ../modules/admin-modules
-  ++ lib.filesystem.listFilesRecursive ../hosts/${host};
+  ++ allFiles ../modules/services
+  ++ allFiles ../modules/admin-modules
+  ++ allFiles ../hosts/${host}
+  ++ allFiles ./nix;
 
   ##############
   ## Hardware ##

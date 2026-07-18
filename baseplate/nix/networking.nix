@@ -1,4 +1,5 @@
 {
+  host,
   ...
 }:
 {
@@ -14,24 +15,24 @@
     ];
   };
 
-
   #########
   ## DNS ##
   #########
 
-  networking = { 
+  networking = {
     networkmanager = {
       enable = true;
-      dns = "none"; ## Disable NetworkManager's DNS resolution
+      ## Disable NetworkManager's DNS resolution
+      dns = "none";
     };
     ## Don't get from router
-    hostName = "lillypond";
+    hostName = "${host}";
     useDHCP = false;
     dhcpcd.enable = false;
 
     nameservers = [
-    "192.168.0.141"
-    "9.9.9.9"
+      "192.168.0.141"
+      "9.9.9.9"
     ];
   };
   ## Avahi Dns services
