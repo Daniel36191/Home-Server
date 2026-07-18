@@ -102,6 +102,7 @@
       sudonix = "git pull && nh os switch -H server ./";
       updatenix = "git pull && nh os switch -H server ./ --update";
       cleannix = "sudo nix-collect-garbage -d";
+      agenixedit = "sudo EDITOR=$EDITOR agenix --identity /etc/ssh/ssh_host_ed25519_key -e";
 
       mi = "${pkgs.micro}/bin/micro";
 
@@ -133,7 +134,7 @@
   };
 
   age.secrets = {
-    "ssh" = {
+    "ssh-${host}" = {
       path = "/home/${host}/.ssh/id_ed25519";
       owner = host;
       mode = "600";
@@ -143,7 +144,7 @@
   ## SSH Client & Git Auth
   home-manager.users.${host} =
     let
-      ssh-private = config.age.secrets."ssh";
+      ssh-private = config.age.secrets."ssh-${host}";
     in
     {
       osConfig,
