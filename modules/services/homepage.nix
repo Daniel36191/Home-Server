@@ -38,7 +38,6 @@ in
         "${mod.proxy.domain}.${vars.sld}.${if mod.proxy.public then vars.tld else "local"},"
         "${vars.sld}.${if mod.proxy.public then vars.tld else "local"}"
       ];
-      environmentFile = "";
 
       bookmarks = [
         {

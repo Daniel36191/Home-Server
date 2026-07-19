@@ -5,8 +5,7 @@
     ## Nixpkgs ##
     #############
 
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-personal.url = "git+https://git.lillypond.name/dmoeller/nixpkgs-personal";
 
@@ -52,7 +51,6 @@
     {
       ## Nixpkgs
       nixpkgs,
-      nixpkgs-stable,
       nixpkgs-unstable,
       nixpkgs-personal,
 
@@ -96,11 +94,6 @@
             fun
             system
             ;
-          pkgs-stable = import nixpkgs-stable {
-            inherit vars;
-            inherit system;
-            config.allowUnfree = true;
-          };
           pkgs-unstable = import nixpkgs-unstable {
             inherit vars;
             inherit system;
