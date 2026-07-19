@@ -16,24 +16,30 @@ in
 
   age.secrets = {
     ## SSH
-    "ssh" = {
-      file = ./ssh.age;
+    "ssh-lillypond" = {
+      file = ./ssh-lillypond.age;
+    };
+    "ssh-lillylake" = {
+      file = ./ssh-lillylake.age;
     };
 
-    ## Copyparty
+    ## Copyparty Users
     "copyparty-user-daniel" = mkIf mods.copyparty.enable {
       file = ./copyparty-user-daniel.age;
       owner = mods.copyparty.data.owner;
     };
 
-    ## Nextcloud
+    ## Nextcloud Users
     "nextcloud-user-admin" = {
       file = ./nextcloud-user-admin.age;
     };
 
     ## Tailscale
-    "tailscale-user-admin" = {
+    "tailscale-user-lillypond" = {
       file = ./tailscale-user-lillypond.age;
+    };
+    "tailscale-user-lillylake" = {
+      file = ./tailscale-user-lillylake.age;
     };
 
     ## Jellyfin
@@ -45,11 +51,6 @@ in
     };
     "jellyfin-user-admin" = {
       file = ./jellyfin-user-admin.age;
-    };
-
-    ## Duckdns
-    "duckdns-token" = {
-      file = ./duckdns-token.age;
     };
 
     ## Authentik
@@ -65,7 +66,7 @@ in
       file = ./cloudflared-creds.age;
     };
 
-    ## Caldav
+    ## Radicale
     "radicale-creds" = mkIf mods.radicale.enable {
       file = ./radicale-creds.age;
       owner = mods.radicale.data.owner;
