@@ -143,6 +143,15 @@
             [
               ## Hm Modules
             ];
+
+        lillylake =
+          fun.mkHost imports "lillylake"
+            [
+              ## Nix Modules
+            ]
+            [
+              ## Hm Modules
+            ];
       };
     };
 }
