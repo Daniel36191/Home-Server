@@ -99,8 +99,8 @@
       bashInteractive
     ];
     shellAliases = {
-      sudonix = "git pull && nh os switch -H server ./";
-      updatenix = "git pull && nh os switch -H server ./ --update";
+      sudonix = "git pull && nh os switch -H ${host} ./";
+      updatenix = "git pull && nh os switch -H ${host} ./ --update";
       cleannix = "sudo nix-collect-garbage -d";
       agenixedit = "sudo EDITOR=$EDITOR agenix --identity /etc/ssh/ssh_host_ed25519_key -e";
 
