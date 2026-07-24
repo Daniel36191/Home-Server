@@ -13,7 +13,8 @@
       enable = true;
       proxy = {
         enable = true;
-        port = 3443;
+        ## This is not a config for authentik.
+        port = 9443;
         domain = "auth";
         public = true;
       };
