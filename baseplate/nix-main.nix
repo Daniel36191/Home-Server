@@ -1,0 +1,100 @@
+{
+  host,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  allFiles = d: lib.filesystem.listFilesRecursive d;
+in
+{
+  imports = [
+  ]
+  ++ allFiles ../modules/services
+  ++ allFiles ../modules/admin-modules
+  ++ allFiles ../hosts/${host}
+  ++ allFiles ./nix;
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "nodejs-20.20.2"
+    "nodejs-slim-20.20.2"
+  ];
+
+  ##############
+  ## Hardware ##
+  ##############
+
+  services.auto-cpufreq = {
+    enable = true;
+    settings = {
+      charger = {
+        governor = "performance";
+        turbo = "auto";
+      };
+    };
+  };
+
+  ###########
+  ## Nixos ##
+  ###########
+
+  ## SSD partition cleanup
+  services.fstrim = {
+    enable = true;
+    interval = "weekly";
+  };
+
+  nix = {
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      substituters = [
+        "https://nix-community.cachix.org"
+        "https://cache.nixos.org"
+        "https://devenv.cachix.org"
+      ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+      ];
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+  };
+
+  ## Compatibility
+  system.activationScripts.binBash = ''
+    ln -sf ${pkgs.bash}/bin/bash /bin/bash
+  '';
+
+  ###################
+  ## Auto Restarts ##
+  ###################
+  systemd.user.services = {
+    ## Restart at 6:30am
+    poweroff = {
+      enable = true;
+      description = "Poweroff Service";
+      startAt = [ "*-*-* 6:30:00" ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "/run/current-system/sw/bin/reboot";
+      };
+    };
+  };
+
+  ## This value determines the NixOS release from which the default
+  ## settings for stateful data, like file locations and database versions
+  ## on your system were taken. It‘s perfectly fine and recommended to leave
+  ## this value at the release version of the first install of this system.
+  ## Before changing this value read the documentation for this option
+  ## (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "24.11";
+}

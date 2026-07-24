@@ -1,15 +1,19 @@
 let
   ## Host public ssh key foubd by cat /etc/ssh/ssh_host_ed25519_key.pub
-  server = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ7DNe+NVZ74xIdEWxSOWxXkK/p+8JXtunLE+TTJXXpO";
+  lillypond = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ7DNe+NVZ74xIdEWxSOWxXkK/p+8JXtunLE+TTJXXpO";
+  lillylake = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAAAwK9S7TWZht1c/TJJjx92SveFjdLnwnJajXDHQI9f";
   systems = [
-    server
+    lillypond
+    lillylake
   ];
 in
 {
-  ## make new files/edit with agenixedit file.age
+  ## Make new files/edit with agenixedit file.age
+  ## Rekey with lillypond's private key
 
   ## SSH
-  "ssh.age".publicKeys = systems;
+  "ssh-lillypond.age".publicKeys = systems;
+  "ssh-lillylake.age".publicKeys = systems;
 
   ## CopyParty users
   "copyparty-user-daniel.age".publicKeys = systems;
@@ -19,14 +23,12 @@ in
 
   ## Tailscale
   "tailscale-user-lillypond.age".publicKeys = systems;
+  "tailscale-user-lillylake.age".publicKeys = systems;
 
   ## Jellyfin
   "jellyfin-api-jellarr.age".publicKeys = systems;
   "jellyfin-user-admin.age".publicKeys = systems;
   "jellyfin-user-family.age".publicKeys = systems;
-
-  ## Duckdns
-  "duckdns-token.age".publicKeys = systems;
 
   ## Authentik
   "authentik-env.age".publicKeys = systems;
@@ -35,7 +37,7 @@ in
   "cloudflared-token.age".publicKeys = systems;
   "cloudflared-creds.age".publicKeys = systems;
 
-  ## radicale
+  ## Radicale
   "radicale-creds.age".publicKeys = systems;
 
   ## Vaultwarden
@@ -44,7 +46,7 @@ in
   ## Minecraft
   "minecraft-rcon.age".publicKeys = systems;
 
-  ## forgejo
+  ## Forgejo
   "authentikClientSecret.age".publicKeys = systems;
   "forgejo-runner-token.age".publicKeys = systems;
   "forgesync.age".publicKeys = systems;

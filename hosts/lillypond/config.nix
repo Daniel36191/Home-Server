@@ -1,0 +1,264 @@
+{
+  pkgs,
+  ...
+}:
+{
+  host = {
+    localIpAddress = "192.168.0.189";
+    sshPublicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIv464AZB6omIM7lrgKqZKnK62iP72YOrcYsV9pplsyF lillypond@lillypond";
+  };
+
+  modules = {
+    authentik = {
+      enable = true;
+      proxy = {
+        enable = true;
+        ## This is not a config for authentik.
+        port = 9443;
+        domain = "auth";
+        public = true;
+      };
+      homepage = {
+        homepage = true;
+      };
+    };
+
+    portainer = {
+      enable = true;
+      proxy = {
+        enable = true;
+        port = 8443;
+        secure = true;
+        public = true;
+        domain = "portainer";
+      };
+      homepage = {
+        abbr = "PT";
+        homepage = true;
+      };
+    };
+
+    proxmox = {
+      enable = false;
+      proxy = {
+        enable = true;
+        port = 8006;
+      };
+      homepage = {
+        abbr = "PX";
+        homepage = true;
+      };
+    };
+
+    syncthing = {
+      enable = true;
+      proxy = {
+        enable = true;
+        port = 8384;
+      };
+      homepage = {
+        abbr = "ST";
+        homepage = true;
+      };
+    };
+
+    copyparty = {
+      enable = true;
+      proxy = {
+        enable = true;
+        port = 3923;
+        domain = "files";
+        public = true;
+        secure = false;
+      };
+      homepage = {
+        abbr = "FS";
+        homepage = true;
+      };
+      data = {
+        owner = "copyparty";
+        dataDirectory = "/services/copyparty";
+      };
+    };
+
+    homeAssistant = {
+      enable = false;
+      proxy = {
+        enable = true;
+        port = 8123;
+        domain = "auto";
+      };
+      homepage = {
+        abbr = "HA";
+        homepage = true;
+      };
+      data = {
+        dataDirectory = "/services/home-assistant";
+      };
+      settings = {
+        ##Set to true to edit dashboard in ui, copy file yaml file next to home-assistant.nix then rebuild.
+        loveConfigWriteable = true;
+        # connectors = with pkgs.home-assistant-custom-components; [
+        # ];
+        lovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
+          mini-graph-card
+        ];
+      };
+    };
+
+    homepage = {
+      enable = true;
+      proxy = {
+        enable = true;
+        port = 8125;
+        domain = "home";
+        public = true;
+        secure = false;
+        authentikAuth = true;
+        default = true;
+      };
+    };
+
+    immich = {
+      enable = true;
+      proxy = {
+        enable = true;
+        port = 2283;
+        public = true;
+        secure = false;
+      };
+      homepage = {
+        homepage = true;
+      };
+      data = {
+        dataDirectory = "/services/immich";
+        owner = "immich";
+      };
+    };
+
+    minecraft = {
+      ## Set rcon password in secrets
+      enable = false;
+      proxy = {
+        enable = false;
+        port = 25500;
+      };
+      data = {
+        dataDirectory = "/services/minecraft/DeceasedCraft-old";
+        owner = "minecraft";
+      };
+      settings = {
+        packName = "DeceasedCraft";
+        autoStart = false;
+        runArgs = "-Xmx6G -Xms4G -p libraries/cpw/mods/bootstraplauncher/1.0.0/bootstraplauncher-1.0.0.jar:libraries/cpw/mods/securejarhandler/1.0.8/securejarhandler-1.0.8.jar:libraries/org/ow2/asm/asm-commons/9.5/asm-commons-9.5.jar:libraries/org/ow2/asm/asm-util/9.5/asm-util-9.5.jar:libraries/org/ow2/asm/asm-analysis/9.5/asm-analysis-9.5.jar:libraries/org/ow2/asm/asm-tree/9.5/asm-tree-9.5.jar:libraries/org/ow2/asm/asm/9.5/asm-9.5.jar:libraries/net/minecraftforge/JarJarFileSystems/0.3.19/JarJarFileSystems-0.3.19.jar --add-modules ALL-MODULE-PATH --add-opens java.base/java.util.jar=cpw.mods.securejarhandler --add-opens java.base/java.lang.invoke=cpw.mods.securejarhandler --add-exports java.base/sun.security.util=cpw.mods.securejarhandler --add-exports jdk.naming.dns/com.sun.jndi.dns=java.naming -Djava.net.preferIPv6Addresses=system -DignoreList=bootstraplauncher-1.0.0.jar,securejarhandler-1.0.8.jar,asm-commons-9.5.jar,asm-util-9.5.jar,asm-analysis-9.5.jar,asm-tree-9.5.jar,asm-9.5.jar,JarJarFileSystems-0.3.19.jar -DlibraryDirectory=libraries -DlegacyClassPath=libraries/cpw/mods/securejarhandler/1.0.8/securejarhandler-1.0.8.jar:libraries/org/ow2/asm/asm/9.5/asm-9.5.jar:libraries/org/ow2/asm/asm-commons/9.5/asm-commons-9.5.jar:libraries/org/ow2/asm/asm-tree/9.5/asm-tree-9.5.jar:libraries/org/ow2/asm/asm-util/9.5/asm-util-9.5.jar:libraries/org/ow2/asm/asm-analysis/9.5/asm-analysis-9.5.jar:libraries/net/minecraftforge/accesstransformers/8.0.4/accesstransformers-8.0.4.jar:libraries/org/antlr/antlr4-runtime/4.9.1/antlr4-runtime-4.9.1.jar:libraries/net/minecraftforge/eventbus/5.0.3/eventbus-5.0.3.jar:libraries/net/minecraftforge/forgespi/4.0.15-4.x/forgespi-4.0.15-4.x.jar:libraries/net/minecraftforge/coremods/5.0.1/coremods-5.0.1.jar:libraries/cpw/mods/modlauncher/9.1.3/modlauncher-9.1.3.jar:libraries/net/minecraftforge/unsafe/0.2.0/unsafe-0.2.0.jar:libraries/com/electronwill/night-config/core/3.6.4/core-3.6.4.jar:libraries/com/electronwill/night-config/toml/3.6.4/toml-3.6.4.jar:libraries/org/apache/commons/commons-lang3/3.12.0/commons-lang3-3.12.0.jar -DignoreList=bootstraplauncher-1.0.0.jar,securejarhandler-1.0.8.jar,asm-commons-9.5.jar,asm-util-9.5.jar,asm-analysis-9.5.jar,asm-tree-9.5.jar,asm-9.5.jar,JarJarFileSystems-0.3.19.jar,accesstransformers-8.0.4.jar,antlr4-runtime-4.9.1.jar,eventbus-5.0.3.jar,forgespi-4.0.15-4.x.jar,coremods-5.0.1.jar,modlauncher-9.1.3.jar,unsafe-0.2.0.jar,night-config-core-3.6.4.jar,night-config-toml-3.6.4.jar,commons-lang3-3.12.0.jar";
+        javaPackage = pkgs.javaPackages.compiler.temurin-bin.jre-17;
+      };
+    };
+
+    radicale = {
+      enable = true;
+      proxy = {
+        enable = true;
+        port = 5232;
+        secure = false;
+        domain = "radicale";
+        public = true;
+      };
+      data = {
+        dataDirectory = "/services/radicale";
+        owner = "radicale";
+      };
+    };
+
+    vaultwarden = {
+      enable = true;
+      proxy = {
+        enable = true;
+        port = 8222;
+        secure = false;
+        domain = "vault";
+        public = true;
+      };
+      data = {
+        dataDirectory = "/services/vaultwarden";
+      };
+    };
+
+    kuma = {
+      enable = true;
+      proxy = {
+        enable = true;
+        port = 8484;
+        secure = false;
+        domain = "kuma";
+        public = true;
+      };
+      data = {
+        dataDirectory = "/services/kuma";
+      };
+    };
+
+    forgejo = {
+      ## Set authentikClientSecret in secrets
+      ## Port forwar 2222 through cloudflare
+      enable = true;
+      proxy = {
+        enable = true;
+        port = 3000;
+        secure = false;
+        domain = "git";
+        public = true;
+      };
+      homepage = {
+        abbr = "Git";
+        homepage = true;
+      };
+      data = {
+        dataDirectory = "/services/forgejo";
+        owner = "forgejo";
+      };
+      settings = {
+        ## Setup all keys for https://hack.moontide.ink/helvetica/forgesync : SOURCE(forgejo), TARGET(github), MIRROR(github)
+        forgeSync = true;
+        authentikClientId = "Rn13Cn2yj50mU4Ru9Ti7BIuPfdNx67w9PNa5IRy1";
+        sshPort = 2222;
+        ## Generate key and place in age from web-ui
+        runnerEnable = false;
+        runnerLabels = [
+          "native:host"
+          "ubuntu-latest:docker://node:20-bookworm"
+          "ubuntu-24.04:docker://node:20-bookworm"
+        ];
+      };
+    };
+
+    vsCode = {
+      enable = true;
+    };
+
+    caddy = {
+      enable = true;
+
+      data.owner = "caddy";
+    };
+
+    nginx = {
+      enable = false;
+
+      data.owner = "nginx";
+    };
+
+    cloudflared = {
+      enable = true;
+      settings.id = "43387887-077c-4587-8be7-58fcc0f35558";
+    };
+
+    containers = {
+      enable = true;
+    };
+
+    tailscale = {
+      enable = true;
+    };
+  };
+}
