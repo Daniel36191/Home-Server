@@ -2,28 +2,44 @@
 let
   lib = (import <nixpkgs> { }).lib;
 
-  modulesFolder = ./modules;
-  nixFiles = builtins.filter (p: lib.hasSuffix ".nix" (toString p)) (
-    lib.filesystem.listFilesRecursive modulesFolder
+  hostsFolder = ./hosts;
+
+  nixFiles = builtins.filter (p: lib.hasSuffix "config.nix" (toString p)) (
+    lib.filesystem.listFilesRecursive hostsFolder
   );
   parseFile =
     path:
     let
       str = toString path;
-      relPath = builtins.elemAt (builtins.split "/modules/" str) 2;
-      segs = lib.splitString "/" relPath;
-      rest = builtins.tail segs; # drop section
-      stem = lib.removeSuffix ".nix" (lib.last rest);
-      group = if builtins.length rest > 1 then builtins.head rest else null;
+      segs = lib.splitString "/" str;
+      value = (import path { }).modules.diskHealth.settings.webUiHost or false;
+      ip = (import path { }).host.localIpAddress or "";
+
+      host = builtins.head (lib.dropEnd 1 (lib.drop (builtins.length segs - 2) segs));
     in
     {
-      inherit stem group;
-      depth = builtins.length rest;
+      inherit
+        host
+        value
+        ip
+        ;
     };
-  parsed = map parseFile nixFiles;
-  servicesList = lib.unique (map (p: p.stem) (builtins.filter (p: p.depth == 1) parsed));
+  parsedAttrs = builtins.listToAttrs (
+    map (item: {
+      name = item.host;
+      value = item;
+    }) (map parseFile nixFiles)
+  );
+  webUiIp = builtins.head (
+    builtins.filter (ip: ip != null) (
+      builtins.attrValues (
+        builtins.mapAttrs (name: value: if value.value == true then value.ip else null) parsedAttrs
+      )
+    )
+  );
+
 in
 {
-  rr = servicesList;
+  rr = webUiIp;
 
 }

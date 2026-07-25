@@ -93,6 +93,8 @@
             vars
             fun
             system
+            modulesFolder
+            hostsFolder
             ;
           pkgs-unstable = import nixpkgs-unstable {
             inherit vars;

@@ -1,5 +1,5 @@
 {
-  pkgs,
+  pkgs ? null,
   ...
 }:
 {
@@ -20,6 +20,25 @@
       };
       homepage = {
         homepage = true;
+      };
+    };
+
+    diskHealth = {
+      enable = true;
+      proxy = {
+        enable = true;
+        port = 8546;
+        secure = false;
+        domain = "disks";
+        public = true;
+      };
+      homepage = {
+        homepage = true;
+        abbr = "DH";
+        icon = "scrutiny";
+      };
+      settings = {
+        webUiHost = true;
       };
     };
 
@@ -96,7 +115,7 @@
         dataDirectory = "/services/home-assistant";
       };
       settings = {
-        ##Set to true to edit dashboard in ui, copy file yaml file next to home-assistant.nix then rebuild.
+        ## Set to true to edit dashboard in ui, copy file yaml file next to home-assistant.nix then rebuild.
         loveConfigWriteable = true;
         # connectors = with pkgs.home-assistant-custom-components; [
         # ];
