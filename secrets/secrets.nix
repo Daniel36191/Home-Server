@@ -1,7 +1,7 @@
 let
   ## Host public ssh key foubd by cat /etc/ssh/ssh_host_ed25519_key.pub
   lillypond = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ7DNe+NVZ74xIdEWxSOWxXkK/p+8JXtunLE+TTJXXpO";
-  lillylake = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAAAwK9S7TWZht1c/TJJjx92SveFjdLnwnJajXDHQI9f";
+  lillylake = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGF0hZeth6aZ5cLaXmCYG3ORKR0MfiuomWeCJQy8N29f";
   systems = [
     lillypond
     lillylake
