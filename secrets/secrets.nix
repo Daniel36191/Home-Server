@@ -9,7 +9,6 @@ let
 in
 {
   ## Make new files/edit with agenixedit file.age
-  ## Rekey with lillypond's private key
 
   ## SSH
   "ssh-lillypond.age".publicKeys = systems;
