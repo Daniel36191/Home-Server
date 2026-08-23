@@ -21,7 +21,7 @@ let
   raidArray = {
     disk = diskArray;
     zpool = {
-      tank = {
+      "${cfg.arrayName}" = {
         type = "zpool";
         mode = "raidz1";
         rootFsOptions = {
