@@ -5,7 +5,10 @@ let
   cfg = import ../../disko/lillylake/raid-config.nix;
 in
 {
-  boot.supportedFilesystems = [ "zfs" ];
+  boot = {
+  	supportedFilesystems = [ "zfs" ];
+  	zfs.forceImportRoot = false;
+  	};
   services.zfs.autoScrub.enable = true;
   fileSystems."${cfg.mountPoint}" = {
     device = cfg.arrayName;

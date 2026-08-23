@@ -1,5 +1,6 @@
 {
   host,
+  config,
   ...
 }:
 {
@@ -34,6 +35,7 @@
       "192.168.0.141"
       "9.9.9.9"
     ];
+    hostId = config.host.hostId;
   };
   ## Avahi Dns services
   services = {
