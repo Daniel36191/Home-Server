@@ -1,12 +1,6 @@
-#! /usr/bin/env -S nix repl --extra-experimental-features "nix-command flakes" --file
 let
-  lib = (import <nixpkgs> { }).lib;
-
-  driveList = {
-    "raid1" = "ata-WDC_WD40EFAX-XXXXXX";
-    "raid2" = "ata-WDC_WD40EFAX-XXXXXY";
-  };
-  mountPoint = "/raid";
+  cfg = import ./raid-config.nix;
+  ## ---
   diskArray = builtins.mapAttrs (name: value: {
     type = "disk";
     device = "/dev/disk/by-id/${value}";
@@ -17,12 +11,12 @@ let
           size = "100%";
           content = {
             type = "zfs";
-            pool = "tank";
+            pool = cfg.arrayName;
           };
         };
       };
     };
-  }) driveList;
+  }) cfg.driveList;
 
   raidArray = {
     disk = diskArray;
@@ -34,12 +28,11 @@ let
           compression = "lz4";
           atime = "off";
         };
-        mountpoint = mountPoint;
+        mountpoint = cfg.mountPoint;
       };
     };
   };
 in
 {
-  rr = raidArray;
-
+  disko.devices = raidArray;
 }
