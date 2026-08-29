@@ -1,6 +1,5 @@
 let
   cfg = import ./raid-config.nix;
-  ## ---
   diskArray = builtins.mapAttrs (name: value: {
     type = "disk";
     device = "/dev/disk/by-id/${value}";

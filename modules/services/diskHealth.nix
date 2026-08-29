@@ -18,6 +18,7 @@ let
       segs = lib.splitString "/" str;
       value = (import path { }).modules.diskHealth.settings.webUiHost or false;
       ip = (import path { }).host.localIpAddress or "";
+      port = (import path { }).modules.diskHealth.proxy.port or 8546;
 
       host = builtins.head (lib.dropEnd 1 (lib.drop (builtins.length segs - 2) segs));
     in
@@ -26,6 +27,7 @@ let
         host
         value
         ip
+        port
         ;
     };
   parsedAttrs = builtins.listToAttrs (
@@ -41,7 +43,13 @@ let
       )
     )
   );
-
+  webUiPort = builtins.head (
+    builtins.filter (port: port != null) (
+      builtins.attrValues (
+        builtins.mapAttrs (name: value: if value.value == true then value.port else null) parsedAttrs
+      )
+    )
+  );
   mod = config.modules.diskHealth;
   log = "DEBUG";
 in
@@ -67,10 +75,10 @@ in
         package = pkgs-unstable.scrutiny-collector;
         settings = {
           log.level = log;
-          host.id =
+          host.id = # Caps only first letter X3
             lib.toUpper (builtins.substring 0 1 host)
             + builtins.substring 1 (builtins.stringLength host - 1) host;
-          api.endpoint = "http://${webUiIp}:${toString mod.proxy.port}";
+          api.endpoint = "http://${webUiIp}:${toString webUiPort}";
         };
       };
     };

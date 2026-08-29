@@ -15,5 +15,9 @@
     tailscale = {
       enable = true;
     };
+
+    diskHealth = {
+      enable = true;
+    };
   };
 }
