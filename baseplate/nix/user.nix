@@ -158,7 +158,7 @@
       programs.ssh = {
         enable = true;
         enableDefaultConfig = false;
-        matchBlocks = {
+        settings = {
           "*" = {
             port = 22;
             identityFile = ssh-private.path;
@@ -178,9 +178,7 @@
             hostname = "ssh.${vars.sld}.${vars.sld}";
             port = 2222;
             user = "forgejo";
-            extraOptions = {
-              WarnWeakCrypto = "no";
-            };
+            WarnWeakCrypto = "no";
           };
 
           "github.com" = {
