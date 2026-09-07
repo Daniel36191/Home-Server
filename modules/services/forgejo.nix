@@ -57,6 +57,8 @@ in
           ENABLE_PUSH_CREATE_USER = true;
           ENABLE_PUSH_CREATE_ORG = true;
           DEFAULT_PUSH_CREATE_PRIVATE = false;
+          ## Dissable download as zip
+          DISABLE_DOWNLOAD_SOURCE_ARCHIVES = true;
         };
         actions.ENABLED = mod.settings.runnerEnable;
         oauth2.ENABLED = true;
@@ -82,7 +84,7 @@ in
       };
     };
 
-    # Register the Authentik OAuth2
+    ## Register the Authentik OAuth2
     systemd.services.forgejo.postStart =
       let
         forgejo-cli = "${cfg.package}/bin/forgejo";

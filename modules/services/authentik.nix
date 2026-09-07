@@ -26,5 +26,8 @@ in
         };
       };
     };
+    systemd.services."authentik" = {
+      serviceConfig.Restart = lib.mkForce "always";
+    };
   };
 }
