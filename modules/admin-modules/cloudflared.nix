@@ -29,5 +29,8 @@ in
         };
       };
     };
+    systemd.services."cloudflared-tunnel-${mod.settings.id}" = {
+      serviceConfig.Restart = lib.mkForce "always";
+    };
   };
 }

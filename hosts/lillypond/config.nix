@@ -252,19 +252,32 @@
       };
     };
 
-    vsCode = {
+    kasmweb = {
       enable = true;
+      proxy = {
+        enable = true;
+        port = 2443;
+        secure = false;
+        domain = "kasm";
+        public = false;
+      };
+      data = {
+        dataDirectory = "/services/kasmweb";
+        owner = "kasmweb";
+      };
+    };
+
+    vsCode = {
+      enable = false;
     };
 
     caddy = {
       enable = true;
-
       data.owner = "caddy";
     };
 
     nginx = {
       enable = false;
-
       data.owner = "nginx";
     };
 
