@@ -50,6 +50,7 @@ in
                 ${if cfg.authentikAuth or false then authentikForwardAuth else ""}
                 reverse_proxy 127.0.0.1:${toString cfg.port} {
                   header_up CF-Connecting-IP {header.CF-Connecting-IP}
+                  header_up X-Real-IP {header.CF-Connecting-IP}
                   ${
                     if cfg.public or false then
                       ''

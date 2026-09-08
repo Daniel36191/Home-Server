@@ -224,7 +224,7 @@
       enable = true;
       proxy = {
         enable = true;
-        port = 3000;
+        port = 8000;
         secure = false;
         domain = "git";
         public = true;
@@ -291,6 +291,10 @@
     };
 
     tailscale = {
+      enable = true;
+    };
+
+    anubis = {
       enable = true;
     };
   };
