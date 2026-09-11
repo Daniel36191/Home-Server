@@ -25,7 +25,7 @@ in
           noTLSVerify = true;
         };
         ingress = {
-          "*.${vars.sld}.${vars.tld}" = "http://localhost";
+          "*.${vars.sld}.${vars.tld}" = "http://127.0.0.1";
         };
       };
     };

@@ -21,8 +21,8 @@ in
         disable_startup_analytics = true;
         avatars = "initials";
         listen = {
-          http = "0.0.0.0:3080";
           https = "0.0.0.0:${toString mod.proxy.port}";
+          http = "0.0.0.0:3080";
         };
       };
     };

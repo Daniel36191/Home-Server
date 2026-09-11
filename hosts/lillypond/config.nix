@@ -16,6 +16,8 @@
         enable = true;
         ## This is not a config for authentik.
         port = 9443;
+        secure = true;
+        anubis = false;
         domain = "auth";
         public = true;
       };
@@ -30,6 +32,7 @@
         enable = true;
         port = 8546;
         secure = false;
+        anubis = true;
         domain = "disks";
         public = true;
       };
@@ -90,6 +93,7 @@
         domain = "files";
         public = true;
         secure = false;
+        anubis = true;
       };
       homepage = {
         abbr = "FS";
@@ -127,7 +131,7 @@
     };
 
     homepage = {
-      enable = true;
+      enable = false;
       proxy = {
         enable = true;
         port = 8125;
@@ -144,6 +148,7 @@
       proxy = {
         enable = true;
         port = 2283;
+        anubis = true;
         public = true;
         secure = false;
       };
@@ -181,6 +186,7 @@
         enable = true;
         port = 5232;
         secure = false;
+        anubis = true;
         domain = "radicale";
         public = true;
       };
@@ -196,6 +202,7 @@
         enable = true;
         port = 8222;
         secure = false;
+        anubis = true;
         domain = "vault";
         public = true;
       };
@@ -226,6 +233,7 @@
         enable = true;
         port = 3000;
         secure = false;
+        anubis = true;
         domain = "git";
         public = true;
       };
@@ -257,7 +265,7 @@
       proxy = {
         enable = true;
         port = 2443;
-        secure = false;
+        secure = true;
         domain = "kasm";
         public = false;
       };
@@ -291,6 +299,10 @@
     };
 
     tailscale = {
+      enable = true;
+    };
+
+    anubis = {
       enable = true;
     };
   };
