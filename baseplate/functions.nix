@@ -43,6 +43,7 @@ let
           enable = mkEnableOption "Enable Proxy";
           port = mkOption { default = 0; };
           secure = mkOption { default = true; };
+          anubis = mkOption { default = false; };
           authentikAuth = mkOption { default = false; }; # Use authentik proxy auth for protection
           domain = mkOption { default = "${name}"; };
           public = mkOption { default = false; };

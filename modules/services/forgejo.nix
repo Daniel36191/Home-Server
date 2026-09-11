@@ -41,7 +41,7 @@ in
           DOMAIN = with vars; "${mod.proxy.domain}.${sld}.${tld}";
           ROOT_URL = "${cfg.settings.server.PROTOCAL}://${mod.proxy.domain}.${vars.sld}.${vars.tld}/";
           PROTOCAL = "https";
-          HTTP_PORT = 3000;
+          HTTP_PORT = mod.proxy.port;
 
           START_SSH_SERVER = true;
           SSH_PORT = mod.settings.sshPort;
