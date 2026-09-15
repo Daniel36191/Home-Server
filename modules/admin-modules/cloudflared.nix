@@ -30,7 +30,13 @@ in
       };
     };
     systemd.services."cloudflared-tunnel-${mod.settings.id}" = {
-      serviceConfig.Restart = lib.mkForce "always";
+      serviceConfig = {
+        Restart = lib.mkForce "always";
+        RestartSec = lib.mkForce "5min";
+      };
+      unitConfig = {
+        StartLimitIntervalSec = lib.mkForce 0;
+      };
     };
   };
 }

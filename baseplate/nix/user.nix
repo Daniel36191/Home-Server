@@ -98,17 +98,6 @@
     shells = with pkgs; [
       bashInteractive
     ];
-    shellAliases = {
-      sudonix = "git pull && nh os switch -H ${host} ./";
-      updatenix = "git pull && nh os switch -H ${host} ./ --update";
-      cleannix = "sudo nix-collect-garbage -d";
-      agenixedit = "sudo EDITOR=$EDITOR agenix --identity /etc/ssh/ssh_host_ed25519_key -e";
-
-      mi = "${pkgs.micro}/bin/micro";
-
-      log = "journalctl -xef -u";
-      logs = "journalctl -xe -u";
-    };
   };
 
   #########
