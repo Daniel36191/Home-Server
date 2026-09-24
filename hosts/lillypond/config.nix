@@ -186,7 +186,7 @@
         enable = true;
         port = 5232;
         secure = false;
-        anubis = true;
+        anubis = false; # Doesn't pass https auth to login from 3rd parties
         domain = "radicale";
         public = true;
       };
