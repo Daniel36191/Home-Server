@@ -93,7 +93,7 @@
         domain = "files";
         public = true;
         secure = false;
-        anubis = true;
+        anubis = false; # Breaks embeds
       };
       homepage = {
         abbr = "FS";
@@ -202,7 +202,7 @@
         enable = true;
         port = 8222;
         secure = false;
-        anubis = true;
+        anubis = false; # Breaks clients
         domain = "vault";
         public = true;
       };

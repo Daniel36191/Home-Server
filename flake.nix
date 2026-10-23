@@ -44,6 +44,7 @@
 
     forgesync.url = "git+https://hack.moontide.ink/helvetica/forgesync";
 
+    ngrok.url = "github:ngrok/ngrok-nix";
   };
 
   outputs =
@@ -68,6 +69,7 @@
       authentik-nix,
       vscode-server,
       forgesync,
+      ngrok,
 
       ## ETC
       self,
@@ -116,6 +118,7 @@
           authentik-nix.nixosModules.default
           vscode-server.nixosModules.default
           forgesync.nixosModules.default
+          ngrok.nixosModules.ngrok
 
           ## Core
           ./baseplate/nix-main.nix
