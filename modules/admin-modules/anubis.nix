@@ -8,6 +8,9 @@ let
   mod = config.modules.anubis;
 in
 {
+  options.modules.anubis.settings = {
+    difficulty = mkOption { default = 4; };
+  };
   config = mkIf mod.enable {
     services.anubis =
       let
@@ -30,8 +33,10 @@ in
                 BIND_NETWORK = "unix"; # unix or tcp
                 BIND = "/run/anubis/anubis-${name}/anubis.sock";
                 JWT_RESTRICTION_HEADER = "X-Real-IP";
-                DIFFICULTY = 4;
+                DIFFICULTY = mod.settings.difficulty;
               };
+              policy.extraBots = [
+              ];
             };
           }
         ) enabledAnubis;

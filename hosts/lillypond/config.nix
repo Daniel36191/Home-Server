@@ -304,6 +304,9 @@
 
     anubis = {
       enable = true;
+      settings = {
+        difficulty = 4;
+      };
     };
 
     wireguard = {
