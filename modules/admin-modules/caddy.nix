@@ -2,6 +2,7 @@
   lib,
   config,
   vars,
+  pkgs,
   ...
 }:
 with lib;
@@ -67,12 +68,25 @@ in
               }
             '';
 
+            robotsTxt = pkgs.writeTextDir "robots.txt" ''
+              User-agent: *
+              Disallow: /
+            '';
+
+            handle-robots = ''
+              handle /robots.txt {
+                root * ${robotsTxt}
+                file_server
+              }
+            '';
+
           in
           {
             name = "${if cfg.public then "${uri}.${vars.tld}" else "${uri}.local"}";
             value = {
               extraConfig = ''
                 ${defaults}
+                ${handle-robots}
                 ${if cfg.authentikAuth then authentikForwardAuth else ""}
                 reverse_proxy ${destination} {
                   ${header-defaults}
