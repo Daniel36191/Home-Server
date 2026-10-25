@@ -49,4 +49,7 @@ in
   "authentikClientSecret.age".publicKeys = systems;
   "forgejo-runner-token.age".publicKeys = systems;
   "forgesync.age".publicKeys = systems;
+
+  ## Wireguard
+  "wg-home-private.age".publicKeys = systems;
 }

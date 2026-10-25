@@ -305,5 +305,9 @@
     anubis = {
       enable = true;
     };
+
+    wireguard = {
+      enable = true;
+    };
   };
 }

@@ -29,7 +29,7 @@ in
                 TARGET = "${protocol}://127.0.0.1:${toString cfg.port}";
                 BIND_NETWORK = "unix"; # unix or tcp
                 BIND = "/run/anubis/anubis-${name}/anubis.sock";
-                JWT_RESTRICTION_HEADER = "CF-Connecting-IP";
+                JWT_RESTRICTION_HEADER = "X-Real-IP";
                 DIFFICULTY = 4;
               };
             };

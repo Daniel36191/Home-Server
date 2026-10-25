@@ -98,5 +98,12 @@ in
     "forgesync" = {
       file = ./forgesync.age;
     };
+
+    ## Wireguard
+    "wg-home-private" = mkIf mods.wireguard.enable {
+      file = ./wg-home-private.age;
+      mode = "0400";
+      owner = "root";
+    };
   };
 }

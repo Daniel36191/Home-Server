@@ -38,6 +38,7 @@ in
                 }
               }
             '';
+            ## This is broken now
             authentikForwardAuth = ''
               forward_auth https://auth.${vars.sld}.${vars.tld} {
                 uri /outpost.goauthentik.io/auth/caddy
@@ -51,8 +52,7 @@ in
 
             ## Header Parts
             header-defaults = ''
-              header_up CF-Connecting-IP {header.CF-Connecting-IP}
-              header_up X-Real-IP {header.CF-Connecting-IP}
+              header_up X-Real-IP {client_ip}
             '';
 
             header-public = ''
@@ -69,7 +69,7 @@ in
 
           in
           {
-            name = "${if cfg.public then "http://${uri}.${vars.tld}" else "${uri}.local"}";
+            name = "${if cfg.public then "${uri}.${vars.tld}" else "${uri}.local"}";
             value = {
               extraConfig = ''
                 ${defaults}
