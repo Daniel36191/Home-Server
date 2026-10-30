@@ -50,6 +50,12 @@ let
           default = mkOption { default = false; };
         };
 
+        fail2ban = {
+          enable = mkEnableOption "Enable Fail2Ban";
+          matchRegx = mkOption { default = ""; };
+          logFile = mkOption { default = ""; };
+        };
+
         homepage = {
           abbr = mkOption { default = "${toUpper (substring 0 2 name)}"; };
           homepage = mkOption { default = false; };

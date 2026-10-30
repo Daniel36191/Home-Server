@@ -44,6 +44,10 @@ in
     interval = "weekly";
   };
 
+  environment.variables = {
+    NIX_HOST = host;
+  };
+
   nix = {
     settings = {
       auto-optimise-store = true;

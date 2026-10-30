@@ -37,6 +37,14 @@ in
       stateDir = mod.data.dataDirectory;
 
       settings = {
+        log = {
+          "logger.access.MODE" = "access-file";
+        };
+        "log.access-file" = {
+          MODE = "file";
+          LEVEL = "Info";
+          FILE_NAME = "access-file.log";
+        };
         server = {
           DOMAIN = with vars; "${mod.proxy.domain}.${sld}.${tld}";
           ROOT_URL = "${cfg.settings.server.PROTOCAL}://${mod.proxy.domain}.${vars.sld}.${vars.tld}/";

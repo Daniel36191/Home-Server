@@ -4,18 +4,6 @@
   ...
 }:
 {
-  ####################
-  ## Port Forwading ##
-  ####################
-
-  networking.firewall = {
-    enable = false;
-    allowedTCPPorts = [
-    ];
-    allowedUDPPorts = [
-    ];
-  };
-
   #########
   ## DNS ##
   #########

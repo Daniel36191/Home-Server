@@ -53,7 +53,7 @@ in
 
             ## Header Parts
             header-defaults = ''
-              header_up X-Real-IP {client_ip}
+              header_up X-Real-IP {remote_host}
             '';
 
             header-public = ''

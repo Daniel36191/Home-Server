@@ -235,7 +235,12 @@
         secure = false;
         anubis = true;
         domain = "git";
-        public = true;
+        public = false;
+      };
+      fail2ban = {
+        enable = true;
+        matchRegx = ''^<HOST> .* "GET /user/login\?redirect_to=[^"]*"'';
+        logFile = "/services/forgejo/log/access-file.log";
       };
       homepage = {
         abbr = "Git";
@@ -310,6 +315,10 @@
     };
 
     wireguard = {
+      enable = true;
+    };
+
+    fail2ban = {
       enable = true;
     };
   };
