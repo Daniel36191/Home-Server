@@ -316,6 +316,10 @@
 
     wireguard = {
       enable = true;
+      settings = {
+        vpsIp = "157.151.228.145";
+        vpsPubKey = "dlrSwo6EPYkrOSJUrVA/zzG7XO9UqXkydfIi0nyhKAw=";
+      };
     };
 
     fail2ban = {

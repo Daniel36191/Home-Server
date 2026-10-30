@@ -7,23 +7,28 @@
 with lib;
 let
   mod = config.modules.wireguard;
-  vpsIp = "157.151.228.145";
-  vpsPubKey = "dlrSwo6EPYkrOSJUrVA/zzG7XO9UqXkydfIi0nyhKAw=";
-  ip = "${pkgs.iproute2}/bin/ip";
+
+  ipPkg = "${pkgs.iproute2}/bin/ip";
 in
 {
+  options.modules.wireguard.settings = {
+    vpsIp = mkOption { default = ""; };
+    vpsPubKey = mkOption { default = ""; };
+    interfaceIp = mkOption { default = "10.10.28.2"; };
+    interface = mkOption { default = "wg0"; };
+  };
   config = mkIf mod.enable {
-    networking.wireguard.interfaces.wg0 = {
-      ips = [ "10.10.28.2/24" ];
+    networking.wireguard.interfaces."${interface}" = {
+      ips = [ "${interfaceIp}/24" ];
       privateKeyFile = config.age.secrets."wg-home-private".path;
       allowedIPsAsRoutes = false;
       postSetup = ''
-        ${ip} route add default dev wg0 table 100
-        ${ip} rule add from 10.10.28.2 table 100 priority 100
+        ${ipPkg} route add default dev ${interface} table 100
+        ${ipPkg} rule add from ${interfaceIp} table 100 priority 100
       '';
       postShutdown = ''
-        ${ip} rule del from 10.10.28.2 table 100 priority 100 || true
-        ${ip} route flush table 100 || true
+        ${ipPkg} rule del from ${interfaceIp} table 100 priority 100 || true
+        ${ipPkg} route flush table 100 || true
       '';
       peers = [
         {
