@@ -18,22 +18,22 @@ in
     interface = mkOption { default = "wg0"; };
   };
   config = mkIf mod.enable {
-    networking.wireguard.interfaces."${interface}" = {
-      ips = [ "${interfaceIp}/24" ];
+    networking.wireguard.interfaces."${mod.settings.interface}" = {
+      ips = [ "${mod.settings.interfaceIp}/24" ];
       privateKeyFile = config.age.secrets."wg-home-private".path;
       allowedIPsAsRoutes = false;
       postSetup = ''
-        ${ipPkg} route add default dev ${interface} table 100
-        ${ipPkg} rule add from ${interfaceIp} table 100 priority 100
+        ${ipPkg} route add default dev ${mod.settings.interface} table 100
+        ${ipPkg} rule add from ${mod.settings.interfaceIp} table 100 priority 100
       '';
       postShutdown = ''
-        ${ipPkg} rule del from ${interfaceIp} table 100 priority 100 || true
+        ${ipPkg} rule del from ${mod.settings.interfaceIp} table 100 priority 100 || true
         ${ipPkg} route flush table 100 || true
       '';
       peers = [
         {
-          publicKey = vpsPubKey;
-          endpoint = "${vpsIp}:51820";
+          publicKey = mod.settings.vpsPubKey;
+          endpoint = "${mod.settings.vpsIp}:51820";
           allowedIPs = [ "0.0.0.0/0" ];
           persistentKeepalive = 25;
         }
