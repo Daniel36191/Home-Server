@@ -325,5 +325,9 @@
     fail2ban = {
       enable = true;
     };
+
+    firewall = {
+      enable = true;
+    };
   };
 }
