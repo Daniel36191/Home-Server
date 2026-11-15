@@ -81,6 +81,9 @@ in
       };
     };
 
+    ## Open firewall for ssh
+    networking.firewall.allowedTCPPorts = [ mod.settings.sshPort ];
+
     services.gitea-actions-runner = mkIf mod.settings.runnerEnable {
       package = pkgs.forgejo-runner;
       instances.default = {
